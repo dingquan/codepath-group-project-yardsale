@@ -1,5 +1,8 @@
 package com.codepath.yardsale.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Category {
 	TOYS_GAMES("Toys & games"), 
 	FURNITURE("Furniture"), 
@@ -11,6 +14,13 @@ public enum Category {
 	CARS("Cars & Trucks"),
 	COMPUTERS("Computers");
 	
+	private static final Map<String, Category> categories = new HashMap<String, Category>();
+	static{
+		for (Category c : Category.values()){
+			categories.put(c.name, c);
+		}
+	}
+	
 	private final String name;
 	
 	Category(String name){
@@ -19,5 +29,14 @@ public enum Category {
 	
 	public String toString(){
 		return name;
+	}
+	
+	/**
+	 * find the Category enum matching the given name
+	 * @param name
+	 * @return
+	 */
+	public Category fromName(String name){
+		return categories.get(name);
 	}
 }
