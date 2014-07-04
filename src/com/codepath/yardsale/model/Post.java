@@ -16,6 +16,7 @@ public class Post {
 	private Category category;
 	private Float price;
 	private Location location;
+	private Long createdAt; //time of the posting in milliseconds
 
 	public String getUserId() {
 		return userId;
@@ -71,5 +72,13 @@ public class Post {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public Long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Long createdAt) {
+		this.createdAt = createdAt;
 	}
 }
