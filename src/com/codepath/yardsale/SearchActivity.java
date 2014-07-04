@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
+import com.codepath.yardsale.util.JsonUtil;
 
 public class SearchActivity extends Activity {
 	private List<Post> posts;
@@ -50,6 +55,18 @@ public class SearchActivity extends Activity {
 //			}
 //
 //		});
+		
+		lvPosts.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent i = new Intent(SearchActivity.this, ViewPostActivity.class);
+				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
+				i.putExtra("position", position);
+				startActivity(i);
+			}
+			
+		});
 
 	}
 

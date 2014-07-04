@@ -3,5 +3,6 @@
 
     <string name="app_name">YardSale</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_post">ViewPostActivity</string>
 
 </resources>
