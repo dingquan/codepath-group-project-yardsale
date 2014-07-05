@@ -26,6 +26,10 @@
             android:name=".ViewPostActivity"
             android:label="@string/title_activity_view_post" >
         </activity>
+        <activity
+            android:name=".CreatePostActivity"
+            android:label="@string/title_activity_create_post" >
+        </activity>
     </application>
 
 </manifest>

@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -14,10 +18,13 @@ import android.widget.ListView;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
+import com.codepath.yardsale.fragments.SearchCriteriaDialog;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 
 public class SearchActivity extends Activity {
+	private static final int REQUEST_CODE_CREATE_POST = 1;
+	
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvPosts;
@@ -73,5 +80,27 @@ public class SearchActivity extends Activity {
 	private void loadMorePosts() {
 		List<Post> posts = postDao.findPostsBySearchCriteria(null);
 		aPosts.addAll(posts);
+	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+	
+	public void onSearch(MenuItem mi){
+		FragmentManager fm = getFragmentManager();
+		SearchCriteriaDialog diag = SearchCriteriaDialog.newInstance();
+		diag.show(fm, "fragment_search_criteria");
+	}
+	
+	public void onPost(MenuItem mi){
+		Intent i = new Intent(SearchActivity.this, CreatePostActivity.class);
+		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
+	}
+	
+	public void onDrawer(MenuItem mi){
+		
 	}
 }
