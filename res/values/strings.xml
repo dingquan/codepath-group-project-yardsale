@@ -6,5 +6,11 @@
     <string name="title_activity_view_post">ViewPostActivity</string>
     <string name="title_activity_create_post">CreatePostActivity</string>
     <string name="title_activity_manage_posts">ManagePostsActivity</string>
+    <string name="title_activity_search_criteria">SearchCriteriaActivity</string>
+    <string name="category">Category</string>
+    <string name="price">Price</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="city">City</string>
 
 </resources>

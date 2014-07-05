@@ -1,13 +1,15 @@
 package com.codepath.yardsale.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum Category {
-	TOYS_GAMES("Toys & games"), 
+	TOYS_GAMES("Toys & Games"), 
 	FURNITURE("Furniture"), 
 	ELECTRONICS("Electronics"), 
-	CLOTHING_ACCESSRIES("CLothing & Accessories"),
+	CLOTHING_ACCESSRIES("Clothing & Accessories"),
 	CELL_PHONES("Cell Phones"),
 	BOOKS_MAGAZINES("Books & Magazines"),
 	APPLIANCES("Appliances"),
@@ -17,18 +19,18 @@ public enum Category {
 	private static final Map<String, Category> categories = new HashMap<String, Category>();
 	static{
 		for (Category c : Category.values()){
-			categories.put(c.name, c);
+			categories.put(c.categoryName, c);
 		}
 	}
 	
-	private final String name;
+	private final String categoryName;
 	
 	Category(String name){
-		this.name = name;
+		this.categoryName = name;
 	}
 	
 	public String toString(){
-		return name;
+		return categoryName;
 	}
 	
 	/**
@@ -36,7 +38,15 @@ public enum Category {
 	 * @param name
 	 * @return
 	 */
-	public Category fromName(String name){
-		return categories.get(name);
+	public static Category fromName(String categoryName){
+		return categories.get(categoryName);
+	}
+	
+	public static String[] getNames(){
+		List<String> names = new ArrayList<String>();
+		for (Category c : Category.values()){
+			names.add(c.categoryName);
+		}
+		return names.toArray(new String[0]);
 	}
 }

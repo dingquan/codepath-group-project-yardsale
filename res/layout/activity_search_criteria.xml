@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <EditText
+        android:id="@+id/etKeyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:ems="10" />
+
+    <ImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etKeyword"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/etKeyword"
+        android:onClick="searchPosts"
+        android:src="@drawable/ic_action_search_dark" />
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etKeyword"
+        android:layout_below="@+id/etKeyword"
+        android:layout_marginTop="30dp"
+        android:text="@string/category"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCategory"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tvCategory" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvCategory"
+        android:layout_below="@+id/tvCategory"
+        android:layout_marginTop="15dp"
+        android:text="@string/price"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/etMinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvPrice"
+        android:layout_alignBottom="@+id/tvPrice"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tvPrice"
+        android:ems="5"
+        android:hint="@string/min"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/etMaxPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etMinPrice"
+        android:layout_alignBottom="@+id/etMinPrice"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/etMinPrice"
+        android:ems="6"
+        android:hint="@string/max"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvPrice"
+        android:layout_below="@+id/etMinPrice"
+        android:layout_marginTop="16dp"
+        android:text="@string/city"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/etCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvCity"
+        android:layout_alignBottom="@+id/tvCity"
+        android:layout_alignLeft="@+id/etMinPrice"
+        android:ems="6" />
+
+</RelativeLayout>

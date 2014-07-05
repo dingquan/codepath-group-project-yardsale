@@ -2,7 +2,8 @@ package com.codepath.yardsale.model;
 
 public class SearchCriteria {
 	private Category category;
-	private Float price;
+	private Integer minPrice;
+	private Integer maxPrice;
 	private Location location;
 	private String keyword;
 
@@ -14,14 +15,22 @@ public class SearchCriteria {
 		this.category = category;
 	}
 
-	public Float getPrice() {
-		return price;
+	public Integer getMinPrice() {
+		return minPrice;
 	}
 
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setMinPrice(Integer minPrice) {
+		this.minPrice = maxPrice;
 	}
 
+	public Integer getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Integer maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+	
 	public Location getLocation() {
 		return location;
 	}
