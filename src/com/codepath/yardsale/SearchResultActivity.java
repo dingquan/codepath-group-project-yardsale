@@ -103,6 +103,11 @@ public class SearchResultActivity extends Activity {
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
 	}
 	
+	public void onManage(MenuItem mi){
+		Intent i = new Intent(SearchResultActivity.this, ManagePostsActivity.class);
+		startActivity(i);
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK){

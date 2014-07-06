@@ -7,7 +7,8 @@ package com.codepath.yardsale.model;
  * 
  */
 public class Post {
-	private String userId; // for simplicity, use the android device id to avoid
+	private String uid;  //unique id of the post
+	private String userId; // id of owner of the post. for simplicity, use the android device id to avoid
 							// a full blown User class
 	private String title;
 	private String description;
@@ -80,5 +81,13 @@ public class Post {
 
 	public void setCreatedAt(Long createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 }

@@ -17,4 +17,12 @@
         android:showAsAction="ifRoom"
         android:title="post">
     </item>
+        <item
+        android:id="@+id/action_manage"
+        android:icon="@drawable/ic_action_manage"
+        android:menuCategory="system"
+        android:onClick="onManage"
+        android:showAsAction="ifRoom"
+        android:title="post">
+    </item>
 </menu>

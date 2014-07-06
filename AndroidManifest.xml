@@ -8,6 +8,10 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -33,6 +37,10 @@
         <activity
             android:name=".SearchCriteriaActivity"
             android:label="@string/title_activity_search_criteria" >
+        </activity>
+        <activity
+            android:name=".ManagePostsActivity"
+            android:label="@string/title_activity_manage_posts" >
         </activity>
     </application>
 

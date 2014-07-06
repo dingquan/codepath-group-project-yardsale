@@ -4,9 +4,25 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/ivPreview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/btnPickPhoto"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignBottom="@+id/ivPreview"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/ivPreview"
+        android:onClick="onPickPhoto"
+        android:text="Select Photo" />
 
 </RelativeLayout>
