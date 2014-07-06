@@ -12,11 +12,10 @@ public class Post {
 							// a full blown User class
 	private String title;
 	private String description;
-	private String contact; // for simplicity, a flat string instead of a user
-							// object that holds phone numbers and other info
+	private Contact contact; 
 	private Category category;
 	private Float price;
-	private Location location;
+	private GeoLocation location;
 	private Long createdAt; //time of the posting in milliseconds
 
 	public String getUserId() {
@@ -43,11 +42,11 @@ public class Post {
 		this.description = description;
 	}
 
-	public String getContact() {
+	public Contact getContact() {
 		return contact;
 	}
 
-	public void setContact(String contact) {
+	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
 
@@ -67,11 +66,11 @@ public class Post {
 		this.price = price;
 	}
 
-	public Location getLocation() {
+	public GeoLocation getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(GeoLocation location) {
 		this.location = location;
 	}
 

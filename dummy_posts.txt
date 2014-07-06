@@ -3,156 +3,176 @@
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "2012 Toyota Camry",
         "description": "Black, 42k miles. first owner.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Francisco, CA"
+        },
         "price": "15000",
         "category": "Cars & Trucks",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Francisco, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404284400000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     },
     {
         "userId": "1234567",
         "title": "Thomas Train Set",
         "description": "Brand new set.",
-        "contact": "650-123-4567",
+        "contact": {
+            "phone": "650-123-4567",
+            "address": "San Mateo, CA"
+        },
         "price": "30",
-        "category": "Toys & games",
+        "category": "Toys & Games",
         "location": {
             "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
-    },
-    {
-        "userId": "1234567",
-        "title": "Thomas Train Set",
-        "description": "Brand new set.",
-        "contact": "650-123-4567",
-        "price": "30",
-        "category": "Toys & games",
-        "location": {
-            "latitude": 37,
-            "longitude": -122,
-            "address": "San Mateo, CA"
-        }
+            "longitude": -122
+        },
+        "createdAt": 1404198000000
     }
 ]

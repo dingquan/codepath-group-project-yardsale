@@ -42,155 +42,177 @@ public class PostDao {
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
 "    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"2012 Toyota Camry\",\n" + 
 "        \"description\": \"Black, 42k miles. first owner.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Francisco, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"15000\",\n" + 
 "        \"category\": \"Cars & Trucks\",\n" + 
-"        \"createdAt\": 1404198000000,\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Francisco, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404284400000\n" + 
 "    },\n" + 
 "    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    },\n" + 
-"        {\n" + 
+"    {\n" + 
 "        \"userId\": \"1234567\",\n" + 
 "        \"title\": \"Thomas Train Set\",\n" + 
 "        \"description\": \"Brand new set.\",\n" + 
-"        \"contact\": \"650-123-4567\",\n" + 
+"        \"contact\": {\n" + 
+"            \"phone\": \"650-123-4567\",\n" + 
+"            \"address\": \"San Mateo, CA\"\n" + 
+"        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & games\",\n" + 
-"        \"createdAt\": 1404500625468,\n" + 
+"        \"category\": \"Toys & Games\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
-"            \"longitude\": -122,\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        }\n" + 
+"            \"longitude\": -122\n" + 
+"        },\n" + 
+"        \"createdAt\": 1404198000000\n" + 
 "    }\n" + 
 "]";
 		JSONArray list;

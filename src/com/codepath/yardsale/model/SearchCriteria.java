@@ -4,7 +4,7 @@ public class SearchCriteria {
 	private Category category;
 	private Integer minPrice;
 	private Integer maxPrice;
-	private Location location;
+	private GeoLocation location;
 	private String keyword;
 
 	public Category getCategory() {
@@ -31,11 +31,11 @@ public class SearchCriteria {
 		this.maxPrice = maxPrice;
 	}
 	
-	public Location getLocation() {
+	public GeoLocation getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(GeoLocation location) {
 		this.location = location;
 	}
 

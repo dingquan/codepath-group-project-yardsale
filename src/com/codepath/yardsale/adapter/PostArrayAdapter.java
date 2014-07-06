@@ -45,7 +45,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		tvTitle.setText(post.getTitle());
 		tvDescription.setText(post.getDescription());
 		tvPrice.setText(post.getPrice().toString());
-		tvLocation.setText(post.getLocation().getAddress());
+		tvLocation.setText(post.getContact().getAddress());
 		
 		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
