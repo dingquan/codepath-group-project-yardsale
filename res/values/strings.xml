@@ -3,7 +3,7 @@
 
     <string name="app_name">YardSale</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_view_post">ViewPostActivity</string>
+    <string name="title_activity_view_post">View Items Details</string>
     <string name="title_activity_create_post">CreatePostActivity</string>
     <string name="title_activity_manage_posts">ManagePostsActivity</string>
     <string name="title_activity_search_criteria">SearchCriteriaActivity</string>
