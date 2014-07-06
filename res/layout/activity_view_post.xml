@@ -82,6 +82,7 @@
         android:layout_below="@+id/etItemPhone"
         android:layout_marginTop="58dp"
         android:layout_toRightOf="@+id/textView5"
+        android:onClick="onReply"
         android:text="Reply" />
 
     <Button
@@ -92,6 +93,7 @@
         android:layout_alignBottom="@+id/btnReply"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/btnReply"
+        android:onClick="onCancel"
         android:text="Cancel" />
 
     <EditText
