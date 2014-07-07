@@ -43,7 +43,11 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
-		tvDescription.setText(post.getDescription());
+		String description = post.getDescription();
+		if (description.length() > 50){
+			description = description.substring(0, 50) + "...";
+		}
+		tvDescription.setText(description);
 		tvPrice.setText(post.getPrice().toString());
 		tvLocation.setText(post.getContact().getAddress());
 		
