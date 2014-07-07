@@ -32,7 +32,24 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getPostById(String uid){
-		return null;
+		String postStr = "    {\n" + 
+				"        \"userId\": \"1234567\",\n" + 
+				"        \"title\": \"Thomas Train Set\",\n" + 
+				"        \"description\": \"Brand new set.\",\n" + 
+				"        \"contact\": {\n" + 
+				"            \"phone\": \"650-123-4567\",\n" + 
+				"            \"address\": \"San Mateo, CA\"\n" + 
+				"        },\n" + 
+				"        \"price\": \"30\",\n" + 
+				"        \"category\": \"Toys & Games\",\n" + 
+				"        \"location\": {\n" + 
+				"            \"latitude\": 37,\n" + 
+				"            \"longitude\": -122\n" + 
+				"        },\n" + 
+				"        \"createdAt\": 1404198000000\n" + 
+				"    },";
+		Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
+		return post;
 	}
 	
 	private List<Post> getDummyPosts(){

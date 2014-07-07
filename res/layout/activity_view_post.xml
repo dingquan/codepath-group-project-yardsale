@@ -37,7 +37,7 @@
         android:layout_below="@+id/etContactEmail"
         android:layout_marginTop="36dp"
         android:layout_toRightOf="@+id/textView4"
-        android:ems="10" />
+        android:ems="10" android:inputType="phone"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -55,7 +55,7 @@
         android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
         android:layout_alignLeft="@+id/etItemPrice"
-        android:ems="10" />
+        android:ems="10" android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/etItemPrice"
