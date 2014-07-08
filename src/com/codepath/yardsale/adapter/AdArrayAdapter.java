@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.codepath.yardsale.model.Post;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
+import com.codepath.yardsale.R;
 public class AdArrayAdapter extends ArrayAdapter<Post> {
 
 	public AdArrayAdapter(Context context, List<Post> objects) {
@@ -34,11 +34,11 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		}
 		
 		ImageView ivImage = (ImageView)v.findViewById(R.id.ivImage);
-		TextView tvTitle = (TextView)v.findViewById(R.id.tvAdTitle);
+		TextView tvTitle = (TextView)v.findViewById(R.id.tvAdsTitle);
 		TextView tvDescription = (TextView)v.findViewById(R.id.tvAdDescription);
-		TextView tvStatus = (TextView)v.findViewById(R.id.tvAdStatus);
-		TextView tvDate = (TextView)v.findViewById(R.id.tvAdDateCreated);
-		TextView tvCategory = (TextView)v.findViewById(R.id.tvAsCategory);
+		TextView tvStatus = (TextView)v.findViewById(R.id.tvAdsStatus);
+		TextView tvDate = (TextView)v.findViewById(R.id.tvAdsDateCreated);
+		TextView tvCategory = (TextView)v.findViewById(R.id.tvAdsCategory);
 
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
