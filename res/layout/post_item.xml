@@ -12,23 +12,26 @@
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="112dp"
+            android:layout_height="84dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_launcher" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mini" />
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivImage"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -38,22 +41,27 @@
             android:layout_below="@+id/tvTitle"
             android:layout_marginTop="5dp"
             android:text="Description"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivImage"
+            android:layout_alignLeft="@+id/ivImage"
+            android:background="#CC404040"
+            android:paddingLeft="10dp"
+            android:text="Price"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#fafafa" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-                <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="5dp"
-            android:text="Price"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" >
 
         <TextView
             android:id="@+id/tvDate"
@@ -62,20 +70,21 @@
             android:layout_alignBaseline="@+id/tvLocation"
             android:layout_alignBottom="@+id/tvLocation"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#909090" />
 
         <TextView
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvPrice"
-            android:layout_alignBottom="@+id/tvPrice"
-            android:layout_toLeftOf="@+id/tvDate"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
             android:text="Location"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#909090" />
+
     </RelativeLayout>
 
 </LinearLayout>
