@@ -17,7 +17,8 @@ public class Post {
 	private Float price;
 	private GeoLocation location;
 	private Long createdAt; //time of the posting in milliseconds
-
+	private String status;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -74,6 +75,13 @@ public class Post {
 		this.location = location;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Long getCreatedAt() {
 		return createdAt;
 	}

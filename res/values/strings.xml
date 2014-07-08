@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_view_post">View Items Details</string>
     <string name="title_activity_create_post">CreatePostActivity</string>
-    <string name="title_activity_manage_posts">ManagePostsActivity</string>
+    <string name="title_activity_manage_posts">Manage Posts</string>
     <string name="title_activity_search_criteria">SearchCriteriaActivity</string>
     <string name="category">Category</string>
     <string name="price">Price</string>

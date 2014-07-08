@@ -22,10 +22,10 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvAdsDateCreated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView3"
+        android:layout_alignRight="@+id/tvAdsStatus"
         android:layout_below="@+id/etItemPrice"
         android:layout_marginTop="38dp"
         android:text="Contact Email" />
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etContactEmail"
         android:layout_marginTop="36dp"
-        android:layout_toRightOf="@+id/textView4"
+        android:layout_toRightOf="@+id/tvAdsDateCreated"
         android:ems="10" android:inputType="phone"/>
 
     <TextView
@@ -45,15 +45,15 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/etItemPhone"
         android:layout_alignBottom="@+id/etItemPhone"
-        android:layout_alignRight="@+id/textView4"
+        android:layout_alignRight="@+id/tvAdsDateCreated"
         android:text="Contact Phone" />
 
     <EditText
         android:id="@+id/etContactEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignBaseline="@+id/tvAdsDateCreated"
+        android:layout_alignBottom="@+id/tvAdsDateCreated"
         android:layout_alignLeft="@+id/etItemPrice"
         android:ems="10" android:inputType="textEmailAddress"/>
 
@@ -67,7 +67,7 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvAdsStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/etItemPrice"
