@@ -23,7 +23,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ManagePostsActivity extends Activity {
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
-	private ListView lvPosts;
+	private ListView lvAds;
 
 	private PostDao postDao;
 
@@ -38,15 +38,15 @@ public class ManagePostsActivity extends Activity {
 
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
-		lvPosts = (ListView) findViewById(R.id.lvPosts);
-		lvPosts.setAdapter(aPosts);
+		lvAds = (ListView) findViewById(R.id.lvAds);
+		lvAds.setAdapter(aPosts);
 
 		setupHandlers();
 		loadMorePosts();
 
 	}
 	private void setupHandlers() {
-		lvPosts.setOnItemClickListener(new OnItemClickListener() {
+		lvAds.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,

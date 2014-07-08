@@ -27,7 +27,7 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		
 		View v;
 		if (convertView == null) {
-			v = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
+			v = LayoutInflater.from(getContext()).inflate(R.layout.ads_view, parent, false);
 		}
 		else{
 			v = convertView;
