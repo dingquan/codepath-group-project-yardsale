@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
+import com.codepath.yardsale.dao.PostAds;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
@@ -25,7 +26,7 @@ public class ManagePostsActivity extends Activity {
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
 
-	private PostDao postDao;
+	private PostAds postAds;
 
 	private String query;
 	private LocationManager locationManager;
@@ -34,7 +35,7 @@ public class ManagePostsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manage_posts);
-		postDao = new PostDao();
+		postAds = new PostAds();
 
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
@@ -63,7 +64,7 @@ public class ManagePostsActivity extends Activity {
 	}
 
 	private void loadMorePosts() {
-		List<Post> posts = postDao.findPostsBySearchCriteria(null);
-		aPosts.addAll(posts);
+		List<Post> ads = postAds.findAdsBySearchCriteria(null);
+		aPosts.addAll(ads);
 	}
 }

@@ -12,7 +12,7 @@ import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
 public class PostAds {
-	public List<Post> findPostsBySearchCriteria(SearchCriteria criteria){
+	public List<Post> findAdsBySearchCriteria(SearchCriteria criteria){
 		List<Post> posts = new ArrayList<Post>();
 		posts = getDummyAds();
 		return posts;
