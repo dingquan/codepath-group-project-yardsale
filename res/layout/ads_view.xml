@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/tvAdsStatus"
+        android:onClick="OnRepost"
         android:text="Repost" />
 
     <TextView

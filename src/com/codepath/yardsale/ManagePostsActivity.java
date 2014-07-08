@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
@@ -68,4 +69,11 @@ public class ManagePostsActivity extends Activity {
 		List<Post> ads = postAds.findAdsBySearchCriteria(null);
 		aPosts.addAll(ads);
 	}
+	
+	public void OnRepost(View view) {
+		//Log.d("Shanthi", "Repost");
+		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
+		finish();
+
+    }
 }
