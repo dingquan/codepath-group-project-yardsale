@@ -43,8 +43,8 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
 		tvDescription.setText(post.getDescription());
-		tvStatus.setText(post.getStatus().toString());
-		tvCategory.setText(post.getCategory().toString());
+		//tvStatus.setText(post.getStatus().toString());
+		//tvCategory.setText(post.getCategory().toString());
 		
 		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);

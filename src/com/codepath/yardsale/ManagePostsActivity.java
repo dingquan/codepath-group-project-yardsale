@@ -3,6 +3,7 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.codepath.yardsale.adapter.AdArrayAdapter;
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostAds;
 import com.codepath.yardsale.dao.PostDao;
@@ -38,7 +39,7 @@ public class ManagePostsActivity extends Activity {
 		postAds = new PostAds();
 
 		posts = new ArrayList<Post>();
-		aPosts = new PostArrayAdapter(this, posts);
+		aPosts = new AdArrayAdapter(this, posts);
 		lvAds = (ListView) findViewById(R.id.lvAds);
 		lvAds.setAdapter(aPosts);
 
