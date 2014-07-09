@@ -4,9 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,8 +23,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Category;
 import com.codepath.yardsale.model.Contact;
+import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 public class CreatePostActivity extends Activity {
 
@@ -34,10 +39,25 @@ public class CreatePostActivity extends Activity {
 	TextView phone;
 	String selectedCategory = "Toys and Games";
 
+	
+	private String userId;
+
+	private SharedPreferences prefs;
+	
+	private PostDao postDao;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		
+		prefs = this.getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
+		userId = prefs.getString("userId", "");
+		if (userId.isEmpty()){
+			userId = UUID.randomUUID().toString();
+		}
+		
+		postDao = new PostDao();
 		setUpViews();
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
@@ -95,15 +115,26 @@ public class CreatePostActivity extends Activity {
 		Category c = Category.fromName(selectedCategory);
 		System.out.println(c.toString());
 		Post p = new Post();
+		p.setUserId(userId);
 		p.setCategory(c);
 		Contact contact = new Contact(phone.getText().toString(), location
 				.getText().toString());
 		p.setContact(contact);
 		p.setTitle(title.getText().toString());
 		p.setDescription(description.getText().toString());
-		p.setPrice(Float.parseFloat(price.getText().toString()));
+		p.setPrice(Double.valueOf(price.getText().toString()));
 		Date date = new Date();
 		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
+		p.setStatus("Active");
+		GeoLocation location = new GeoLocation();
+		location.setLatitude(30D);
+		location.setLongitude(123D);
+		p.setLocation(location);
+		
+		postDao.savePost(p);
+		
+		Intent i = new Intent(CreatePostActivity.this, SearchResultActivity.class);
+		startActivity(i);
 
 	}
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {

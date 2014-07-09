@@ -3,11 +3,6 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codepath.yardsale.adapter.AdArrayAdapter;
-import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostDao;
-import com.codepath.yardsale.model.Post;
-import com.codepath.yardsale.util.JsonUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -7,23 +7,47 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.codepath.yardsale.dao.parse.ParsePost;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 public class PostDao {
 	public List<Post> findPostsBySearchCriteria(SearchCriteria criteria){
 		List<Post> posts = new ArrayList<Post>();
-		posts = getDummyPosts();
+		ParseQuery<ParsePost> query = buildQuery(criteria);
+		try {
+			List<ParsePost> results = query.find();
+			for (ParsePost parsePost : results){
+				posts.add(parsePost.toPost());
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		posts = getDummyPosts();
 		return posts;
 	}
 	
+	private ParseQuery<ParsePost> buildQuery(SearchCriteria criteria) {
+		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
+		query.include("contact");
+		query.include("location");
+		return query;
+	}
+
 	public void savePosts(List<Post> posts){
-		
+		for (Post post: posts){
+			savePost(post);
+		}
 	}
 	
 	public void savePost(Post post){
-		
+		ParsePost parsePost = new ParsePost(post);
+		parsePost.saveInBackground();
 	}
 
 	/**
@@ -31,27 +55,36 @@ public class PostDao {
 	 * @param uid
 	 * @return
 	 */
-	public Post getPostById(String uid){
-		String postStr = 
-"{\n" + 
-"        \"userId\": \"1234569\",\n" + 
-"        \"title\": \"***Whirlpool commercial Washer & Electric Dryer with hoses***\",\n" + 
-"        \"description\": \"Selling a perfect working Newer Style Whirlpool Commercial Washer & Electric dryer set both are Super capacity. Clean and ready to go. In immaculate condition only 16 months old. Still has plastic on it. with all hoses still hooked up in so you can see they Function properly and never been worked on.\\nAsking $380 for the set will only sell as a set only\",\n" + 
-"        \"contact\": {\n" + 
-"            \"phone\": \"650-123-4567\",\n" + 
-"            \"address\": \"San Mateo, CA\"\n" + 
-"        },\n" + 
-"        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
-"        \"location\": {\n" + 
-"            \"latitude\": 37,\n" + 
-"            \"longitude\": -122\n" + 
-"        },\n" + 
-"        \"createdAt\": 1404198000000\n" + 
-"    },";
+	public Post getPostById(String id){
+//		String postStr = 
+//"{\n" + 
+//"        \"userId\": \"1234569\",\n" + 
+//"        \"title\": \"***Whirlpool commercial Washer & Electric Dryer with hoses***\",\n" + 
+//"        \"description\": \"Selling a perfect working Newer Style Whirlpool Commercial Washer & Electric dryer set both are Super capacity. Clean and ready to go. In immaculate condition only 16 months old. Still has plastic on it. with all hoses still hooked up in so you can see they Function properly and never been worked on.\\nAsking $380 for the set will only sell as a set only\",\n" + 
+//"        \"contact\": {\n" + 
+//"            \"phone\": \"650-123-4567\",\n" + 
+//"            \"address\": \"San Mateo, CA\"\n" + 
+//"        },\n" + 
+//"        \"price\": \"380\",\n" + 
+//"        \"category\": \"Appliances\",\n" + 
+//"        \"location\": {\n" + 
+//"            \"latitude\": 37,\n" + 
+//"            \"longitude\": -122\n" + 
+//"        },\n" + 
+//"        \"createdAt\": 1404198000000\n" + 
+//"    },";
+//		
+//		Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
 		
-		Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
-		return post;
+		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
+		try {
+			ParsePost parsePost = query.get(id);
+			return parsePost.toPost();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return null;
 	}
 	
 	private List<Post> getDummyPosts(){

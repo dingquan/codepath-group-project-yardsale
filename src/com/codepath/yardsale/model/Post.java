@@ -7,22 +7,19 @@ package com.codepath.yardsale.model;
  * 
  */
 public class Post {
-	private String uid;  //unique id of the post
-	private String userId; // id of owner of the post. for simplicity, use the android device id to avoid
+	private String id; // unique id of the post
+	private String userId; // id of owner of the post. for simplicity, use the
+							// android device id to avoid
 							// a full blown User class
 	private String title;
 	private String description;
-	private Contact contact; 
+	private Contact contact;
 	private Category category;
-	private Float price;
+	private Double price;
 	private GeoLocation location;
-	private Long createdAt; //time of the posting in milliseconds
+	private Long createdAt; // time of the posting in milliseconds
 	private String status;
-	
-	public Post(){
-		
-	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
@@ -63,11 +60,11 @@ public class Post {
 		this.category = category;
 	}
 
-	public Float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -86,6 +83,7 @@ public class Post {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public Long getCreatedAt() {
 		return createdAt;
 	}
@@ -94,11 +92,11 @@ public class Post {
 		this.createdAt = createdAt;
 	}
 
-	public String getUid() {
-		return uid;
+	public String getId() {
+		return id;
 	}
 
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setId(String id) {
+		this.id = id;
 	}
 }

@@ -2,7 +2,6 @@ package com.codepath.yardsale;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.yardsale.model.Post;
