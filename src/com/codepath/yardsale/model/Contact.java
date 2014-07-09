@@ -4,6 +4,11 @@ public class Contact {
 	private String phone;
 	private String address; // for simplicity, just a flat address
 
+	public Contact(String phone, String address) {
+		this.phone = phone;
+		this.address = address;
+	}
+
 	public String getPhone() {
 		return phone;
 	}

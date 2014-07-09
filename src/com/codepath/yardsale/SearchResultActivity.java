@@ -11,7 +11,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -166,10 +165,10 @@ public class SearchResultActivity extends Activity implements LocationListener {
 		// check if enabled and if not send user to the GSP settings
 		// Better solution would be to display a dialog and suggesting to
 		// go to the settings
-//		if (!enabled) {
-//			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//			startActivity(intent);
-//		}
+		// if (!enabled) {
+		// Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		// startActivity(intent);
+		// }
 	}
 
 	/* Request updates at startup */
@@ -193,19 +192,19 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String arg0) {
-	    Toast.makeText(this, "Disabled provider " + provider,
-	            Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Disabled provider " + provider,
+				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0) {
-	    Toast.makeText(this, "Enabled new provider " + provider,
-	            Toast.LENGTH_SHORT).show();
-		
+		Toast.makeText(this, "Enabled new provider " + provider,
+				Toast.LENGTH_SHORT).show();
+
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		
+
 	}
 }

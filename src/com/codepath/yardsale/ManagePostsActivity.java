@@ -3,15 +3,8 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostAds;
-import com.codepath.yardsale.dao.PostDao;
-import com.codepath.yardsale.model.Post;
-import com.codepath.yardsale.util.JsonUtil;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostDao;
+import com.codepath.yardsale.dao.PostAds;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 

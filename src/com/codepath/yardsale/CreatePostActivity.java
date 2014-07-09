@@ -2,6 +2,8 @@ package com.codepath.yardsale;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,18 +12,53 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.codepath.yardsale.model.Category;
+import com.codepath.yardsale.model.Contact;
+import com.codepath.yardsale.model.Post;
 public class CreatePostActivity extends Activity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
+	Spinner spinner;
+	TextView title;
+	TextView description;
+	TextView location;
+	TextView price;
+	TextView phone;
+	String selectedCategory = "Toys and Games";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		setUpViews();
+		// Create an ArrayAdapter using the string array and a default spinner
+		// layout
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.categories_array,
+				android.R.layout.simple_spinner_item);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 	}
 
+	public void setUpViews() {
+		spinner = (Spinner) findViewById(R.id.spCategory);
+		title = (TextView) findViewById(R.id.etTitle);
+		description = (TextView) findViewById(R.id.etDescription);
+		location = (TextView) findViewById(R.id.etLocation);
+		price = (TextView) findViewById(R.id.etPrice);
+		phone = (TextView) findViewById(R.id.etPhone);
+	}
 	// Trigger gallery selection for a photo
 	public void onPickPhoto(View view) {
 		// Create intent for picking a photo from the gallery
@@ -52,5 +89,44 @@ public class CreatePostActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void onSave(View v) {
+		Category c = Category.fromName(selectedCategory);
+		System.out.println(c.toString());
+		Post p = new Post();
+		p.setCategory(c);
+		Contact contact = new Contact(phone.getText().toString(), location
+				.getText().toString());
+		p.setContact(contact);
+		p.setTitle(title.getText().toString());
+		p.setDescription(description.getText().toString());
+		p.setPrice(Float.parseFloat(price.getText().toString()));
+		Date date = new Date();
+		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
+
+	}
+	public class MyOnItemSelectedListener implements OnItemSelectedListener {
+
+		public void onItemSelected(AdapterView<?> parent, View view, int pos,
+				long id) {
+
+			selectedCategory = parent.getItemAtPosition(pos).toString();
+
+			// make sure the country was already selected during the onCreate
+			if (selectedCategory != null) {
+				Toast.makeText(parent.getContext(),
+						"Country you selected is " + selectedCategory,
+						Toast.LENGTH_LONG).show();
+			}
+
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 }

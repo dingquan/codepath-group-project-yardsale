@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.codepath.yardsale.model.Category;
-import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
@@ -54,7 +53,7 @@ public class SearchCriteriaActivity extends Activity {
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setKeyword(etKeyword.getText().toString());
 		GeoLocation location = new GeoLocation();
-//		location.setAddress(etCity.getText().toString());
+		// location.setAddress(etCity.getText().toString());
 		criteria.setLocation(location);
 		if (etMinPrice.getText().length() > 0)
 			criteria.setMinPrice(Integer.valueOf(etMinPrice.getText()
@@ -63,9 +62,11 @@ public class SearchCriteriaActivity extends Activity {
 			criteria.setMaxPrice(Integer.valueOf(etMaxPrice.getText()
 					.toString()));
 
-		criteria.setCategory(Category.fromName(spCategory.getSelectedItem().toString()));
-		
-//		Intent i = new Intent(SearchCriteriaActivity.this, SearchResultActivity.class);
+		criteria.setCategory(Category.fromName(spCategory.getSelectedItem()
+				.toString()));
+
+		// Intent i = new Intent(SearchCriteriaActivity.this,
+		// SearchResultActivity.class);
 		Intent i = new Intent();
 		i.putExtra("search_criteria", JsonUtil.toJson(criteria));
 		setResult(RESULT_OK, i);

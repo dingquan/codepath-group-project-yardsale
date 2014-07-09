@@ -14,21 +14,22 @@ public class ViewPostActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ads_view);
-		
+
 		populateData();
 	}
 	private void populateData() {
 		String postJson = getIntent().getStringExtra("post");
 		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
-		Toast.makeText(this, "Read post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
-		
+		Toast.makeText(this, "Read post: " + post.getTitle(),
+				Toast.LENGTH_SHORT).show();
+
 	}
 	public void onReply(View view) {
-        Toast.makeText(this, "Reply Clicked", Toast.LENGTH_SHORT).show();
-        finish();
-    }
+		Toast.makeText(this, "Reply Clicked", Toast.LENGTH_SHORT).show();
+		finish();
+	}
 	public void onCancel(View view) {
-        Toast.makeText(this, "Cancel Clicked", Toast.LENGTH_SHORT).show();
-        finish();
-    }
+		Toast.makeText(this, "Cancel Clicked", Toast.LENGTH_SHORT).show();
+		finish();
+	}
 }

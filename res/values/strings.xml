@@ -12,5 +12,16 @@
     <string name="min">min</string>
     <string name="max">max</string>
     <string name="city">City</string>
+    <string-array name="categories_array">
+        <item>Toys and Games</item>
+        <item>Furniture</item>
+        <item>Electronics</item>
+        <item>Clothing and Accessories</item>
+        <item>CellPhones</item>
+        <item>Books and Magazines</item>
+        <item>Appliances</item>
+        <item>Cars and Trucks</item>
+        <item>Computers</item>
+    </string-array>
 
 </resources>
