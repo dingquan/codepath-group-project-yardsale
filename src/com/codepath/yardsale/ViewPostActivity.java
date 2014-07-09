@@ -13,8 +13,13 @@ public class ViewPostActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 		setContentView(R.layout.activity_ads_view);
 
+=======
+		setContentView(R.layout.activity_view_post);
+		
+>>>>>>> 7dbe9fca34dfeec754a8964689eb693bf83a94af
 		populateData();
 	}
 	private void populateData() {

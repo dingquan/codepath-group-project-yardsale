@@ -3,6 +3,16 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import com.codepath.yardsale.adapter.AdArrayAdapter;
+import com.codepath.yardsale.adapter.PostArrayAdapter;
+import com.codepath.yardsale.dao.PostAds;
+import com.codepath.yardsale.dao.PostDao;
+import com.codepath.yardsale.model.Post;
+import com.codepath.yardsale.util.JsonUtil;
+
+>>>>>>> 7dbe9fca34dfeec754a8964689eb693bf83a94af
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostAds;
@@ -31,7 +42,7 @@ public class ManagePostsActivity extends Activity {
 		postAds = new PostAds();
 
 		posts = new ArrayList<Post>();
-		aPosts = new PostArrayAdapter(this, posts);
+		aPosts = new AdArrayAdapter(this, posts);
 		lvAds = (ListView) findViewById(R.id.lvAds);
 		lvAds.setAdapter(aPosts);
 
@@ -60,4 +71,11 @@ public class ManagePostsActivity extends Activity {
 		List<Post> ads = postAds.findAdsBySearchCriteria(null);
 		aPosts.addAll(ads);
 	}
+	
+	public void OnRepost(View view) {
+		//Log.d("Shanthi", "Repost");
+		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
+		finish();
+
+    }
 }
