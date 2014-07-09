@@ -5,14 +5,12 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codepath.yardsale.R;
 import com.codepath.yardsale.model.Post;
@@ -49,12 +47,11 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		tvStatus.setText(post.getStatus().toString());
 		tvCategory.setText(post.getCategory().toString());
 
-		Date date = new Date(post.getCreatedAt());
+		Date date = post.getCreatedAt();
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
 		tvDate.setText(dateStr);
 
 		return v;
 	}
-
 
 }
