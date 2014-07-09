@@ -26,12 +26,5 @@ public class ViewPostActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 
 	}
-	public void onReply(View view) {
-		Toast.makeText(this, "Reply Clicked", Toast.LENGTH_SHORT).show();
-		finish();
-	}
-	public void onCancel(View view) {
-		Toast.makeText(this, "Cancel Clicked", Toast.LENGTH_SHORT).show();
-		finish();
-	}
+
 }

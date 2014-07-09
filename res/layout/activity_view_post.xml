@@ -37,7 +37,8 @@
         android:layout_below="@+id/etContactEmail"
         android:layout_marginTop="36dp"
         android:layout_toRightOf="@+id/tvAdsDateCreated"
-        android:ems="10" android:inputType="phone"/>
+        android:ems="10"
+        android:inputType="phone" />
 
     <TextView
         android:id="@+id/textView5"
@@ -55,7 +56,8 @@
         android:layout_alignBaseline="@+id/tvAdsDateCreated"
         android:layout_alignBottom="@+id/tvAdsDateCreated"
         android:layout_alignLeft="@+id/etItemPrice"
-        android:ems="10" android:inputType="textEmailAddress"/>
+        android:ems="10"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/etItemPrice"
@@ -74,27 +76,6 @@
         android:layout_alignBottom="@+id/etItemPrice"
         android:layout_alignRight="@+id/tvItemDescription"
         android:text="Price" />
-
-    <Button
-        android:id="@+id/btnReply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etItemPhone"
-        android:layout_marginTop="58dp"
-        android:layout_toRightOf="@+id/textView5"
-        android:onClick="onReply"
-        android:text="Reply" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnReply"
-        android:layout_alignBottom="@+id/btnReply"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/btnReply"
-        android:onClick="onCancel"
-        android:text="Cancel" />
 
     <EditText
         android:id="@+id/etTitle"
@@ -120,7 +101,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvtemTitle"
-        android:layout_alignRight="@+id/btnReply"
         android:layout_marginBottom="22dp" />
 
 </RelativeLayout>
