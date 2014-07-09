@@ -6,6 +6,7 @@ public class SearchCriteria {
 	private Integer maxPrice;
 	private GeoLocation location;
 	private String keyword;
+	private String userId;
 
 	public Category getCategory() {
 		return category;
@@ -45,5 +46,13 @@ public class SearchCriteria {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

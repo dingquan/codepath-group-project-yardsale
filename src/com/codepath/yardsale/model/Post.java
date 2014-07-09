@@ -19,6 +19,10 @@ public class Post {
 	private Long createdAt; //time of the posting in milliseconds
 	private String status;
 	
+	public Post(){
+		
+	}
+	
 	public String getUserId() {
 		return userId;
 	}

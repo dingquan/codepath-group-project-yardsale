@@ -3,16 +3,11 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import com.codepath.yardsale.adapter.AdArrayAdapter;
 import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostAds;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
-
->>>>>>> 7dbe9fca34dfeec754a8964689eb693bf83a94af
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostAds;
+import com.codepath.yardsale.adapter.AdArrayAdapter;
+import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
+import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
 public class ManagePostsActivity extends Activity {
@@ -33,13 +29,13 @@ public class ManagePostsActivity extends Activity {
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
 
-	private PostAds postAds;
+	private PostDao postDao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manage_posts);
-		postAds = new PostAds();
+		postDao = new PostDao();
 
 		posts = new ArrayList<Post>();
 		aPosts = new AdArrayAdapter(this, posts);
@@ -68,7 +64,9 @@ public class ManagePostsActivity extends Activity {
 	}
 
 	private void loadMorePosts() {
-		List<Post> ads = postAds.findAdsBySearchCriteria(null);
+		SearchCriteria criteria = new SearchCriteria();
+		//todo, populate criteria with userId
+		List<Post> ads = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(ads);
 	}
 	
