@@ -2,6 +2,8 @@ package com.codepath.yardsale;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -100,8 +102,8 @@ public class CreatePostActivity extends Activity {
 		p.setTitle(title.getText().toString());
 		p.setDescription(description.getText().toString());
 		p.setPrice(Float.parseFloat(price.getText().toString()));
-
-		p.saveInBackground();
+		Date date = new Date();
+		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
 
 	}
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {

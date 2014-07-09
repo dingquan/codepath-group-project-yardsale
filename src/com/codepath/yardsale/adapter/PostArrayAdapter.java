@@ -25,33 +25,33 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Post post = getItem(position);
-
+		
 		View v;
 		if (convertView == null) {
-			v = LayoutInflater.from(getContext()).inflate(R.layout.post_item,
-					parent, false);
-		} else {
+			v = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
+		}
+		else{
 			v = convertView;
 		}
-
-		ImageView ivImage = (ImageView) v.findViewById(R.id.ivImage);
-		TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-		TextView tvDescription = (TextView) v.findViewById(R.id.tvDescription);
-		TextView tvPrice = (TextView) v.findViewById(R.id.tvPrice);
-		TextView tvDate = (TextView) v.findViewById(R.id.tvDate);
-		TextView tvLocation = (TextView) v.findViewById(R.id.tvLocation);
+		
+		ImageView ivImage = (ImageView)v.findViewById(R.id.ivImage);
+		TextView tvTitle = (TextView)v.findViewById(R.id.tvTitle);
+		TextView tvDescription = (TextView)v.findViewById(R.id.tvDescription);
+		TextView tvPrice = (TextView)v.findViewById(R.id.tvPrice);
+		TextView tvDate = (TextView)v.findViewById(R.id.tvDate);
+		TextView tvLocation = (TextView)v.findViewById(R.id.tvLocation);
 
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
 		String description = post.getDescription();
-		if (description.length() > 80) {
+		if (description.length() > 80){
 			description = description.substring(0, 80) + "...";
 		}
 		tvDescription.setText(description);
 		tvPrice.setText("$" + post.getPrice().toString());
 		tvLocation.setText(post.getContact().getAddress());
-
-		Date date = post.getCreatedAt();
+		
+		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
 		tvDate.setText(dateStr);
 
