@@ -79,6 +79,7 @@ public class CreatePostActivity extends Activity {
 		price = (TextView) findViewById(R.id.etPrice);
 		phone = (TextView) findViewById(R.id.etPhone);
 	}
+	
 	// Trigger gallery selection for a photo
 	public void onPickPhoto(View view) {
 		// Create intent for picking a photo from the gallery
