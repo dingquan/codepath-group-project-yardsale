@@ -2,7 +2,6 @@ package com.codepath.yardsale.dao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -13,7 +12,6 @@ import com.codepath.yardsale.dao.parse.ParsePost;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -43,6 +41,15 @@ public class PostDao {
 		if (c.getKeyword() != null){
 			String[] keywords = c.getKeyword().split("\\s+");
 			query = query.whereContainedIn("description", Arrays.asList(keywords));
+		}
+		if (c.getMaxPrice() != null){
+			query = query.whereLessThan("price", c.getMaxPrice());
+		}
+		if (c.getMinPrice() != null){
+			query = query.whereGreaterThan("price", c.getMinPrice());
+		}
+		if (c.getUserId() != null){
+			query = query.whereEqualTo("userId", c.getUserId());
 		}
 		return query;
 	}

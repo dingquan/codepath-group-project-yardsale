@@ -28,6 +28,7 @@ import com.codepath.yardsale.model.Category;
 import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
+import com.codepath.yardsale.util.JsonUtil;
 public class CreatePostActivity extends Activity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
@@ -37,13 +38,11 @@ public class CreatePostActivity extends Activity {
 	TextView location;
 	TextView price;
 	TextView phone;
-	String selectedCategory = "Toys and Games";
+	String selectedCategory;
 
 	
 	private String userId;
-
 	private SharedPreferences prefs;
-	
 	private PostDao postDao;
 	
 	@Override
@@ -51,7 +50,7 @@ public class CreatePostActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
 		
-		prefs = this.getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
+		prefs = getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
 		userId = prefs.getString("userId", "");
 		if (userId.isEmpty()){
 			userId = UUID.randomUUID().toString();
@@ -62,9 +61,8 @@ public class CreatePostActivity extends Activity {
 		setUpViews();
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.categories_array,
-				android.R.layout.simple_spinner_item);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, Category.getNames());
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
@@ -113,11 +111,9 @@ public class CreatePostActivity extends Activity {
 	}
 
 	public void onSave(View v) {
-		Category c = Category.fromName(selectedCategory);
-		System.out.println(c.toString());
 		Post p = new Post();
 		p.setUserId(userId);
-		p.setCategory(c);
+		p.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
 		Contact contact = new Contact(phone.getText().toString(), location
 				.getText().toString());
 		p.setContact(contact);
@@ -134,8 +130,17 @@ public class CreatePostActivity extends Activity {
 		
 		postDao.savePost(p);
 		
-		Intent i = new Intent(CreatePostActivity.this, SearchResultActivity.class);
-		startActivity(i);
+		// Prepare data intent
+		Intent data = new Intent();
+		// Pass relevant data back as a result
+		data.putExtra("post", JsonUtil.toJson(p));
+		// Activity finished ok, return the data
+		setResult(RESULT_OK, data); // set result code and bundle data for
+									// response
+		finish(); // closes the activity, pass data to parent
+
+//		Intent i = new Intent(CreatePostActivity.this, SearchResultActivity.class);
+//		startActivity(i);
 
 	}
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {

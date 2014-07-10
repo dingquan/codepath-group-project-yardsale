@@ -43,9 +43,7 @@ public class SearchCriteriaActivity extends Activity {
 		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, Category.getNames());
 
-		categoryAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spCategory.setAdapter(categoryAdapter);
 	}
 
@@ -56,14 +54,11 @@ public class SearchCriteriaActivity extends Activity {
 		// location.setAddress(etCity.getText().toString());
 		criteria.setLocation(location);
 		if (etMinPrice.getText().length() > 0)
-			criteria.setMinPrice(Integer.valueOf(etMinPrice.getText()
-					.toString()));
+			criteria.setMinPrice(Integer.valueOf(etMinPrice.getText().toString()));
 		if (etMaxPrice.getText().length() > 0)
-			criteria.setMaxPrice(Integer.valueOf(etMaxPrice.getText()
-					.toString()));
+			criteria.setMaxPrice(Integer.valueOf(etMaxPrice.getText().toString()));
 
-		criteria.setCategory(Category.fromName(spCategory.getSelectedItem()
-				.toString()));
+		criteria.setCategory(Category.fromName(spCategory.getSelectedItem().toString()));
 
 		// Intent i = new Intent(SearchCriteriaActivity.this,
 		// SearchResultActivity.class);

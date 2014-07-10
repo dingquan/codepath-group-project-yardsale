@@ -2,9 +2,12 @@ package com.codepath.yardsale;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +27,8 @@ public class ManagePostsActivity extends Activity {
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
 
+	private String userId;
+	private SharedPreferences prefs;
 	private PostDao postDao;
 
 	@Override
@@ -37,10 +42,20 @@ public class ManagePostsActivity extends Activity {
 		lvAds = (ListView) findViewById(R.id.lvAds);
 		lvAds.setAdapter(aPosts);
 
+		lookupOwnUserId();
 		setupHandlers();
-		loadMorePosts();
+		loadOwnPosts();
 
 	}
+	
+	private void lookupOwnUserId(){
+		prefs = getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
+		userId = prefs.getString("userId", "");
+		if (userId.isEmpty()){
+			userId = UUID.randomUUID().toString();
+		}
+	}
+	
 	private void setupHandlers() {
 		lvAds.setOnItemClickListener(new OnItemClickListener() {
 
@@ -57,8 +72,12 @@ public class ManagePostsActivity extends Activity {
 
 	}
 
-	private void loadMorePosts() {
+	/**
+	 * load posts created by self
+	 */
+	private void loadOwnPosts() {
 		SearchCriteria criteria = new SearchCriteria();
+		criteria.setUserId(userId);
 		//todo, populate criteria with userId
 		List<Post> ads = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(ads);
@@ -67,7 +86,7 @@ public class ManagePostsActivity extends Activity {
 	public void OnRepost(View view) {
 		//Log.d("Shanthi", "Repost");
 		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
-		finish();
+//		finish();
 
     }
 }
