@@ -54,6 +54,7 @@ public class CreatePostActivity extends Activity {
 		userId = prefs.getString("userId", "");
 		if (userId.isEmpty()){
 			userId = UUID.randomUUID().toString();
+			prefs.edit().putString("userId", userId).commit();
 		}
 		
 		postDao = new PostDao();

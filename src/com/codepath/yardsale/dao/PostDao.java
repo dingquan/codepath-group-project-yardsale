@@ -33,14 +33,20 @@ public class PostDao {
 	
 	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
-		query.include("contact");
-		query.include("location");
+		
+		String keyword = c.getKeyword();
+		if (keyword != null && !keyword.isEmpty()){
+//			String[] keywords = c.getKeyword().split("\\s+");
+//			query = query.whereContainedIn("description", Arrays.asList(keywords));
+			ParseQuery<ParsePost> titleQuery = ParseQuery.getQuery(ParsePost.class).whereContains("title", keyword);
+			ParseQuery<ParsePost> descQuery = ParseQuery.getQuery(ParsePost.class).whereContains("description", keyword);
+			List<ParseQuery<ParsePost>> queries = new ArrayList<ParseQuery<ParsePost>>();
+			queries.add(titleQuery);
+			queries.add(descQuery);
+			query = ParseQuery.or(queries);
+		}
 		if (c.getCategory() != null){
 			query = query.whereEqualTo("category", c.getCategory().name());
-		}
-		if (c.getKeyword() != null){
-			String[] keywords = c.getKeyword().split("\\s+");
-			query = query.whereContainedIn("description", Arrays.asList(keywords));
 		}
 		if (c.getMaxPrice() != null){
 			query = query.whereLessThan("price", c.getMaxPrice());
@@ -48,9 +54,12 @@ public class PostDao {
 		if (c.getMinPrice() != null){
 			query = query.whereGreaterThan("price", c.getMinPrice());
 		}
-		if (c.getUserId() != null){
-			query = query.whereEqualTo("userId", c.getUserId());
+		String userId = c.getUserId();
+		if (userId != null && !userId.isEmpty()){
+			query = query.whereEqualTo("userId", userId);
 		}
+		query.include("contact");
+		query.include("location");
 		return query;
 	}
 

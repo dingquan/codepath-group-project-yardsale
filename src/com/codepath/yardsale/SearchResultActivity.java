@@ -136,18 +136,14 @@ public class SearchResultActivity extends Activity implements LocationListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
 			if (requestCode == REQUEST_CODE_CREATE_POST) {
-				String postStr = data.getExtras().getString("post");
-				Toast.makeText(this, "returned from create post" + postStr,Toast.LENGTH_SHORT).show();
-				Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
-				aPosts.insert(post, 0);
+				//nothing much to do here really.
+				
+//				String postStr = data.getExtras().getString("post");
+//				Toast.makeText(this, "returned from create post" + postStr,Toast.LENGTH_SHORT).show();
 			} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
 				String searchStr = data.getExtras().getString("search_criteria");
 				SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
-				Toast.makeText(
-						this,
-						"returned from search criteria, "
-								+ criteria.getKeyword(), Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(this, "returned from search criteria, " + criteria.getKeyword(), Toast.LENGTH_SHORT).show();
 				List<Post> results = postDao.findPostsBySearchCriteria(criteria);
 				aPosts.clear();
 				aPosts.addAll(results);
