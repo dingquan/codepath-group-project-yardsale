@@ -22,4 +22,4 @@ Repo for the group project
   a. Post an ad: user should be able to post an Ad by picking location, category, image/video/link, Contact person information, and set a price.<br>
   b. User should be able to edit and delete the Ads he/she has previously created.
 
-![UI Mock](YardSale.jpg)
+![Video Walkthrough](YardSale.jpg)
