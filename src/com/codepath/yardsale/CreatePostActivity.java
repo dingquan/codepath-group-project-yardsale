@@ -3,6 +3,7 @@ package com.codepath.yardsale;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -60,10 +61,11 @@ public class CreatePostActivity extends Activity {
 		postDao = new PostDao();
 
 		setUpViews();
-		// Create an ArrayAdapter using the string array and a default spinner
-		// layout
+		// Create an ArrayAdapter using the string array and a default spinner layout
+		String[] categoryNames = Category.getNames();
+		Arrays.sort(categoryNames);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, Category.getNames());
+				android.R.layout.simple_spinner_item, categoryNames);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner

@@ -31,6 +31,7 @@
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#cc6600"
             android:textStyle="bold" />
 
         <TextView

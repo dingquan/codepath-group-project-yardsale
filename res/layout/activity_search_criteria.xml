@@ -4,22 +4,31 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <TextView
+        android:id="@+id/tvKeyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/keyword"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <EditText
         android:id="@+id/etKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/tvKeyword"
+        android:layout_toRightOf="@+id/tvKeyword"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:ems="10" />
+        android:layout_alignParentTop="true"
+        android:ems="8" />
 
     <ImageView
         android:id="@+id/ivSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etKeyword"
-        android:layout_marginLeft="18dp"
+        android:layout_alignBottom="@+id/tvKeyword"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/etKeyword"
         android:onClick="searchPosts"
         android:src="@drawable/ic_action_search_dark" />
@@ -28,7 +37,7 @@
         android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etKeyword"
+        android:layout_alignLeft="@+id/tvKeyword"
         android:layout_below="@+id/etKeyword"
         android:layout_marginTop="30dp"
         android:text="@string/category"
@@ -39,8 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvCategory"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/tvCategory" />
+        android:layout_toRightOf="@+id/tvCategory" 
+        android:layout_alignLeft="@+id/etKeyword"/>
 
     <TextView
         android:id="@+id/tvPrice"

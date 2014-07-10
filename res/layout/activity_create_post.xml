@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/ivPreview"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="112dp"
+                android:layout_height="84dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_launcher" />
@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/ivPreview"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/tvCategory"
                 android:layout_toRightOf="@+id/ivPreview" />
 
             <TextView
