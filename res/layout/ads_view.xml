@@ -52,8 +52,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ivImage"
         android:layout_alignTop="@+id/tvAdsStatus"
+        android:text="Repost" 
         android:onClick="OnRepost"
-        android:text="Repost" />
+        android:focusable="false"
+		android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/tvPrice"
