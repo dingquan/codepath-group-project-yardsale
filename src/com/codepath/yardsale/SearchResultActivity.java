@@ -48,7 +48,6 @@ public class SearchResultActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_search_result);
 
 		postDao = new PostDao();
-
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
 		lvPosts = (ListView) findViewById(R.id.lvPosts);
@@ -89,8 +88,7 @@ public class SearchResultActivity extends Activity implements LocationListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent i = new Intent(SearchResultActivity.this,
-						ViewPostActivity.class);
+				Intent i = new Intent(SearchResultActivity.this, ViewPostActivity.class);
 				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
 				i.putExtra("position", position);
 				startActivity(i);
@@ -101,7 +99,8 @@ public class SearchResultActivity extends Activity implements LocationListener {
 	}
 
 	private void loadMorePosts() {
-		List<Post> posts = postDao.findPostsBySearchCriteria(null);
+		SearchCriteria criteria = new SearchCriteria();
+		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(posts);
 	}
 

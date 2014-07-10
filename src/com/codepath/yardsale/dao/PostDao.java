@@ -1,6 +1,8 @@
 package com.codepath.yardsale.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -28,18 +30,25 @@ public class PostDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		posts = getDummyPosts();
 		return posts;
 	}
 	
-	private ParseQuery<ParsePost> buildQuery(SearchCriteria criteria) {
+	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
 		query.include("contact");
 		query.include("location");
+		if (c.getCategory() != null){
+			query = query.whereEqualTo("category", c.getCategory().name());
+		}
+		if (c.getKeyword() != null){
+			String[] keywords = c.getKeyword().split("\\s+");
+			query = query.whereContainedIn("description", Arrays.asList(keywords));
+		}
 		return query;
 	}
 
 	public void savePosts(List<Post> posts){
+		posts = getDummyPosts();
 		for (Post post: posts){
 			savePost(post);
 		}
@@ -56,26 +65,6 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getPostById(String id){
-//		String postStr = 
-//"{\n" + 
-//"        \"userId\": \"1234569\",\n" + 
-//"        \"title\": \"***Whirlpool commercial Washer & Electric Dryer with hoses***\",\n" + 
-//"        \"description\": \"Selling a perfect working Newer Style Whirlpool Commercial Washer & Electric dryer set both are Super capacity. Clean and ready to go. In immaculate condition only 16 months old. Still has plastic on it. with all hoses still hooked up in so you can see they Function properly and never been worked on.\\nAsking $380 for the set will only sell as a set only\",\n" + 
-//"        \"contact\": {\n" + 
-//"            \"phone\": \"650-123-4567\",\n" + 
-//"            \"address\": \"San Mateo, CA\"\n" + 
-//"        },\n" + 
-//"        \"price\": \"380\",\n" + 
-//"        \"category\": \"Appliances\",\n" + 
-//"        \"location\": {\n" + 
-//"            \"latitude\": 37,\n" + 
-//"            \"longitude\": -122\n" + 
-//"        },\n" + 
-//"        \"createdAt\": 1404198000000\n" + 
-//"    },";
-//		
-//		Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
-		
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
 		try {
 			ParsePost parsePost = query.get(id);
@@ -99,7 +88,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & Games\",\n" + 
+"        \"category\": \"TOYS_GAMES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -115,7 +105,8 @@ public class PostDao {
 "            \"address\": \"San Francisco, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"15000\",\n" + 
-"        \"category\": \"Cars & Trucks\",\n" + 
+"        \"category\": \"CARS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -131,7 +122,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
+"        \"category\": \"APPLIANCES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -147,7 +139,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"300\",\n" + 
-"        \"category\": \"Computers\",\n" + 
+"        \"category\": \"COMPUTERS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -163,7 +156,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & Games\",\n" + 
+"        \"category\": \"TOYS_GAMES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -179,7 +173,8 @@ public class PostDao {
 "            \"address\": \"San Francisco, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"15000\",\n" + 
-"        \"category\": \"Cars & Trucks\",\n" + 
+"        \"category\": \"CARS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -195,7 +190,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
+"        \"category\": \"APPLIANCES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -211,7 +207,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"300\",\n" + 
-"        \"category\": \"Computers\",\n" + 
+"        \"category\": \"COMPUTERS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -227,7 +224,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & Games\",\n" + 
+"        \"category\": \"TOYS_GAMES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -243,7 +241,8 @@ public class PostDao {
 "            \"address\": \"San Francisco, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"15000\",\n" + 
-"        \"category\": \"Cars & Trucks\",\n" + 
+"        \"category\": \"CARS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -259,7 +258,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
+"        \"category\": \"APPLIANCES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -275,7 +275,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"300\",\n" + 
-"        \"category\": \"Computers\",\n" + 
+"        \"category\": \"COMPUTERS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -291,7 +292,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & Games\",\n" + 
+"        \"category\": \"TOYS_GAMES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -307,7 +309,8 @@ public class PostDao {
 "            \"address\": \"San Francisco, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"15000\",\n" + 
-"        \"category\": \"Cars & Trucks\",\n" + 
+"        \"category\": \"CARS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -323,7 +326,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
+"        \"category\": \"APPLIANCES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -339,7 +343,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"300\",\n" + 
-"        \"category\": \"Computers\",\n" + 
+"        \"category\": \"COMPUTERS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -355,7 +360,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"30\",\n" + 
-"        \"category\": \"Toys & Games\",\n" + 
+"        \"category\": \"TOYS_GAMES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -371,7 +377,8 @@ public class PostDao {
 "            \"address\": \"San Francisco, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"15000\",\n" + 
-"        \"category\": \"Cars & Trucks\",\n" + 
+"        \"category\": \"CARS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -387,7 +394,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"380\",\n" + 
-"        \"category\": \"Appliances\",\n" + 
+"        \"category\": \"APPLIANCES\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 
@@ -403,7 +411,8 @@ public class PostDao {
 "            \"address\": \"San Mateo, CA\"\n" + 
 "        },\n" + 
 "        \"price\": \"300\",\n" + 
-"        \"category\": \"Computers\",\n" + 
+"        \"category\": \"COMPUTERS\",\n" + 
+"        \"status\": \"Active\",\n" + 
 "        \"location\": {\n" + 
 "            \"latitude\": 37,\n" + 
 "            \"longitude\": -122\n" + 

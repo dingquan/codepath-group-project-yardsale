@@ -47,8 +47,7 @@ public class ManagePostsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent i = new Intent(ManagePostsActivity.this,
-						ViewPostActivity.class);
+				Intent i = new Intent(ManagePostsActivity.this, ViewPostActivity.class);
 				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
 				i.putExtra("position", position);
 				startActivity(i);

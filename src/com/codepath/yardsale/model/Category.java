@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 public enum Category {
-	TOYS_GAMES("Toys and Games"), FURNITURE("Furniture"), ELECTRONICS(
-			"Electronics"), CLOTHING_ACCESSRIES("Clothing and Accessories"), CELL_PHONES(
-			"Cell Phones"), BOOKS_MAGAZINES("Books and Magazines"), APPLIANCES(
-			"Appliances"), CARS("Cars and Trucks"), COMPUTERS("Computers");
+	TOYS_GAMES("Toys and Games"), 
+	FURNITURE("Furniture"),
+	ELECTRONICS("Electronics"),
+	CLOTHING_ACCESSRIES("Clothing and Accessories"),
+	CELL_PHONES("Cell Phones"),
+	BOOKS_MAGAZINES("Books and Magazines"),
+	APPLIANCES("Appliances"),
+	CARS("Cars and Trucks"),
+	COMPUTERS("Computers");
 
 	private static final Map<String, Category> categories = new HashMap<String, Category>();
 	static {
