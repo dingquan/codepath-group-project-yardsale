@@ -91,4 +91,8 @@ public class PostDao {
 		return null;
 	}
 
+	public void deltePost(Post post){
+		ParsePost parsePost = new ParsePost(post);
+		parsePost.deleteInBackground();
+	}
 }
