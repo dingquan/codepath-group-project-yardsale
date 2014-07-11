@@ -1,5 +1,6 @@
 package com.codepath.yardsale;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,6 +33,7 @@ import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
+import com.parse.ParseFile;
 public class CreatePostActivity extends Activity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
@@ -46,6 +49,9 @@ public class CreatePostActivity extends Activity {
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
+	
+	private ArrayList<String> names;
+	private ArrayList<ParseFile> fileArray;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +87,8 @@ public class CreatePostActivity extends Activity {
 		location = (TextView) findViewById(R.id.etLocation);
 		price = (TextView) findViewById(R.id.etPrice);
 		phone = (TextView) findViewById(R.id.etPhone);
+		names = new ArrayList<String>();
+		fileArray = new ArrayList<ParseFile>();
 	}
 	
 	// Trigger gallery selection for a photo
@@ -94,13 +102,30 @@ public class CreatePostActivity extends Activity {
 	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
 	            ArrayList<String> result=(ArrayList<String>) data.getSerializableExtra("result");
+	          for(int i=0;i<result.size();i++){
+	          Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
+	          // Convert it to byte
+	          ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	          // Compress image to lower quality scale 1 - 100
+	          bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+	          byte[] image = stream.toByteArray();
+	          String ID = UUID.randomUUID().toString();
+	          names.add(ID+".png");
+	  
+	          // Create the ParseFile
+	          ParseFile file = new ParseFile(ID, image);
+	          // Upload the image into Parse Cloud
+	          file.saveInBackground();
+	          fileArray.add(file);
+	        }
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
 	        }
-	    }
+	  }
+	
 	}
-
+	
 	public void onSave(View v) {
 		Post p = new Post();
 		p.setUserId(userId);
@@ -118,8 +143,9 @@ public class CreatePostActivity extends Activity {
 		location.setLatitude(30D);
 		location.setLongitude(123D);
 		p.setLocation(location);
+		p.setImageList(names);
 		
-		postDao.savePost(p);
+		postDao.savePost(p,fileArray);
 		
 		// Prepare data intent
 		Intent data = new Intent();

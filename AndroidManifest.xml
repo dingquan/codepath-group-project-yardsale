@@ -22,9 +22,6 @@
         android:name="com.codepath.yardsale.YardSaleApplication"
         android:theme="@style/AppTheme" >
         
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
         
         <activity
             android:name=".SearchResultActivity"
@@ -50,6 +47,11 @@
         <activity
             android:name=".ManagePostsActivity"
             android:label="@string/title_activity_manage_posts" >
+        </activity>
+        
+        <activity
+            android:name=".MultiPhotoSelectActivity"
+            android:label="@string/title_activity_multi_photo_select" >
         </activity>
     </application>
 

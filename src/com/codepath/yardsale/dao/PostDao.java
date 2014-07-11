@@ -8,11 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
 public class PostDao {
@@ -65,15 +67,19 @@ public class PostDao {
 		return query;
 	}
 
-	public void savePosts(List<Post> posts){
-		for (Post post: posts){
-			savePost(post);
-		}
-	}
+//	public void savePosts(List<Post> posts){
+//		for (Post post: posts){
+//			savePost(post);
+//		}
+//	}
 	
-	public void savePost(Post post){
+	public void savePost(Post post, ArrayList<ParseFile> fileArray){
 		ParsePost parsePost = new ParsePost(post);
 		parsePost.saveInBackground();
+		for (int i=0;i<fileArray.size();i++){
+			ParseImages img = new ParseImages(fileArray.get(i));
+			img.saveInBackground();
+		}
 	}
 
 	/**
