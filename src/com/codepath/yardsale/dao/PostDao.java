@@ -22,6 +22,7 @@ public class PostDao {
 		try {
 			List<ParsePost> results = query.find();
 			for (ParsePost parsePost : results){
+				System.out.println(parsePost.toString());
 				posts.add(parsePost.toPost());
 			}
 		} catch (ParseException e) {
@@ -33,7 +34,7 @@ public class PostDao {
 	
 	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
-		
+		if(c!=null){
 		String keyword = c.getKeyword();
 		if (keyword != null && !keyword.isEmpty()){
 //			String[] keywords = c.getKeyword().split("\\s+");
@@ -60,6 +61,7 @@ public class PostDao {
 		}
 		query.include("contact");
 		query.include("location");
+		}
 		return query;
 	}
 

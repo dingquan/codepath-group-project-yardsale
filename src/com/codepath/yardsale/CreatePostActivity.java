@@ -3,6 +3,7 @@ package com.codepath.yardsale;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
@@ -84,34 +85,20 @@ public class CreatePostActivity extends Activity {
 	
 	// Trigger gallery selection for a photo
 	public void onPickPhoto(View view) {
-		// Create intent for picking a photo from the gallery
-		Intent intent = new Intent(Intent.ACTION_PICK,
-				MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-		// Bring up gallery to select a photo
-		startActivityForResult(intent, PICK_PHOTO_CODE);
+		Intent i = new Intent(this,MultiPhotoSelectActivity.class);
+		startActivityForResult(i, 1);
 	}
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (data != null) {
-			try {
-				Uri photoUri = data.getData();
-				// Do something with the photo based on Uri
-				Bitmap selectedImage;
-				selectedImage = MediaStore.Images.Media.getBitmap(
-						this.getContentResolver(), photoUri);
-				// Load the selected image into a preview
-				ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-				ivPreview.setImageBitmap(selectedImage);
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            ArrayList<String> result=(ArrayList<String>) data.getSerializableExtra("result");
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
 	}
 
 	public void onSave(View v) {
