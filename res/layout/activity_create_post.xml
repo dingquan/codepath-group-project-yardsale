@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/tvPrice"
-                android:ems="10"
+                android:ems="6"
                 android:inputType="numberDecimal" />
 
             <TextView
@@ -131,7 +131,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/tvPhone"
                 android:layout_toRightOf="@+id/etPrice"
-                android:ems="10"
+                android:ems="6"
                 android:inputType="phone" />
 
             <Button
@@ -139,10 +139,9 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/etPrice"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="22dp"
-                android:layout_marginRight="22dp"
+                android:layout_alignParentBottom="true"
                 android:onClick="onPickPhoto"
                 android:text="Select Photo" />
 
@@ -150,6 +149,7 @@
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/etPrice"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:onClick="onSave"
