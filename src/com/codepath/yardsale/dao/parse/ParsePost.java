@@ -38,7 +38,7 @@ public class ParsePost extends ParseObject {
 		post.setCreatedAt(this.getCreatedAt().getTime());
 		post.setDescription(getDescription());
 		post.setId(getObjectId());
-		//post.setLocation(getLocation().toLocation());
+		post.setLocation(getLocation().toLocation());
 		post.setPrice(getPrice());
 		post.setStatus(getStatus());
 		post.setTitle(getTitle());
