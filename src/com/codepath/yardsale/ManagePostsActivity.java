@@ -31,14 +31,12 @@ public class ManagePostsActivity extends Activity {
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
-	ArrayList<String> items;
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		items = new ArrayList<String>();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manage_posts);
 		postDao = new PostDao();
@@ -86,9 +84,10 @@ public class ManagePostsActivity extends Activity {
 		    public boolean onItemLongClick(AdapterView<?> parent, View view,int position,long rowId)
 			{
 		    	Toast.makeText(ManagePostsActivity.this, "delete", Toast.LENGTH_SHORT).show();
-		    	postDao = new PostDao();
-		    	items.remove(position);
-		    	//postDao.deletePost(items);
+		    	postDao = new PostDao();	    	
+		    	Post post = posts.get(position);
+		        postDao.deletePost(post);
+		        aPosts.remove(post);        
 				return true;
 			}
 		}); 
