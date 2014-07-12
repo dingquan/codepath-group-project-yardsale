@@ -2,6 +2,7 @@ package com.codepath.yardsale;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +32,8 @@ public class ViewPostActivity extends Activity {
 		title = (TextView) findViewById(R.id.tvAdsTitle);
 		title.setText(post.getTitle());
 		description = (TextView) findViewById(R.id.tvAdsDescription);
-		String descr = post.getDescription();
-		if (descr.length() > 80){
-			descr = descr.substring(0, 80) + "...";
-		}
-		description.setText(descr);
+		description.setMovementMethod(new ScrollingMovementMethod());
+		description.setText(post.getDescription());
 		location = (TextView) findViewById(R.id.tvAdsAddress);
 		location.setText(post.getContact().getAddress());
 		price = (TextView) findViewById(R.id.tvAdsPrice);
