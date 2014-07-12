@@ -17,6 +17,7 @@ public class ParsePost extends ParseObject {
 	
 	public ParsePost(Post post){
 		super();
+		setObjectId(post.getId());
 		setUserId(post.getUserId());
 		setTitle(post.getTitle());
 		setCategory(post.getCategory().name());
