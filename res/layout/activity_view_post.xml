@@ -5,92 +5,100 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-
-    <ImageView
-        android:id="@+id/ivAds"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/tvPriceLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvTitleLabel"
-        android:layout_below="@+id/tvTitleLabel"
-        android:layout_marginTop="24dp"
-        
-        android:text="Price:" />
+            <ImageView
+                android:id="@+id/ivAds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/tvDescriptionLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPriceLabel"
-        android:layout_below="@+id/tvAdsPrice"
-        android:layout_marginTop="17dp"
-        android:text="Description:" />
-    <TextView
-        android:id="@+id/tvAdsPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvPriceLabel"
-        android:layout_alignBottom="@+id/tvPriceLabel"
-        android:layout_alignLeft="@+id/tvAdsTitle"
-        android:text="Price" />
+            <TextView
+                android:id="@+id/tvPriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvTitleLabel"
+                android:layout_below="@+id/tvTitleLabel"
+                android:layout_marginTop="24dp"
+                android:text="Price:" />
 
+            <TextView
+                android:id="@+id/tvDescriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvPriceLabel"
+                android:layout_below="@+id/tvAdsPrice"
+                android:layout_marginTop="17dp"
+                android:text="Description:" />
 
+            <TextView
+                android:id="@+id/tvAdsPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvPriceLabel"
+                android:layout_alignBottom="@+id/tvPriceLabel"
+                android:layout_alignLeft="@+id/tvAdsTitle"
+                android:text="Price" />
 
-    <TextView
-        android:id="@+id/tvAdsAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvAddressLabel"
-        android:layout_alignBottom="@+id/tvAddressLabel"
-        android:layout_alignLeft="@+id/tvAdsPrice"
-        android:text="Address" />
+            <TextView
+                android:id="@+id/tvAdsAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvAddressLabel"
+                android:layout_alignBottom="@+id/tvAddressLabel"
+                android:layout_alignLeft="@+id/tvAdsPrice"
+                android:text="Address" />
 
-    <TextView
-        android:id="@+id/tvTitleLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ivAds"
-        android:layout_below="@+id/ivAds"
-        android:layout_marginTop="28dp"
-        android:text="Title:" />
+            <TextView
+                android:id="@+id/tvTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/ivAds"
+                android:layout_below="@+id/ivAds"
+                android:layout_marginTop="28dp"
+                android:text="Title:" />
 
-    <TextView
-        android:id="@+id/tvAdsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvPriceLabel"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@+id/tvDescriptionLabel"
-        android:text="Title" />
+            <TextView
+                android:id="@+id/tvAdsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvTitleLabel"
+                android:layout_marginLeft="22dp"
+                android:layout_toRightOf="@+id/tvDescriptionLabel"
+                android:text="Title" />
 
-    <TextView
-        android:id="@+id/tvAdsDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tvAdsAddress"
-        android:layout_alignLeft="@+id/tvAdsPrice"
-        android:layout_alignTop="@+id/tvDescriptionLabel"
-        android:maxLines="15"
-        android:scrollbars="vertical"
-        android:text="Description" />
+            <TextView
+                android:id="@+id/tvAdsDescription"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAdsPrice"
+                android:layout_alignTop="@+id/tvDescriptionLabel"
+                android:text="Description" />
 
-    <TextView
-        android:id="@+id/tvAddressLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvDescriptionLabel"
-        android:layout_below="@+id/tvDescriptionLabel"
-        android:layout_marginTop="109dp"
-        android:text="Address:" />
-
-
+            <TextView
+                android:id="@+id/tvAddressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvDescriptionLabel"
+                android:layout_below="@+id/tvAdsDescription"
+                android:layout_marginTop="10dp"
+                android:text="Address:" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
