@@ -105,6 +105,14 @@ public class SearchResultActivity extends Activity implements LocationListener {
 //			geoLocation.setLatitude(location.getLatitude());
 //			criteria.setLocation(geoLocation);
 //		}
+		//Log.d("SearchResultActivity searchNearByPost",location.toString());
+		if (location !=null){
+			Log.d("SearchResultACtivity searchNearBypost","location is not null");
+			
+		}else{
+			Log.d("SearchResultACtivity searchNearBypost","location is null");
+		}
+		
 		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(posts);
 	}

@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
 import com.codepath.yardsale.model.GeoLocation;
@@ -60,16 +62,21 @@ public class PostDao {
 		}
 		String userId = c.getUserId();
 		if (userId != null && !userId.isEmpty()){
+			Log.d("PostDao buildquery", "userId is not null");
 			query = query.whereEqualTo("userId", userId);
 		}
 		GeoLocation geoLocation = c.getLocation();
+		//Log.d("PostDao buildquery",geoLocation.toString());
 		if (geoLocation != null){
+			Log.d("PostDao buildquery","geoLocation is not null");
 			ParseGeoPoint geoPoint = new ParseGeoPoint(geoLocation.getLatitude(), geoLocation.getLongitude());
 			query = query.whereWithinMiles("location", geoPoint, 10);
+		}else{
+			Log.d("Postdao Buildquery","geoLocation is null");
 		}
 		query.addDescendingOrder("createdAt");
 		query.include("contact");
-		query.include("location");
+		//query.include("location");
 		}
 		return query;
 	}
