@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
+import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
@@ -38,9 +39,8 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	private PostDao postDao;
 
-	private String query;
 	private LocationManager locationManager;
-	private String provider;
+	private String provider = LocationManager.NETWORK_PROVIDER;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +48,25 @@ public class SearchResultActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_search_result);
 
 		postDao = new PostDao();
+//		List<Post> posts = postDao.getDummyPosts();
+//		postDao.savePosts(posts);
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
 		lvPosts = (ListView) findViewById(R.id.lvPosts);
 		lvPosts.setAdapter(aPosts);
 
 		setupHandlers();
-		loadMorePosts();
 		checkIfLocationServiceEnabled();
 		initLocationManager();
+		searchNearbyRecentPosts();
 	}
 
 	private void initLocationManager() {
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		// Define the criteria how to select the locatioin provider -> use
-		// default
+		// Define the criteria how to select the locatioin provider -> use default
 		Criteria criteria = new Criteria();
 		provider = locationManager.getBestProvider(criteria, false);
-		Location location = locationManager.getLastKnownLocation(provider);
 	}
 
 	private void setupHandlers() {
@@ -98,8 +98,15 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	}
 
-	private void loadMorePosts() {
+	private void searchNearbyRecentPosts() {
 		SearchCriteria criteria = new SearchCriteria();
+		Location location = locationManager.getLastKnownLocation(provider);
+//		if (location != null){
+//			GeoLocation geoLocation = new GeoLocation();
+//			geoLocation.setLongitude(location.getLongitude());
+//			geoLocation.setLatitude(location.getLatitude());
+//			criteria.setLocation(geoLocation);
+//		}
 		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(posts);
 	}
@@ -152,9 +159,9 @@ public class SearchResultActivity extends Activity implements LocationListener {
 	}
 
 	private void checkIfLocationServiceEnabled() {
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		boolean enabled = service
-				.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+//		boolean enabled = service
+//				.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 		// check if enabled and if not send user to the GSP settings
 		// Better solution would be to display a dialog and suggesting to
@@ -186,14 +193,12 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String arg0) {
-		Toast.makeText(this, "Disabled provider " + provider,
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Disabled provider " + provider, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0) {
-		Toast.makeText(this, "Enabled new provider " + provider,
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Enabled new provider " + provider, Toast.LENGTH_SHORT).show();
 
 	}
 

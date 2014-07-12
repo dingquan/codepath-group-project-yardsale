@@ -3,8 +3,10 @@ package com.codepath.yardsale.dao.parse;
 import java.util.ArrayList;
 
 import com.codepath.yardsale.model.Category;
+import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.parse.ParseClassName;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 @ParseClassName("Post")
@@ -20,7 +22,11 @@ public class ParsePost extends ParseObject {
 		setCategory(post.getCategory().name());
 		setContact(new ParseContact(post.getContact()));
 		setDescription(post.getDescription());
-		setLocation(new ParseGeoLocation(post.getLocation()));
+		GeoLocation loc = post.getLocation();
+		if (loc != null){
+			ParseGeoPoint pt = new ParseGeoPoint(loc.getLatitude(), loc.getLongitude());
+			setLocation(pt);
+		}
 		setPrice(post.getPrice());
 		setStatus(post.getStatus());
 		setImageList(post.getImageList());
@@ -38,7 +44,12 @@ public class ParsePost extends ParseObject {
 		post.setCreatedAt(this.getCreatedAt().getTime());
 		post.setDescription(getDescription());
 		post.setId(getObjectId());
-		post.setLocation(getLocation().toLocation());
+		ParseGeoPoint geoPt = getLocation();
+		if (geoPt != null){
+			GeoLocation location = new GeoLocation();
+			location.setLatitude(geoPt.getLatitude());
+			location.setLongitude(geoPt.getLongitude());
+		}
 		post.setPrice(getPrice());
 		post.setStatus(getStatus());
 		post.setTitle(getTitle());
@@ -94,11 +105,11 @@ public class ParsePost extends ParseObject {
 		put("price", price);
 	}
 
-	public ParseGeoLocation getLocation() {
-		return (ParseGeoLocation)getParseObject("location");
+	public ParseGeoPoint getLocation() {
+		return getParseGeoPoint("location");
 	}
 
-	public void setLocation(ParseGeoLocation location) {
+	public void setLocation(ParseGeoPoint location) {
 		put("location", location);
 	}
 

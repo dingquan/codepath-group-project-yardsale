@@ -54,9 +54,8 @@ public class SearchCriteriaActivity extends Activity {
 	public void searchPosts(View v) {
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setKeyword(etKeyword.getText().toString());
-		GeoLocation location = new GeoLocation();
-		// location.setAddress(etCity.getText().toString());
-		criteria.setLocation(location);
+//		GeoLocation location = new GeoLocation();
+//		criteria.setLocation(location);
 		if (etMinPrice.getText().length() > 0)
 			criteria.setMinPrice(Integer.valueOf(etMinPrice.getText().toString()));
 		if (etMaxPrice.getText().length() > 0)
