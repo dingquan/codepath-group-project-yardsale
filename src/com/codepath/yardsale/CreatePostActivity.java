@@ -43,15 +43,14 @@ public class CreatePostActivity extends Activity {
 	TextView location;
 	TextView price;
 	TextView phone;
-	String selectedCategory;
 
-	
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
 	
 	private ArrayList<String> names;
 	private ArrayList<ParseFile> fileArray;
+	private GeoLocation geoLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,11 @@ public class CreatePostActivity extends Activity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
-		spinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
+		
+		String locationJson = getIntent().getStringExtra("geo_location");
+		if (locationJson != null && !locationJson.isEmpty()){
+			geoLocation = (GeoLocation) JsonUtil.fromJson(locationJson, GeoLocation.class);
+		}
 	}
 
 	public void setUpViews() {
@@ -139,10 +142,7 @@ public class CreatePostActivity extends Activity {
 		Date date = new Date();
 		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
 		p.setStatus("Active");
-		GeoLocation location = new GeoLocation();
-		location.setLatitude(30D);
-		location.setLongitude(123D);
-		p.setLocation(location);
+		p.setLocation(geoLocation);
 		p.setImageList(names);
 		
 		postDao.savePost(p,fileArray);
@@ -160,27 +160,5 @@ public class CreatePostActivity extends Activity {
 //		startActivity(i);
 
 	}
-	public class MyOnItemSelectedListener implements OnItemSelectedListener {
 
-		public void onItemSelected(AdapterView<?> parent, View view, int pos,
-				long id) {
-
-			selectedCategory = parent.getItemAtPosition(pos).toString();
-
-			// make sure the country was already selected during the onCreate
-			if (selectedCategory != null) {
-				Toast.makeText(parent.getContext(),
-						"Country you selected is " + selectedCategory,
-						Toast.LENGTH_LONG).show();
-			}
-
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
 }

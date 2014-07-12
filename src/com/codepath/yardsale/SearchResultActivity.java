@@ -45,6 +45,7 @@ public class SearchResultActivity extends Activity
 	private PostDao postDao;
 
 	private LocationClient locationClient;
+	private Location lastKnownLocation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +143,13 @@ public class SearchResultActivity extends Activity
 	}
 
 	public void onPost(MenuItem mi) {
-		Intent i = new Intent(SearchResultActivity.this,
-				CreatePostActivity.class);
+		Intent i = new Intent(SearchResultActivity.this, CreatePostActivity.class);
+		if (lastKnownLocation != null){
+			GeoLocation geoLocation = new GeoLocation();
+			geoLocation.setLatitude(lastKnownLocation.getLatitude());
+			geoLocation.setLongitude(lastKnownLocation.getLongitude());
+			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
+		}
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
 	}
 
@@ -267,22 +273,21 @@ public class SearchResultActivity extends Activity
 
 	@Override
 	public void onConnected(Bundle dataBundle) {
-		Location location = locationClient.getLastLocation();
-		if (location != null) {
-			Toast.makeText(this, "GPS location was found! (" + location.getLatitude() + ", " + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+		lastKnownLocation = locationClient.getLastLocation();
+		if (lastKnownLocation != null) {
+			Toast.makeText(this, "GPS location was found! (" + lastKnownLocation.getLatitude() + ", " + lastKnownLocation.getLongitude() + ")", Toast.LENGTH_SHORT).show();
 
 		} else {
 			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
 		}
 		
-        searchNearbyRecentPosts(location);
+        searchNearbyRecentPosts(lastKnownLocation);
 	}
 
 	@Override
 	public void onDisconnected() {
         // Display the connection status
-        Toast.makeText(this, "Disconnected. Please re-connect.",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
 		
 	}
 

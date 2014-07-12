@@ -112,7 +112,8 @@ public class ParsePost extends ParseObject {
 	}
 
 	public void setLocation(ParseGeoPoint location) {
-		put("location", location);
+		if (location != null)
+			put("location", location);
 	}
 
 	public String getStatus() {

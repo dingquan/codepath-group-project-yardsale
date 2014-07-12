@@ -26,8 +26,6 @@ import com.codepath.yardsale.util.JsonUtil;
 
 
 public class ManagePostsActivity extends Activity {
-	private static final int REQUEST_CODE_CREATE_ADS = 1;
-	private static final int REQUEST_CODE_SEARCH_ADS = 2;
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
@@ -82,9 +80,7 @@ public class ManagePostsActivity extends Activity {
 		//Delete ad
 		lvAds.setOnItemLongClickListener(new OnItemLongClickListener() {
 		    public boolean onItemLongClick(AdapterView<?> parent, View view,int position,long rowId)
-			{
-		    	Toast.makeText(ManagePostsActivity.this, "delete", Toast.LENGTH_SHORT).show();
-		    	postDao = new PostDao();	    	
+			{    	
 		    	Post post = posts.get(position);
 		        postDao.deletePost(post);
 		        aPosts.remove(post);        
@@ -105,32 +101,9 @@ public class ManagePostsActivity extends Activity {
 	}
 	
 	public void OnRepost(View view) {
-		//
+		
 		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
-//		finish();
 
     }
-    @Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			if (requestCode == REQUEST_CODE_CREATE_ADS) {
-				Toast.makeText(this, "returned from create ads",
-						Toast.LENGTH_SHORT).show();
-			} else if (requestCode == REQUEST_CODE_SEARCH_ADS) {
-				String searchStr = data.getExtras()
-						.getString("search_ads");
-				SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(
-						searchStr, SearchCriteria.class);
-				Toast.makeText(
-						this,
-						"returned from search criteria, "
-								+ criteria.getKeyword(), Toast.LENGTH_SHORT)
-						.show();
-				List<Post> results = postDao
-						.findPostsBySearchCriteria(criteria);
-				aPosts.clear();
-				aPosts.addAll(results);
-			}
-		}
-	}
+
 }

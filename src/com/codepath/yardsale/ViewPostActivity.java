@@ -26,8 +26,7 @@ public class ViewPostActivity extends Activity {
 	private void populateData() {
 		String postJson = getIntent().getStringExtra("post");
 		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
-		Toast.makeText(this, "Read post: " + post.getTitle(),
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "Read post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
 		
 		title = (TextView) findViewById(R.id.tvAdsTitle);
 		title.setText(post.getTitle());
