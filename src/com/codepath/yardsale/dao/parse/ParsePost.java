@@ -33,7 +33,8 @@ public class ParsePost extends ParseObject {
 	}
 	
 	public void setImageList(ArrayList<String> imageList) {
-		put ("ImageList",imageList);
+		if (imageList != null)
+			put ("ImageList",imageList);
 		
 	}
 

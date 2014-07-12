@@ -48,8 +48,6 @@ public class SearchResultActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_search_result);
 
 		postDao = new PostDao();
-//		List<Post> posts = postDao.getDummyPosts();
-//		postDao.savePosts(posts);
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
 		lvPosts = (ListView) findViewById(R.id.lvPosts);

@@ -74,11 +74,11 @@ public class PostDao {
 		return query;
 	}
 
-//	public void savePosts(List<Post> posts){
-//		for (Post post: posts){
-//			savePost(post);
-//		}
-//	}
+	public void savePosts(List<Post> posts){
+		for (Post post: posts){
+			savePost(post);
+		}
+	}
 	
 	public void savePost(Post post, ArrayList<ParseFile> fileArray){
 		ParsePost parsePost = new ParsePost(post);
@@ -89,6 +89,11 @@ public class PostDao {
 		}
 	}
 
+	public void savePost(Post post) {
+		ParsePost parsePost = new ParsePost(post);
+		parsePost.saveInBackground();
+	}
+	
 	/**
 	 * find a Post by its unique id
 	 * @param uid
