@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
-import android.location.Criteria;
+import android.content.IntentSender;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,8 +27,14 @@ import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.LocationClient;
 
-public class SearchResultActivity extends Activity implements LocationListener {
+public class SearchResultActivity extends Activity 
+	implements GooglePlayServicesClient.ConnectionCallbacks,
+				GooglePlayServicesClient.OnConnectionFailedListener {
 	private static final int REQUEST_CODE_CREATE_POST = 1;
 	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
 
@@ -39,9 +44,8 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	private PostDao postDao;
 
-	private LocationManager locationManager;
-	private String provider = LocationManager.NETWORK_PROVIDER;
-
+	private LocationClient locationClient;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,19 +58,26 @@ public class SearchResultActivity extends Activity implements LocationListener {
 		lvPosts.setAdapter(aPosts);
 
 		setupHandlers();
-		checkIfLocationServiceEnabled();
-		initLocationManager();
-		searchNearbyRecentPosts();
+		locationClient = new LocationClient(this, this, this);
+	
 	}
 
-	private void initLocationManager() {
-		// Get the location manager
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		// Define the criteria how to select the locatioin provider -> use default
-		Criteria criteria = new Criteria();
-		provider = locationManager.getBestProvider(criteria, false);
-	}
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Connect the client.
+        if (isGooglePlayServicesAvailable()){
+        	locationClient.connect();
+        }
+    }
+    
+    @Override
+    protected void onStop() {
+        // Disconnecting the client invalidates it.
+        locationClient.disconnect();
+        super.onStop();
+    }
+    
 	private void setupHandlers() {
 
 		// lvPosts.setOnScrollListener(new EndlessScrollListener() {
@@ -96,23 +107,20 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	}
 
-	private void searchNearbyRecentPosts() {
+	private void searchNearbyRecentPosts(Location location) {
 		SearchCriteria criteria = new SearchCriteria();
-		Location location = locationManager.getLastKnownLocation(provider);
-//		if (location != null){
-//			GeoLocation geoLocation = new GeoLocation();
-//			geoLocation.setLongitude(location.getLongitude());
-//			geoLocation.setLatitude(location.getLatitude());
-//			criteria.setLocation(geoLocation);
-//		}
-		//Log.d("SearchResultActivity searchNearByPost",location.toString());
-		if (location !=null){
-			Log.d("SearchResultACtivity searchNearBypost","location is not null");
-			
-		}else{
+//		Location location = locationClient.getLastLocation();
+		if (location != null){
+			GeoLocation geoLocation = new GeoLocation();
+			geoLocation.setLongitude(location.getLongitude());
+			geoLocation.setLatitude(location.getLatitude());
+			criteria.setLocation(geoLocation);
+			Log.d("SearchResultActivity searchNearByPost",location.toString());
+		}
+		else{
 			Log.d("SearchResultACtivity searchNearBypost","location is null");
 		}
-		
+
 		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
 		aPosts.addAll(posts);
 	}
@@ -147,69 +155,135 @@ public class SearchResultActivity extends Activity implements LocationListener {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			if (requestCode == REQUEST_CODE_CREATE_POST) {
-				//nothing much to do here really.
-				
-//				String postStr = data.getExtras().getString("post");
-//				Toast.makeText(this, "returned from create post" + postStr,Toast.LENGTH_SHORT).show();
-			} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
-				String searchStr = data.getExtras().getString("search_criteria");
-				SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
-//				Toast.makeText(this, "returned from search criteria, " + criteria.getKeyword(), Toast.LENGTH_SHORT).show();
-				List<Post> results = postDao.findPostsBySearchCriteria(criteria);
-				aPosts.clear();
-				aPosts.addAll(results);
+		if (requestCode == REQUEST_CODE_CREATE_POST) {
+			// nothing much to do here really.
+
+			// String postStr = data.getExtras().getString("post");
+			// Toast.makeText(this, "returned from create post" +
+			// postStr,Toast.LENGTH_SHORT).show();
+		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
+			String searchStr = data.getExtras().getString("search_criteria");
+			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(
+					searchStr, SearchCriteria.class);
+			// Toast.makeText(this, "returned from search criteria, " +
+			// criteria.getKeyword(), Toast.LENGTH_SHORT).show();
+			List<Post> results = postDao.findPostsBySearchCriteria(criteria);
+			aPosts.clear();
+			aPosts.addAll(results);
+		} else if (requestCode == CONNECTION_FAILURE_RESOLUTION_REQUEST) {
+			if (resultCode == RESULT_OK) {
+
 			}
 		}
 	}
 
-	private void checkIfLocationServiceEnabled() {
-//		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//		boolean enabled = service
-//				.isProviderEnabled(LocationManager.GPS_PROVIDER);
+	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
-		// check if enabled and if not send user to the GSP settings
-		// Better solution would be to display a dialog and suggesting to
-		// go to the settings
-		// if (!enabled) {
-		// Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		// startActivity(intent);
-		// }
+	// Define a DialogFragment that displays the error dialog
+	public static class ErrorDialogFragment extends DialogFragment {
+		// Global field to contain the error dialog
+		private Dialog mDialog;
+
+		// Default constructor. Sets the dialog field to null
+		public ErrorDialogFragment() {
+			super();
+			mDialog = null;
+		}
+
+		// Set the dialog to display
+		public void setDialog(Dialog dialog) {
+			mDialog = dialog;
+		}
+
+		// Return a Dialog to the DialogFragment.
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			return mDialog;
+		}
 	}
 
-	/* Request updates at startup */
+	private boolean isGooglePlayServicesAvailable() {
+		// Check that Google Play services is available
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		// If Google Play services is available
+		if (ConnectionResult.SUCCESS == resultCode) {
+			// In debug mode, log the status
+			Log.d("Location Updates", "Google Play services is available.");
+			// Continue
+			return true;
+			// Google Play services was not available for some reason
+		} else {
+			// Get the error code
+			Log.e("ERROR", "failed to connect: " + resultCode);
+			// Get the error dialog from Google Play services
+			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
+					resultCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+
+//			// If Google Play services can provide an error dialog
+//			if (errorDialog != null) {
+//				// Create a new DialogFragment for the error dialog
+//				ErrorDialogFragment errorFragment = new ErrorDialogFragment();
+//				// Set the dialog in the DialogFragment
+//				errorFragment.setDialog(errorDialog);
+//				// Show the error dialog in the DialogFragment
+//				errorFragment.show(getSupportFragmentManager(),
+//						"Location Updates");
+//			}
+			return false;
+		}
+	}
+
 	@Override
-	protected void onResume() {
-		super.onResume();
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+        /*
+         * Google Play services can resolve some errors it detects.
+         * If the error has a resolution, try sending an Intent to
+         * start a Google Play services activity that can resolve
+         * error.
+         */
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(
+                        this,
+                        CONNECTION_FAILURE_RESOLUTION_REQUEST);
+                /*
+                 * Thrown if Google Play services canceled the original
+                 * PendingIntent
+                 */
+            } catch (IntentSender.SendIntentException e) {
+                // Log the error
+                e.printStackTrace();
+            }
+        } else {
+            /*
+             * If no resolution is available, display a dialog to the
+             * user with the error.
+             */
+//            showErrorDialog(connectionResult.getErrorCode());
+        }
+		
 	}
 
-	/* Remove the locationlistener updates when Activity is paused */
 	@Override
-	protected void onPause() {
-		super.onPause();
-		locationManager.removeUpdates(this);
+	public void onConnected(Bundle dataBundle) {
+		Location location = locationClient.getLastLocation();
+		if (location != null) {
+			Toast.makeText(this, "GPS location was found! (" + location.getLatitude() + ", " + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
+		} else {
+			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
+		}
+		
+        searchNearbyRecentPosts(location);
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {
-		Log.d("DEBUG", "### location changed: " + location.toString());
+	public void onDisconnected() {
+        // Display the connection status
+        Toast.makeText(this, "Disconnected. Please re-connect.",
+                Toast.LENGTH_SHORT).show();
+		
 	}
 
-	@Override
-	public void onProviderDisabled(String arg0) {
-		Toast.makeText(this, "Disabled provider " + provider, Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onProviderEnabled(String arg0) {
-		Toast.makeText(this, "Enabled new provider " + provider, Toast.LENGTH_SHORT).show();
-
-	}
-
-	@Override
-	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-
-	}
 }

@@ -31,52 +31,54 @@ public class PostDao {
 				posts.add(parsePost.toPost());
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e("ERROR", "Parse Exceptoin", e);
 		}
 		return posts;
 	}
 	
 	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
-		if(c!=null){
-		String keyword = c.getKeyword();
-		if (keyword != null && !keyword.isEmpty()){
-//			String[] keywords = c.getKeyword().split("\\s+");
-//			query = query.whereContainedIn("description", Arrays.asList(keywords));
-			ParseQuery<ParsePost> titleQuery = ParseQuery.getQuery(ParsePost.class).whereContains("title", keyword);
-			ParseQuery<ParsePost> descQuery = ParseQuery.getQuery(ParsePost.class).whereContains("description", keyword);
-			List<ParseQuery<ParsePost>> queries = new ArrayList<ParseQuery<ParsePost>>();
-			queries.add(titleQuery);
-			queries.add(descQuery);
-			query = ParseQuery.or(queries);
-		}
-		if (c.getCategory() != null){
-			query = query.whereEqualTo("category", c.getCategory().name());
-		}
-		if (c.getMaxPrice() != null){
-			query = query.whereLessThan("price", c.getMaxPrice());
-		}
-		if (c.getMinPrice() != null){
-			query = query.whereGreaterThan("price", c.getMinPrice());
-		}
-		String userId = c.getUserId();
-		if (userId != null && !userId.isEmpty()){
-			Log.d("PostDao buildquery", "userId is not null");
-			query = query.whereEqualTo("userId", userId);
-		}
-		GeoLocation geoLocation = c.getLocation();
-		//Log.d("PostDao buildquery",geoLocation.toString());
-		if (geoLocation != null){
-			Log.d("PostDao buildquery","geoLocation is not null");
-			ParseGeoPoint geoPoint = new ParseGeoPoint(geoLocation.getLatitude(), geoLocation.getLongitude());
-			query = query.whereWithinMiles("location", geoPoint, 10);
-		}else{
-			Log.d("Postdao Buildquery","geoLocation is null");
-		}
-		query.addDescendingOrder("createdAt");
-		query.include("contact");
-		//query.include("location");
+		if (c != null) {
+			String keyword = c.getKeyword();
+			if (keyword != null && !keyword.isEmpty()) {
+				// String[] keywords = c.getKeyword().split("\\s+");
+				// query = query.whereContainedIn("description",
+				// Arrays.asList(keywords));
+				ParseQuery<ParsePost> titleQuery = ParseQuery.getQuery(
+						ParsePost.class).whereContains("title", keyword);
+				ParseQuery<ParsePost> descQuery = ParseQuery.getQuery(
+						ParsePost.class).whereContains("description", keyword);
+				List<ParseQuery<ParsePost>> queries = new ArrayList<ParseQuery<ParsePost>>();
+				queries.add(titleQuery);
+				queries.add(descQuery);
+				query = ParseQuery.or(queries);
+			}
+			if (c.getCategory() != null) {
+				query = query.whereEqualTo("category", c.getCategory().name());
+			}
+			if (c.getMaxPrice() != null) {
+				query = query.whereLessThan("price", c.getMaxPrice());
+			}
+			if (c.getMinPrice() != null) {
+				query = query.whereGreaterThan("price", c.getMinPrice());
+			}
+			String userId = c.getUserId();
+			if (userId != null && !userId.isEmpty()) {
+				Log.d("PostDao buildquery", "userId is not null");
+				query = query.whereEqualTo("userId", userId);
+			}
+			GeoLocation location = c.getLocation();
+			// Log.d("PostDao buildquery",geoLocation.toString());
+			if (location != null) {
+				Log.d("PostDao buildquery", "geoLocation is not null");
+				ParseGeoPoint geoPoint = new ParseGeoPoint(
+						location.getLatitude(), location.getLongitude());
+				query = query.whereWithinMiles("location", geoPoint, 10);
+			} else {
+				Log.d("Postdao Buildquery", "geoLocation is null");
+			}
+			query.addDescendingOrder("createdAt");
+			query.include("contact");
 		}
 		return query;
 	}
@@ -111,9 +113,8 @@ public class PostDao {
 		try {
 			ParsePost parsePost = query.get(id);
 			return parsePost.toPost();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (ParseException e) {
+			Log.e("ERROR", "Parse Exception", e);
 		}
 		return null;
 	}
