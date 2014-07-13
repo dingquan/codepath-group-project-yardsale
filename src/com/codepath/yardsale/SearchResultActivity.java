@@ -36,7 +36,6 @@ public class SearchResultActivity extends BaseActivity
 				GooglePlayServicesClient.OnConnectionFailedListener {
 	private static final int REQUEST_CODE_CREATE_POST = 1;
 	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
-
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvPosts;
@@ -59,7 +58,6 @@ public class SearchResultActivity extends BaseActivity
 
 		setupHandlers();
 		locationClient = new LocationClient(this, this, this);
-	
 		searchNearbyRecentPosts(lastKnownLocation);
 	}
 
@@ -114,7 +112,7 @@ public class SearchResultActivity extends BaseActivity
 			GeoLocation geoLocation = new GeoLocation();
 			geoLocation.setLongitude(location.getLongitude());
 			geoLocation.setLatitude(location.getLatitude());
-			criteria.setLocation(geoLocation);
+			//criteria.setLocation(geoLocation);
 			Log.d("SearchResultActivity searchNearByPost",location.toString());
 		}
 		else{

@@ -37,6 +37,7 @@ import com.parse.ParseFile;
 public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
+	public final static String REQUEST_CODE_EDIT_ADS ="0";
 	Spinner spinner;
 	TextView title;
 	TextView description;
@@ -67,7 +68,7 @@ public class CreatePostActivity extends BaseActivity {
 		postDao = new PostDao();
 
 		setUpViews();
-		populateData();
+
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		String[] categoryNames = Category.getNames();
 		Arrays.sort(categoryNames);
@@ -79,6 +80,15 @@ public class CreatePostActivity extends BaseActivity {
 		spinner.setAdapter(adapter);
 		
 		String locationJson = getIntent().getStringExtra("geo_location");
+			//Toast.makeText(this, "create:"+getIntent().getStringExtra("status"), Toast.LENGTH_LONG).show();
+		String status = getIntent().getStringExtra("status");
+		//Edit an Ad
+		if(status!=null)
+		{
+			//Toast.makeText(this, status, Toast.LENGTH_LONG).show();
+			populateData();
+		}
+
 		if (locationJson != null && !locationJson.isEmpty()){
 			geoLocation = (GeoLocation) JsonUtil.fromJson(locationJson, GeoLocation.class);
 		}
@@ -86,11 +96,14 @@ public class CreatePostActivity extends BaseActivity {
 
 	public void populateData()
 	{
+		//Existing ad
 		String postJson = getIntent().getStringExtra("post");
 		if (postJson == null || postJson.isEmpty())
+
 			return;
+
 		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
-		
+
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
@@ -98,7 +111,7 @@ public class CreatePostActivity extends BaseActivity {
 
 		if(!dValue.isNaN())
 		{
-			price.setText("$"+dValue.toString());
+			price.setText(dValue.toString());
 		} 
 		
 		phone.setText(post.getContact().getPhone());
@@ -117,7 +130,7 @@ public class CreatePostActivity extends BaseActivity {
 	    index = i;
 	   }
 	  }
-	  Toast.makeText(this, "Read post: " + index,Toast.LENGTH_SHORT).show();
+	  //Toast.makeText(this, "Read post: " + index,Toast.LENGTH_SHORT).show();
 	  return index;
 		
 	 }
