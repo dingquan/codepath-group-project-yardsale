@@ -58,6 +58,28 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 			imageLoader.displayImage(url, ivImage);
 			
 			
+		}else{
+			String ctgry = post.getCategory().name();
+			System.out.println("PostArrayAdapter-->>"+ctgry);
+			if(ctgry.equals("TOYS_GAMES")){
+				ivImage.setImageResource(R.drawable.ic_toys);
+			}else if(ctgry.equals("FURNITURE")){
+				ivImage.setImageResource(R.drawable.ic_furniture);
+			}else if(ctgry.equals("ELECTRONICS")){
+				ivImage.setImageResource(R.drawable.ic_electronics);
+			}else if(ctgry.equals("CLOTHING_ACCESSRIES")){
+				ivImage.setImageResource(R.drawable.ic_clothing);
+			}else if(ctgry.equals("BOOKS_MAGAZINES")){
+				ivImage.setImageResource(R.drawable.ic_books);
+			}else if(ctgry.equals("COMPUTERS")){
+				ivImage.setImageResource(R.drawable.ic_computers);
+			}else if(ctgry.equals("APPLIANCES")){
+				ivImage.setImageResource(R.drawable.ic_appliances);
+			}else if(ctgry.equals("CARS")){
+				ivImage.setImageResource(R.drawable.ic_cars);
+			}else{
+				ivImage.setImageResource(R.drawable.ic_cells);
+			}
 		}
 		
 		
@@ -78,4 +100,6 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 
 		return v;
 	}
+
+	
 }
