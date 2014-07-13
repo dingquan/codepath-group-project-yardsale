@@ -100,7 +100,10 @@ public class SearchResultActivity extends BaseActivity
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent i = new Intent(SearchResultActivity.this, ViewPostActivity.class);
-				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
+				Post post = posts.get(position);
+				String postStr = JsonUtil.toJson(post);
+				Log.d("DEBUG", "view details of post: " + postStr);
+				i.putExtra("post", postStr);
 				i.putExtra("position", position);
 				startActivity(i);
 			}
@@ -115,7 +118,7 @@ public class SearchResultActivity extends BaseActivity
 			GeoLocation geoLocation = new GeoLocation();
 			geoLocation.setLongitude(location.getLongitude());
 			geoLocation.setLatitude(location.getLatitude());
-			//criteria.setLocation(geoLocation);
+			criteria.setLocation(geoLocation);
 			Log.d("SearchResultActivity searchNearByPost",location.toString());
 		}
 		else{

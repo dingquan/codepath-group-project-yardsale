@@ -66,7 +66,7 @@
                 android:id="@+id/tvTitleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/ivAds"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/ivAds"
                 android:layout_marginTop="28dp"
                 android:text="Title:" />
@@ -75,7 +75,7 @@
                 android:id="@+id/tvAdsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tvTitleLabel"
+                android:layout_alignBottom="@+id/tvTitleLabel"
                 android:layout_marginLeft="22dp"
                 android:layout_toRightOf="@+id/tvDescriptionLabel"
                 android:text="Title" />
@@ -96,8 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvDescriptionLabel"
                 android:layout_below="@+id/tvAdsDescription"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
                 android:text="Address:" />
+
         </RelativeLayout>
     </ScrollView>
 

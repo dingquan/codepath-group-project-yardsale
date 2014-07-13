@@ -18,6 +18,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -153,7 +154,6 @@ public class CreatePostActivity extends BaseActivity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
 	            ArrayList<String> result=(ArrayList<String>) data.getSerializableExtra("result");
@@ -178,7 +178,6 @@ public class CreatePostActivity extends BaseActivity {
 	            //Write your code if there's no result
 	        }
 	  }
-	
 	}
 	
 	public void onSave(View v) {
