@@ -34,7 +34,7 @@ import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 import com.parse.ParseFile;
-public class CreatePostActivity extends Activity {
+public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
 	Spinner spinner;
@@ -170,8 +170,7 @@ public class CreatePostActivity extends Activity {
 		Post p = new Post();
 		p.setUserId(userId);
 		p.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
-		Contact contact = new Contact(phone.getText().toString(), location
-				.getText().toString());
+		Contact contact = new Contact(phone.getText().toString(), location.getText().toString());
 		p.setContact(contact);
 		p.setTitle(title.getText().toString());
 		p.setDescription(description.getText().toString());
@@ -179,6 +178,10 @@ public class CreatePostActivity extends Activity {
 		Date date = new Date();
 		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
 		p.setStatus("Active");
+		String locationStr = location.getText().toString();
+		if (locationStr != null && !locationStr.isEmpty()){
+			geoLocation = getGeoFromAddress(locationStr);
+		}
 		p.setLocation(geoLocation);
 		p.setImageList(names);
 		
@@ -189,13 +192,8 @@ public class CreatePostActivity extends Activity {
 		// Pass relevant data back as a result
 		data.putExtra("post", JsonUtil.toJson(p));
 		// Activity finished ok, return the data
-		setResult(RESULT_OK, data); // set result code and bundle data for
-									// response
+		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent
-
-//		Intent i = new Intent(CreatePostActivity.this, SearchResultActivity.class);
-//		startActivity(i);
-
 	}
 
 }

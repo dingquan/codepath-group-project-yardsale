@@ -105,6 +105,6 @@
         android:layout_alignBaseline="@+id/tvCity"
         android:layout_alignBottom="@+id/tvCity"
         android:layout_alignLeft="@+id/etMinPrice"
-        android:ems="6" />
+        android:ems="10" />
 
 </RelativeLayout>

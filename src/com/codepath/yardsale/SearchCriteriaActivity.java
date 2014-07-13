@@ -22,10 +22,6 @@ public class SearchCriteriaActivity extends Activity {
 	private EditText etMinPrice;
 	private EditText etMaxPrice;
 
-	// private CategoryAdapter categoryAdapter = new CategoryAdapter();
-
-	// private SearchCriteria criteria;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,19 +50,16 @@ public class SearchCriteriaActivity extends Activity {
 	public void searchPosts(View v) {
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setKeyword(etKeyword.getText().toString());
-//		GeoLocation location = new GeoLocation();
-//		criteria.setLocation(location);
 		if (etMinPrice.getText().length() > 0)
 			criteria.setMinPrice(Integer.valueOf(etMinPrice.getText().toString()));
 		if (etMaxPrice.getText().length() > 0)
 			criteria.setMaxPrice(Integer.valueOf(etMaxPrice.getText().toString()));
 
 		criteria.setCategory(Category.fromName(spCategory.getSelectedItem().toString()));
-
-		// Intent i = new Intent(SearchCriteriaActivity.this,
-		// SearchResultActivity.class);
+		String city = etCity.getText().toString();
 		Intent i = new Intent();
 		i.putExtra("search_criteria", JsonUtil.toJson(criteria));
+		i.putExtra("city", city);
 		setResult(RESULT_OK, i);
 		finish();
 	}

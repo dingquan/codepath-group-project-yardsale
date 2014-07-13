@@ -3,7 +3,6 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -32,7 +31,7 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
-public class SearchResultActivity extends Activity 
+public class SearchResultActivity extends BaseActivity 
 	implements GooglePlayServicesClient.ConnectionCallbacks,
 				GooglePlayServicesClient.OnConnectionFailedListener {
 	private static final int REQUEST_CODE_CREATE_POST = 1;
@@ -61,6 +60,7 @@ public class SearchResultActivity extends Activity
 		setupHandlers();
 		locationClient = new LocationClient(this, this, this);
 	
+		searchNearbyRecentPosts(lastKnownLocation);
 	}
 
     @Override
@@ -110,7 +110,6 @@ public class SearchResultActivity extends Activity
 
 	private void searchNearbyRecentPosts(Location location) {
 		SearchCriteria criteria = new SearchCriteria();
-//		Location location = locationClient.getLastLocation();
 		if (location != null){
 			GeoLocation geoLocation = new GeoLocation();
 			geoLocation.setLongitude(location.getLongitude());
@@ -169,10 +168,11 @@ public class SearchResultActivity extends Activity
 			// postStr,Toast.LENGTH_SHORT).show();
 		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
 			String searchStr = data.getExtras().getString("search_criteria");
-			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(
-					searchStr, SearchCriteria.class);
-			// Toast.makeText(this, "returned from search criteria, " +
-			// criteria.getKeyword(), Toast.LENGTH_SHORT).show();
+			String city = data.getExtras().getString("city");
+			GeoLocation geoLocation = getGeoFromAddress(city);
+			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
+			criteria.setLocation(geoLocation);
+			Log.d("DEBUG", JsonUtil.toJson(criteria));
 			List<Post> results = postDao.findPostsBySearchCriteria(criteria);
 			aPosts.clear();
 			aPosts.addAll(results);
@@ -281,7 +281,7 @@ public class SearchResultActivity extends Activity
 			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
 		}
 		
-        searchNearbyRecentPosts(lastKnownLocation);
+//        searchNearbyRecentPosts(lastKnownLocation);
 	}
 
 	@Override
@@ -290,5 +290,4 @@ public class SearchResultActivity extends Activity
         Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
 		
 	}
-
 }
