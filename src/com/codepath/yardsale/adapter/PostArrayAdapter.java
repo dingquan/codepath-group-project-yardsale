@@ -1,10 +1,12 @@
 package com.codepath.yardsale.adapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.yardsale.BaseActivity;
 import com.codepath.yardsale.R;
 import com.codepath.yardsale.model.Post;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class PostArrayAdapter extends ArrayAdapter<Post> {
+	
 
 	public PostArrayAdapter(Context context, List<Post> objects) {
 		super(context, 0, objects);
@@ -40,9 +44,25 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		TextView tvPrice = (TextView)v.findViewById(R.id.tvPrice);
 		TextView tvDate = (TextView)v.findViewById(R.id.tvDate);
 		TextView tvLocation = (TextView)v.findViewById(R.id.tvLocation);
-		
-		
+		ArrayList<String> postUrl = post.getImageUrl();
+		if(postUrl !=null){
+			Log.d("PosrArrayAdapter posrtUrl --->>>","null");
+		}else{
+			Log.d("PosrArrayAdapter posrtUrl --->>>","not null");
+
+		}
 		ImageLoader imageLoader = ImageLoader.getInstance();
+		if(postUrl != null && postUrl.size()>0){
+			String url =postUrl.get(0);
+			Log.d("PostArrayAdapter url string--->>",url);
+			imageLoader.displayImage(url, ivImage);
+			
+			
+		}
+		
+		
+		//ImageLoader imageLoader = ImageLoader.getInstance();
+		Log.d("PostArrayAdapter title-->>",post.getTitle());
 		tvTitle.setText(post.getTitle());
 		String description = post.getDescription();
 		if (description.length() > 80){

@@ -3,6 +3,7 @@ package com.codepath.yardsale;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,22 +25,26 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
-public class MultiPhotoSelectActivity extends BaseActivity {
-	 
+public class MultiPhotoSelectActivity extends Activity {
     private ArrayList<String> imageUrls;
     private DisplayImageOptions options;
     private ImageAdapter imageAdapter;
+    private ImageLoader imageLoader;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
+        //imageLoader.init(ImageLoaderConfiguration.createDefault(getBaseContext()));
+        
+		imageLoader = ImageLoader.getInstance();
+
 
  
         final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
@@ -186,7 +191,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
  
             CheckBox mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
- 
+
             imageLoader.displayImage("file://"+imageUrls.get(position), imageView, options, new SimpleImageLoadingListener() {
             	@Override
                 public void onLoadingComplete(String imageUri,View v,Bitmap loadedImage) {

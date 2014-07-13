@@ -3,6 +3,7 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -36,6 +37,7 @@ public class SearchResultActivity extends BaseActivity
 				GooglePlayServicesClient.OnConnectionFailedListener {
 	private static final int REQUEST_CODE_CREATE_POST = 1;
 	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
+
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvPosts;
@@ -58,6 +60,7 @@ public class SearchResultActivity extends BaseActivity
 
 		setupHandlers();
 		locationClient = new LocationClient(this, this, this);
+	
 		searchNearbyRecentPosts(lastKnownLocation);
 	}
 

@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 public abstract class BaseActivity extends Activity {
 	 
-    protected ImageLoader imageLoader = ImageLoader.getInstance();
+    //protected ImageLoader imageLoader = ImageLoader.getInstance();
  
 	GeoLocation getGeoFromAddress(String strAddress){
 		Geocoder coder = new Geocoder(this);

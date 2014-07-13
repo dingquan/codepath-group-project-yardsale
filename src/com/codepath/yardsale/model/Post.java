@@ -3,6 +3,8 @@ package com.codepath.yardsale.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 /**
  * Model class for a single Post item for sale
  * 
@@ -23,6 +25,17 @@ public class Post {
 	private Long createdAt; // time of the posting in milliseconds
 	private String status;
 	private ArrayList<String> imageList;
+	private ArrayList<String> imageUrl;
+	
+	public ArrayList<String> getImageUrl(){
+		return this.imageUrl;
+	}
+	
+	public void setImageUrl(ArrayList<String>urls){
+		Log.d("Post.java","Entered set ImageUrl"+urls.toString());
+		this.imageUrl = urls;
+		
+	}
 
 	public ArrayList<String> getImageList() {
 		return imageList;

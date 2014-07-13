@@ -6,6 +6,9 @@ import com.activeandroid.util.Log;
 import com.codepath.yardsale.dao.parse.ParseContact;
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -15,6 +18,15 @@ public class YardSaleApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+		.cacheInMemory().cacheOnDisc().build();
+		
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				getApplicationContext()).defaultDisplayImageOptions(
+				defaultOptions).build();
+
+				ImageLoader.getInstance().init(config);
 
 		
 		ParseObject.registerSubclass(ParsePost.class);
