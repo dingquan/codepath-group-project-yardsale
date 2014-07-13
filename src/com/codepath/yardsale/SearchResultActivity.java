@@ -168,6 +168,9 @@ public class SearchResultActivity extends BaseActivity
 			// Toast.makeText(this, "returned from create post" +
 			// postStr,Toast.LENGTH_SHORT).show();
 		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
+			if (data == null){
+				return; //noop. user hit backbutton
+			}
 			String searchStr = data.getExtras().getString("search_criteria");
 			String city = data.getExtras().getString("city");
 			GeoLocation geoLocation = getGeoFromAddress(city);
