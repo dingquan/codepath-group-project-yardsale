@@ -40,7 +40,7 @@
         android:layout_alignLeft="@+id/tvKeyword"
         android:layout_below="@+id/etKeyword"
         android:layout_marginTop="30dp"
-        android:text="@string/category"
+        android:text="@string/title_category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
