@@ -1,6 +1,7 @@
 package com.codepath.yardsale.dao.parse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.codepath.yardsale.model.Category;
 import com.codepath.yardsale.model.GeoLocation;
@@ -34,9 +35,14 @@ public class ParsePost extends ParseObject {
 	}
 	
 	public void setImageList(ArrayList<String> imageList) {
-		if (imageList != null)
-			put ("ImageList",imageList);
-		
+		put ("ImageList",imageList);
+//		
+	}
+	
+	public List<Object> getImageList(){
+		List<Object> objList = getList("ImageList");
+		System.out.println(objList);
+		return objList;
 	}
 
 	public Post toPost(){
@@ -56,6 +62,7 @@ public class ParsePost extends ParseObject {
 		post.setStatus(getStatus());
 		post.setTitle(getTitle());
 		post.setUserId(getUserId());
+		post.setImageList(getImageList());
 		return post;
 	}
 	

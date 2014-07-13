@@ -13,14 +13,26 @@ public class ParseImages extends ParseObject {
 		super();
 	}
 	
-	public ParseImages(ParseFile imageFile){
+	public ParseImages(ParseFile imageFile, String name){
 		super();
 		setImageFile(imageFile);
-		
+		setImageFileName(name);
 	}
 	
 	public void setImageFile(ParseFile imagefile) {
 		put ("ImageFile",imagefile);
 		
+	}
+	
+	public ParseFile getImageFile(){
+		return (ParseFile) get("ImageFile");
+	}
+	
+	public void setImageFileName(String name){
+		put ("ImageFileName",name);
+	}
+	
+	public void getImageFileName(){
+		getString("ImageFileName");
 	}
 }

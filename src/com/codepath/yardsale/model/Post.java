@@ -1,6 +1,7 @@
 package com.codepath.yardsale.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model class for a single Post item for sale
@@ -27,8 +28,21 @@ public class Post {
 		return imageList;
 	}
 
+	public void setImageList(List<Object> imageList) {
+		if(imageList != null){
+		List<String> images = new ArrayList<String>();
+		for(int i=0; i<imageList.size();i++){
+			String obj = (String) imageList.get(i);
+			images.add(obj);
+		}
+		this.imageList = (ArrayList<String>) images;
+		}
+	}
+	
 	public void setImageList(ArrayList<String> imageList) {
+		if(imageList != null){
 		this.imageList = imageList;
+		}
 	}
 
 	public String getUserId() {

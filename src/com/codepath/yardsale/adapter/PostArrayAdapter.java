@@ -40,7 +40,8 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		TextView tvPrice = (TextView)v.findViewById(R.id.tvPrice);
 		TextView tvDate = (TextView)v.findViewById(R.id.tvDate);
 		TextView tvLocation = (TextView)v.findViewById(R.id.tvLocation);
-
+		
+		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
 		String description = post.getDescription();

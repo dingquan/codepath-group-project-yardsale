@@ -128,7 +128,7 @@ public class CreatePostActivity extends Activity {
 	          bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 	          byte[] image = stream.toByteArray();
 	          String ID = UUID.randomUUID().toString();
-	          names.add(ID+".png");
+	          names.add(ID);
 	  
 	          // Create the ParseFile
 	          ParseFile file = new ParseFile(ID, image);

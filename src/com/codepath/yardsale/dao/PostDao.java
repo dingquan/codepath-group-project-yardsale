@@ -28,12 +28,70 @@ public class PostDao {
 			List<ParsePost> results = query.find();
 			for (ParsePost parsePost : results){
 				System.out.println(parsePost.toString());
-				posts.add(parsePost.toPost());
+				Post post = parsePost.toPost();
+				posts.add(post);
+				if(post.getImageList() != null && post.getImageList().size()>0){
+					String imgName  = post.getImageList().get(0);
+					Log.d("PostDao post.getImageList 1st element",imgName);
+					
+					try {
+						String url = getPostImage(imgName);
+						if(url != null){
+							Log.d("PostarrayAdapter image url",url);
+						}else{
+							Log.d("PostArrayAdapter Image url", "null");
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
+					Log.d("PostArrayAdapter","No Image found");
+				}
 			}
 		} catch (ParseException e) {
 			Log.e("ERROR", "Parse Exceptoin", e);
 		}
 		return posts;
+	}
+	
+	public String getPostImage(String name) throws Exception{
+		//List<Post> posts = new ArrayList<Post>();
+		String url;
+		
+		ParseQuery<ParseImages> query = ParseQuery.getQuery(ParseImages.class);
+		query = query.whereEqualTo("ImageFileName", name);
+		
+		
+	   List<ParseImages> results = new ArrayList<ParseImages>();
+	   results = query.find();
+	   
+	   // if (results.size() == 1){
+		Log.d("PostaDao getPostImage string=",name);
+		if(results.size()>0){
+			
+			Log.d("PostDao getPostImage results  size",">0");
+			Log.d("url",results.get(0).getImageFile().getUrl());
+		}else{
+			Log.d("PostDao getPostImage results size","0");
+
+		}
+		for (ParseImages eachresult :results){
+    		ParseFile file = eachresult.getImageFile();
+    		System.out.println("PostDao getPost images url "+file.getUrl());
+    	}
+	    	//ParseImages img = results.get(0);
+	    	//ParseFile parsefile = img.getImageFile();
+	    	//url = parsefile.getUrl();
+	    	
+//	    }else{
+//	    	for (ParseImages eachresult :results){
+//	    		ParseFile file = eachresult.getImageFile();
+//	    		System.out.println(file.getName());
+//	    	}
+//	    	throw new Exception("More then 1 mage found with the same file name "+name);
+//	    }
+	    return null;
 	}
 	
 	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
@@ -93,7 +151,7 @@ public class PostDao {
 		ParsePost parsePost = new ParsePost(post);
 		parsePost.saveInBackground();
 		for (int i=0;i<fileArray.size();i++){
-			ParseImages img = new ParseImages(fileArray.get(i));
+			ParseImages img = new ParseImages(fileArray.get(i),post.getImageList().get(i));
 			img.saveInBackground();
 		}
 	}
