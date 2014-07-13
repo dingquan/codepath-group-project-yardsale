@@ -87,6 +87,8 @@ public class CreatePostActivity extends BaseActivity {
 	public void populateData()
 	{
 		String postJson = getIntent().getStringExtra("post");
+		if (postJson == null || postJson.isEmpty())
+			return;
 		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
 		
 		title.setText(post.getTitle());

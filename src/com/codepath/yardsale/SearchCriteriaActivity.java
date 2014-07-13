@@ -1,6 +1,8 @@
 package com.codepath.yardsale;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,13 +38,13 @@ public class SearchCriteriaActivity extends Activity {
 		spCategory = (Spinner) findViewById(R.id.spCategory);
 		etMinPrice = (EditText) findViewById(R.id.etMinPrice);
 		etMaxPrice = (EditText) findViewById(R.id.etMaxPrice);
-		spCategory = (Spinner) findViewById(R.id.spCategory);
 
-		String[] categoryNames = Category.getNames();
-		Arrays.sort(categoryNames);
-		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, categoryNames);
-
+		String[] names = Category.getNames();
+		Arrays.sort(names);
+		List<String> categories = new ArrayList<String>();
+		categories.add("Any"); //the "Any" option
+		categories.addAll(Arrays.asList(names));
+		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spCategory.setAdapter(categoryAdapter);
 	}
