@@ -88,16 +88,38 @@ public class CreatePostActivity extends Activity {
 	{
 		String postJson = getIntent().getStringExtra("post");
 		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
-		Toast.makeText(this, "Read post: " + post.getTitle(),
-				Toast.LENGTH_SHORT).show();
 		
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
-		price.setText("$"+post.getPrice().toString());
-		phone.setText(post.getContact().getPhone());
+		Double  dValue= post.getPrice();
+
+		if(!dValue.isNaN())
+		{
+			price.setText("$"+dValue.toString());
+		} 
 		
+		phone.setText(post.getContact().getPhone());
+		String category = post.getCategory().toString();
+		spinner.setSelection(getIndex(spinner, category));
 	}
+	
+	//Get Spinner Index position
+	 
+	 private int getIndex(Spinner spinner, String myString){
+	 
+	  int index = 0;
+	 
+	  for (int i=0;i<spinner.getCount();i++){
+	   if (spinner.getItemAtPosition(i).equals(myString)){
+	    index = i;
+	   }
+	  }
+	  Toast.makeText(this, "Read post: " + index,Toast.LENGTH_SHORT).show();
+	  return index;
+		
+	 }
+	 
 	public void setUpViews() {
 		spinner = (Spinner) findViewById(R.id.spCategory);
 		title = (TextView) findViewById(R.id.etTitle);

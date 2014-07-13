@@ -6,7 +6,7 @@
     <string name="title_activity_create_post">Post a new AD</string>
     <string name="title_activity_manage_posts">Manage Posts</string>
     <string name="title_activity_search_criteria">Search</string>
-    <string name="category">Category</string>
+    <string name="title_category">Category</string>
     <string name="price">Price</string>
     <string name="min">min</string>
     <string name="max">max</string>
