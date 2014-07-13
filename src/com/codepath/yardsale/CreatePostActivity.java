@@ -67,6 +67,7 @@ public class CreatePostActivity extends Activity {
 		postDao = new PostDao();
 
 		setUpViews();
+		populateData();
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		String[] categoryNames = Category.getNames();
 		Arrays.sort(categoryNames);
@@ -83,6 +84,20 @@ public class CreatePostActivity extends Activity {
 		}
 	}
 
+	public void populateData()
+	{
+		String postJson = getIntent().getStringExtra("post");
+		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
+		Toast.makeText(this, "Read post: " + post.getTitle(),
+				Toast.LENGTH_SHORT).show();
+		
+		title.setText(post.getTitle());
+		description.setText(post.getDescription());
+		location.setText(post.getContact().getAddress());
+		price.setText("$"+post.getPrice().toString());
+		phone.setText(post.getContact().getPhone());
+		
+	}
 	public void setUpViews() {
 		spinner = (Spinner) findViewById(R.id.spCategory);
 		title = (TextView) findViewById(R.id.etTitle);
