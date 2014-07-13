@@ -48,6 +48,7 @@ public class CreatePostActivity extends BaseActivity {
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
+	private Post post;
 	
 	private ArrayList<String> names;
 	private ArrayList<ParseFile> fileArray;
@@ -80,14 +81,10 @@ public class CreatePostActivity extends BaseActivity {
 		spinner.setAdapter(adapter);
 		
 		String locationJson = getIntent().getStringExtra("geo_location");
-			//Toast.makeText(this, "create:"+getIntent().getStringExtra("status"), Toast.LENGTH_LONG).show();
+
 		String status = getIntent().getStringExtra("status");
 		//Edit an Ad
-		if(status!=null)
-		{
-			//Toast.makeText(this, status, Toast.LENGTH_LONG).show();
-			populateData();
-		}
+		populateData();
 
 		if (locationJson != null && !locationJson.isEmpty()){
 			geoLocation = (GeoLocation) JsonUtil.fromJson(locationJson, GeoLocation.class);
@@ -99,10 +96,12 @@ public class CreatePostActivity extends BaseActivity {
 		//Existing ad
 		String postJson = getIntent().getStringExtra("post");
 		if (postJson == null || postJson.isEmpty())
-
+		{
+			post=null;
 			return;
+		}
 
-		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
+		post = (Post) JsonUtil.fromJson(postJson, Post.class);
 
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
@@ -117,6 +116,7 @@ public class CreatePostActivity extends BaseActivity {
 		phone.setText(post.getContact().getPhone());
 		String category = post.getCategory().toString();
 		spinner.setSelection(getIndex(spinner, category));
+		
 	}
 	
 	//Get Spinner Index position
@@ -182,30 +182,35 @@ public class CreatePostActivity extends BaseActivity {
 	}
 	
 	public void onSave(View v) {
-		Post p = new Post();
-		p.setUserId(userId);
-		p.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
+		//check if the ad is an edit or new
+		if (post == null)
+		{
+			post = new Post();
+		}
+		post.setUserId(userId);
+		post.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
 		Contact contact = new Contact(phone.getText().toString(), location.getText().toString());
-		p.setContact(contact);
-		p.setTitle(title.getText().toString());
-		p.setDescription(description.getText().toString());
-		p.setPrice(Double.valueOf(price.getText().toString()));
+		post.setContact(contact);
+		post.setTitle(title.getText().toString());
+		post.setDescription(description.getText().toString());
+		post.setPrice(Double.valueOf(price.getText().toString()));
 		Date date = new Date();
-		p.setCreatedAt((new Timestamp(date.getTime())).getTime());
-		p.setStatus("Active");
+		
+		post.setCreatedAt((new Timestamp(date.getTime())).getTime());
+		post.setStatus("Active");
 		String locationStr = location.getText().toString();
 		if (locationStr != null && !locationStr.isEmpty()){
 			geoLocation = getGeoFromAddress(locationStr);
 		}
-		p.setLocation(geoLocation);
-		p.setImageList(names);
+		post.setLocation(geoLocation);
+		post.setImageList(names);
 		
-		postDao.savePost(p,fileArray);
+		postDao.savePost(post,fileArray);
 		
 		// Prepare data intent
 		Intent data = new Intent();
 		// Pass relevant data back as a result
-		data.putExtra("post", JsonUtil.toJson(p));
+		data.putExtra("post", JsonUtil.toJson(post));
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent

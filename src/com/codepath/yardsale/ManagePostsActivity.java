@@ -32,7 +32,6 @@ public class ManagePostsActivity extends Activity {
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
-	public final static String REQUEST_CODE_EDIT_ADS ="0";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +70,6 @@ public class ManagePostsActivity extends Activity {
 						CreatePostActivity.class);
 				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
 				i.putExtra("position", position);
-				i.putExtra("status",  REQUEST_CODE_EDIT_ADS);
 				startActivity(i);
 			}
 		});
