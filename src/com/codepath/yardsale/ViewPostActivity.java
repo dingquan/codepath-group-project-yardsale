@@ -59,9 +59,12 @@ public class ViewPostActivity extends Activity {
 		price.setText("$"+post.getPrice().toString());
 		//ivImage = (ImageView) findViewById(R.id.ivAds);
 		//ivImage.setImageURI(post.get);
-		@SuppressWarnings("deprecation")
-		Gallery g = (Gallery) findViewById(R.id.gallery);
-		   g.setAdapter(new ImageAdapter(this,post.getImageUrl()));
+		
+		if(post.getImageUrl()!=null){
+			@SuppressWarnings("deprecation")
+			Gallery g = (Gallery) findViewById(R.id.gallery);
+		    g.setAdapter(new ImageAdapter(this,post.getImageUrl()));
+		}
 	}
 	
 	public class ImageAdapter extends ArrayAdapter {
