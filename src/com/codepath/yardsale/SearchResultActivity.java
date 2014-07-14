@@ -130,8 +130,6 @@ public class SearchResultActivity extends BaseActivity
         pbLoading.setVisibility(ProgressBar.VISIBLE);
 
         new SearchPostTask().execute(criteria); 
-//		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
-//		aPosts.addAll(posts);
 	}
 
 	@Override

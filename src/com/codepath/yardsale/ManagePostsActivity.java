@@ -8,16 +8,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 
 import com.codepath.yardsale.adapter.AdArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
@@ -33,6 +32,8 @@ public class ManagePostsActivity extends Activity {
 	private String userId;
 	private SharedPreferences prefs;
 	private PostDao postDao;
+	private ProgressBar pbLoading;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class ManagePostsActivity extends Activity {
 		aPosts = new AdArrayAdapter(this, posts);
 		lvAds = (ListView) findViewById(R.id.lvAds);
 		lvAds.setAdapter(aPosts);
+		pbLoading = (ProgressBar)findViewById(R.id.pbLoading);
 
 		lookupOwnUserId();
 		setupHandlers();
@@ -96,9 +98,13 @@ public class ManagePostsActivity extends Activity {
 	private void loadOwnPosts() {
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setUserId(userId);
-		//todo, populate criteria with userId
-		List<Post> ads = postDao.findPostsBySearchCriteria(criteria);
-		aPosts.addAll(ads);
+		
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
+        new SearchPostTask().execute(criteria); 
+        
+//		//todo, populate criteria with userId
+//		List<Post> ads = postDao.findPostsBySearchCriteria(criteria);
+//		aPosts.addAll(ads);
 	}
 	
 	public void OnDelete(View view) {
@@ -111,4 +117,19 @@ public class ManagePostsActivity extends Activity {
 
     }
 
+	private class SearchPostTask extends AsyncTask<SearchCriteria, Void, List<Post>> {
+
+		@Override
+		protected void onPostExecute(List<Post> posts) {
+			aPosts.addAll(posts);
+	        pbLoading.setVisibility(ProgressBar.INVISIBLE);
+		}
+
+		@Override
+		protected List<Post> doInBackground(SearchCriteria... criterias) {
+	    	 PostDao postDao = new PostDao();
+	         List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
+	         return posts;
+		}
+	}
 }
