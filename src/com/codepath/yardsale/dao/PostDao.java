@@ -155,12 +155,22 @@ public class PostDao {
 	}
 	
 	public void savePost(Post post, ArrayList<ParseFile> fileArray){
+		ArrayList<String> urls = new ArrayList<String>();
+		for (int i=0;i<fileArray.size();i++){
+			String name = post.getImageList().get(i);
+			ParseImages img = new ParseImages(fileArray.get(i), name);
+//			img.saveInBackground();
+			try {
+				img.save();
+				urls.add(img.getParseFile(name).getUrl());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		post.setImageUrl(urls);
 		ParsePost parsePost = new ParsePost(post);
 		parsePost.saveInBackground();
-		for (int i=0;i<fileArray.size();i++){
-			ParseImages img = new ParseImages(fileArray.get(i),post.getImageList().get(i));
-			img.saveInBackground();
-		}
 	}
 
 	public void savePost(Post post) {

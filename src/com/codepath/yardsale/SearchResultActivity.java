@@ -3,11 +3,11 @@ package com.codepath.yardsale;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.PostArrayAdapter;
@@ -41,7 +42,8 @@ public class SearchResultActivity extends BaseActivity
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvPosts;
-
+	private ProgressBar pbLoading;
+	
 	private PostDao postDao;
 
 	private LocationClient locationClient;
@@ -57,6 +59,7 @@ public class SearchResultActivity extends BaseActivity
 		aPosts = new PostArrayAdapter(this, posts);
 		lvPosts = (ListView) findViewById(R.id.lvPosts);
 		lvPosts.setAdapter(aPosts);
+		pbLoading = (ProgressBar)findViewById(R.id.pbLoading);
 
 		setupHandlers();
 		locationClient = new LocationClient(this, this, this);
@@ -124,9 +127,11 @@ public class SearchResultActivity extends BaseActivity
 		else{
 			Log.d("SearchResultACtivity searchNearBypost","location is null");
 		}
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
 
-		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
-		aPosts.addAll(posts);
+        new SearchPostTask().execute(criteria); 
+//		List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
+//		aPosts.addAll(posts);
 	}
 
 	@Override
@@ -296,5 +301,21 @@ public class SearchResultActivity extends BaseActivity
         // Display the connection status
         Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
 		
+	}
+	
+	private class SearchPostTask extends AsyncTask<SearchCriteria, Void, List<Post>> {
+
+		@Override
+		protected void onPostExecute(List<Post> posts) {
+			aPosts.addAll(posts);
+	        pbLoading.setVisibility(ProgressBar.INVISIBLE);
+		}
+
+		@Override
+		protected List<Post> doInBackground(SearchCriteria... criterias) {
+	    	 PostDao postDao = new PostDao();
+	         List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
+	         return posts;
+		}
 	}
 }

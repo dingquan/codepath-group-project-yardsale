@@ -2,7 +2,6 @@ package com.codepath.yardsale;
 
 import android.app.Application;
 
-import com.activeandroid.util.Log;
 import com.codepath.yardsale.dao.parse.ParseContact;
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
@@ -10,8 +9,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 public class YardSaleApplication extends Application {
