@@ -48,7 +48,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		}
 		
 		
-		ArrayList<String> postUrl = post.getImageList();
+		List<String> postUrl = post.getImageUrls();
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		if(postUrl != null && postUrl.size()>0){

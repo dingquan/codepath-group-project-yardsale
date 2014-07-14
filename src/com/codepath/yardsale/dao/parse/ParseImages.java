@@ -1,8 +1,5 @@
 package com.codepath.yardsale.dao.parse;
 
-import java.util.ArrayList;
-
-import com.codepath.yardsale.model.Post;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -16,23 +13,23 @@ public class ParseImages extends ParseObject {
 	public ParseImages(ParseFile imageFile, String name){
 		super();
 		setImageFile(imageFile);
-		setImageFileName(name);
+		setName(name);
 	}
 	
 	public void setImageFile(ParseFile imagefile) {
-		put ("ImageFile",imagefile);
+		put ("imageFile",imagefile);
 		
 	}
 	
 	public ParseFile getImageFile(){
-		return (ParseFile) get("ImageFile");
+		return (ParseFile) get("imageFile");
 	}
 	
-	public void setImageFileName(String name){
-		put ("ImageFileName",name);
+	public void setName(String name){
+		put ("name",name);
 	}
 	
-	public void getImageFileName(){
-		getString("ImageFileName");
+	public void getName(){
+		getString("name");
 	}
 }

@@ -60,10 +60,10 @@ public class ViewPostActivity extends Activity {
 		//ivImage = (ImageView) findViewById(R.id.ivAds);
 		//ivImage.setImageURI(post.get);
 		
-		if(post.getImageList()!=null){
+		if(post.getImageUrls()!=null){
 			@SuppressWarnings("deprecation")
 			Gallery g = (Gallery) findViewById(R.id.gallery);
-		    g.setAdapter(new ImageAdapter(this,post.getImageList()));
+		    g.setAdapter(new ImageAdapter(this,post.getImageUrls()));
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class ViewPostActivity extends Activity {
 		   int mGalleryItemBackground;
 		   private Context mContext;
 
-		   private ArrayList<String> imageUrls;
+		   private List<String> imageUrls;
 		   ImageLoader imageLoader = ImageLoader.getInstance();
 		   private Integer[] mImageIds = {
 		           R.drawable.ic_books,
@@ -80,7 +80,7 @@ public class ViewPostActivity extends Activity {
 		          
 		   };
 
-		   public ImageAdapter(Context context, ArrayList<String> objects) {
+		   public ImageAdapter(Context context, List<String> objects) {
 				super(context, 0, objects);
 				 mContext = context;
 				 imageUrls = objects;

@@ -30,76 +30,12 @@ public class PostDao {
 				//System.out.println(parsePost.toString());
 				Post post = parsePost.toPost();
 				posts.add(post);
-//				if(post.getImageList() != null && post.getImageList().size()>0){
-//					ArrayList<String> imageUrl = new ArrayList<String>();
-//					for(int i=0;i<post.getImageList().size();i++){
-//					   String imgName  = post.getImageList().get(i);
-//					   Log.d("PostDao post.getImageList"+i+" st element",imgName);
-//					
-//					   try {
-//						  String url = getPostImage(imgName);
-//						  if(url != null){
-//							  imageUrl.add(url);
-//							Log.d("PostDao image url adding to ImageList",url);
-//						  }else{
-//							Log.d("PostDao Image url not added to List", "null");
-//						  }
-//					  } catch (Exception e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					  }
-//					}
-//					Log.d("PostDao final imageUrl List",imageUrl.toString());
-//					post.setImageUrl(imageUrl);
-//				}else{
-//					Log.d("PostDao ","No Image found");
-//				}
 			}
 		} catch (ParseException e) {
 			Log.e("ERROR", "Parse Exceptoin", e);
 		}
 		return posts;
 	}
-	
-//	public String getPostImage(String name) throws Exception{
-//		//List<Post> posts = new ArrayList<Post>();
-//		String url =null;
-//		
-//		ParseQuery<ParseImages> query = ParseQuery.getQuery(ParseImages.class);
-//		query = query.whereEqualTo("ImageFileName", name);
-//		
-//		
-//	   List<ParseImages> results = new ArrayList<ParseImages>();
-//	   results = query.find();
-//	   
-//	   // if (results.size() == 1){
-//		//Log.d("PostaDao getPostImage string=",name);
-//		if(results.size()>0){
-//			
-//			//Log.d("PostDao getPostImage results  size",">0");
-//			//Log.d("url",results.get(0).getImageFile().getUrl());
-//		}else{
-//			//Log.d("PostDao getPostImage results size","0");
-//
-//		}
-//		for (ParseImages eachresult :results){
-//    		ParseFile file = eachresult.getImageFile();
-//    		url=file.getUrl();
-//    		System.out.println("PostDao getPost images url "+file.getUrl());
-//    	}
-//	    	//ParseImages img = results.get(0);
-//	    	//ParseFile parsefile = img.getImageFile();
-//	    	//url = parsefile.getUrl();
-//	    	
-////	    }else{
-////	    	for (ParseImages eachresult :results){
-////	    		ParseFile file = eachresult.getImageFile();
-////	    		System.out.println(file.getName());
-////	    	}
-////	    	throw new Exception("More then 1 mage found with the same file name "+name);
-////	    }
-//	    return url;
-//	}
 	
 	private ParseQuery<ParsePost> buildQuery(SearchCriteria c) {
 		ParseQuery<ParsePost> query = ParseQuery.getQuery(ParsePost.class);
@@ -154,25 +90,6 @@ public class PostDao {
 		}
 	}
 	
-	public void savePost(Post post, ArrayList<ParseFile> fileArray){
-//		ArrayList<String> urls = new ArrayList<String>();
-//		for (int i=0;i<fileArray.size();i++){
-//			String name = post.getImageList().get(i);
-//			ParseImages img = new ParseImages(fileArray.get(i), name);
-////			img.saveInBackground();
-//			try {
-//				img.save();
-//				urls.add(img.getParseFile(name).getUrl());
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		post.setImageUrl(urls);
-		ParsePost parsePost = new ParsePost(post);
-		parsePost.saveInBackground();
-	}
-
 	public void savePost(Post post) {
 		ParsePost parsePost = new ParsePost(post);
 		parsePost.saveInBackground();

@@ -1,9 +1,6 @@
 package com.codepath.yardsale.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import android.util.Log;
 
 /**
  * Model class for a single Post item for sale
@@ -24,30 +21,15 @@ public class Post {
 	private GeoLocation location;
 	private Long createdAt; // time of the posting in milliseconds
 	private String status;
-	private ArrayList<String> imageList;
-	private ArrayList<String> imageUrl;
-	
+	private List<String> imageUrls;
+	private List<String> imageNames;
 
-
-	public ArrayList<String> getImageList() {
-		return imageList;
+	public List<String> getImageUrls() {
+		return imageUrls;
 	}
 
-	public void setImageList(List<Object> imageList) {
-		if(imageList != null){
-		List<String> images = new ArrayList<String>();
-		for(int i=0; i<imageList.size();i++){
-			String obj = (String) imageList.get(i);
-			images.add(obj);
-		}
-		this.imageList = (ArrayList<String>) images;
-		}
-	}
-	
-	public void setImageList(ArrayList<String> imageList) {
-		if(imageList != null){
-		this.imageList = imageList;
-		}
+	public void setImageUrls(List<String> imageUrls) {
+		this.imageUrls = imageUrls;
 	}
 
 	public String getUserId() {
@@ -128,5 +110,13 @@ public class Post {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public List<String> getImageNames() {
+		return imageNames;
+	}
+
+	public void setImageNames(List<String> imageNames) {
+		this.imageNames = imageNames;
 	}
 }
