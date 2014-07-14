@@ -1,6 +1,5 @@
 package com.codepath.yardsale.adapter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import android.widget.TextView;
 import com.codepath.yardsale.R;
 import com.codepath.yardsale.model.Post;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class AdArrayAdapter extends ArrayAdapter<Post> {
 
 	public AdArrayAdapter(Context context, List<Post> objects) {

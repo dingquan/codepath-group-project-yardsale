@@ -1,5 +1,6 @@
 package com.codepath.yardsale.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +22,8 @@ public class Post {
 	private GeoLocation location;
 	private Long createdAt; // time of the posting in milliseconds
 	private String status;
-	private List<String> imageUrls;
-	private List<String> imageNames;
+	private List<String> imageUrls = new ArrayList<String>();
+	private List<String> imageNames = new ArrayList<String>();
 
 	public List<String> getImageUrls() {
 		return imageUrls;

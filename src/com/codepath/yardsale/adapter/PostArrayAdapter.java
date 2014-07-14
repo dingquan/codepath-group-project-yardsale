@@ -1,6 +1,5 @@
 package com.codepath.yardsale.adapter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.yardsale.BaseActivity;
 import com.codepath.yardsale.R;
 import com.codepath.yardsale.model.Post;
 import com.nostra13.universalimageloader.core.ImageLoader;

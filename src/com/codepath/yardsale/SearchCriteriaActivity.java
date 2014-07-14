@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.codepath.yardsale.model.Category;
-import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 

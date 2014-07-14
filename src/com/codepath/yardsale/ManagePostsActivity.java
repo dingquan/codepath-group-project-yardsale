@@ -102,9 +102,6 @@ public class ManagePostsActivity extends Activity {
         pbLoading.setVisibility(ProgressBar.VISIBLE);
         new SearchPostTask().execute(criteria); 
         
-//		//todo, populate criteria with userId
-//		List<Post> ads = postDao.findPostsBySearchCriteria(criteria);
-//		aPosts.addAll(ads);
 	}
 	
 	public void OnDelete(View view) {
