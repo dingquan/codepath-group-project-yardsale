@@ -78,7 +78,7 @@ public class ManagePostsActivity extends Activity {
 	
 	private void setupListViewListener() {
 		//Delete ad
-		lvAds.setOnItemLongClickListener(new OnItemLongClickListener() {
+		/*lvAds.setOnItemLongClickListener(new OnItemLongClickListener() {
 		    public boolean onItemLongClick(AdapterView<?> parent, View view,int position,long rowId)
 			{    	
 		    	Post post = posts.get(position);
@@ -86,7 +86,7 @@ public class ManagePostsActivity extends Activity {
 		        aPosts.remove(post);        
 				return true;
 			}
-		}); 
+		}); */
 	}
 
 	/**
@@ -100,9 +100,13 @@ public class ManagePostsActivity extends Activity {
 		aPosts.addAll(ads);
 	}
 	
-	public void OnRepost(View view) {
+	public void OnDelete(View view) {
 		
 		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
+		int position = lvAds.getPositionForView((View) view.getParent());
+		Post post = posts.get(position);
+        postDao.deletePost(post);
+        aPosts.remove(post);        
 
     }
 
