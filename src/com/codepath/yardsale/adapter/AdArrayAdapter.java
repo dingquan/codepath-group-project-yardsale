@@ -60,16 +60,16 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
 		tvDate.setText(dateStr);
 		
-		ArrayList<String> postUrl = post.getImageList();
-		if(postUrl !=null){
+		List<String> postUrls = post.getImageUrls();
+		if(postUrls !=null){
 			Log.d("PosrArrayAdapter posrtUrl --->>>","null");
 		}else{
 			Log.d("PosrArrayAdapter posrtUrl --->>>","not null");
 
 		}
 		
-		if(postUrl != null && postUrl.size()>0){
-			String url =postUrl.get(0);
+		if(postUrls != null && postUrls.size()>0){
+			String url =postUrls.get(0);
 			Log.d("PostArrayAdapter url string--->>",url);
 			imageLoader.displayImage(url, ivImage);
 			
