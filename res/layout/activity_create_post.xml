@@ -15,146 +15,144 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Gallery
+                android:id="@+id/gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/etTitle"
-                android:layout_marginTop="20dp"
-                android:text="Description" />
-
-            <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/etDescription"
-                android:layout_marginTop="20dp"
-                android:text="Location" />
-
-            <EditText
-                android:id="@+id/etDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tvDescription"
-                android:layout_alignBottom="@+id/tvDescription"
-                android:layout_alignLeft="@+id/etLocation"
                 android:layout_alignParentRight="true"
-                android:ems="10"
-                android:inputType="textMultiLine" />
+                android:layout_alignParentTop="true" />
 
-            <ImageView
-                android:id="@+id/ivPreview"
-                android:layout_width="112dp"
-                android:layout_height="84dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/ic_launcher" />
-
-            <EditText
-                android:id="@+id/etLocation"
+            <TextView
+                android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tvLocation"
-                android:layout_alignBottom="@+id/tvLocation"
-                android:layout_alignParentRight="true"
-                android:ems="10" />
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/gallery"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_category" />
+
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvCategory"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tvCategory" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvCategory"
+                android:layout_below="@+id/tvCategory"
+                android:layout_marginTop="20dp"
+                android:text="Title" />
 
             <EditText
                 android:id="@+id/etTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/ivPreview"
-                android:ems="10" />
+                android:layout_alignBottom="@+id/tvTitle"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:layout_alignLeft="@+id/spCategory" />
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignBaseline="@+id/etTitle"
-                android:layout_alignBottom="@+id/etTitle"
-                android:text="Title" />
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvCategory"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="20dp"
+                android:text="Description" />
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvDescription"
+                android:layout_alignLeft="@+id/spCategory"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvCategory"
+                android:layout_below="@+id/tvDescription"
+                android:layout_marginTop="20dp"
+                android:text="Location" />
+
+            <EditText
+                android:id="@+id/etLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvLocation"
+                android:ems="10"
+                android:layout_alignLeft="@+id/spCategory"/>
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvCategory"
+                android:layout_below="@+id/tvLocation"
+                android:layout_marginTop="20dp"
+                android:text="Price" />
+
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvPrice"
+                android:layout_alignLeft="@+id/spCategory"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvCategory"
+                android:layout_below="@+id/tvPrice"
+                android:layout_marginTop="20dp"
+                android:text="Phone" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/spCategory"
+                android:layout_alignBottom="@+id/tvPhone"
+                android:ems="10"
+                android:inputType="phone" >
+            </EditText>
+
+            <Button
+                android:id="@+id/btnPickPhoto"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tvPhone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:onClick="onPickPhoto"
+                android:text="Select Photo" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnPickPhoto"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:onClick="onSave"
+                android:text="Post" />
         </RelativeLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnPickPhoto"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="34dp"
-        android:onClick="onPickPhoto"
-        android:text="Select Photo" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btnPickPhoto"
-        android:layout_marginLeft="71dp"
-        android:layout_toRightOf="@+id/btnPickPhoto"
-        android:onClick="onSave"
-        android:text="Post" />
-
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spCategory"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="18dp"
-        android:text="@string/title_category" />
-
-    <Spinner
-        android:id="@+id/spCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvPhone"
-        android:layout_marginTop="19dp"
-        android:layout_toRightOf="@+id/btnPickPhoto" />
-
-    <EditText
-        android:id="@+id/etPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/btnPickPhoto"
-        android:ems="6"
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/etPrice"
-        android:layout_toRightOf="@+id/btnPickPhoto"
-        android:ems="6"
-        android:inputType="phone" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignBottom="@+id/etPhone"
-        android:layout_alignParentLeft="true"
-        android:text="Phone" />
-
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:text="Price" />
 
 </RelativeLayout>

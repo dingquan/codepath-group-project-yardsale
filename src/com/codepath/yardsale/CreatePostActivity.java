@@ -11,14 +11,20 @@ import java.util.UUID;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.codepath.yardsale.ViewPostActivity.ImageAdapter;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.model.Category;
@@ -26,17 +32,20 @@ import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.ParseFile;
 public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
 	public final static String REQUEST_CODE_EDIT_ADS ="0";
-	Spinner spinner;
-	TextView title;
-	TextView description;
-	TextView location;
-	TextView price;
-	TextView phone;
+	private Spinner spinner;
+	private TextView title;
+	private TextView description;
+	private TextView location;
+	private TextView price;
+	private TextView phone;
+	@SuppressWarnings("unused")
+	private Gallery gallery;
 
 	private String userId;
 	private SharedPreferences prefs;
@@ -110,23 +119,25 @@ public class CreatePostActivity extends BaseActivity {
 		String category = post.getCategory().toString();
 		spinner.setSelection(getIndex(spinner, category));
 		
+		gallery.setAdapter(new ImageAdapter(this,post.getImageUrls()));
 	}
 	
 	//Get Spinner Index position
 	 
-	 private int getIndex(Spinner spinner, String myString){
-	 
-	  int index = 0;
-	 
-	  for (int i=0;i<spinner.getCount();i++){
-	   if (spinner.getItemAtPosition(i).equals(myString)){
-	    index = i;
-	   }
-	  }
-	  //Toast.makeText(this, "Read post: " + index,Toast.LENGTH_SHORT).show();
-	  return index;
-		
-	 }
+	private int getIndex(Spinner spinner, String myString) {
+
+		int index = 0;
+
+		for (int i = 0; i < spinner.getCount(); i++) {
+			if (spinner.getItemAtPosition(i).equals(myString)) {
+				index = i;
+			}
+		}
+		// Toast.makeText(this, "Read post: " +
+		// index,Toast.LENGTH_SHORT).show();
+		return index;
+
+	}
 	 
 	public void setUpViews() {
 		spinner = (Spinner) findViewById(R.id.spCategory);
@@ -137,6 +148,7 @@ public class CreatePostActivity extends BaseActivity {
 		phone = (TextView) findViewById(R.id.etPhone);
 		names = new ArrayList<String>();
 		parseImages = new ArrayList<ParseImages>();
+		gallery = (Gallery) findViewById(R.id.gallery);
 	}
 	
 	// Trigger gallery selection for a photo
@@ -212,4 +224,64 @@ public class CreatePostActivity extends BaseActivity {
 		finish(); // closes the activity, pass data to parent
 	}
 
+	public class ImageAdapter extends ArrayAdapter {
+		int mGalleryItemBackground;
+		private Context mContext;
+
+		private List<String> imageUrls;
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		private Integer[] mImageIds = {
+				R.drawable.ic_books,
+				R.drawable.ic_appliances,
+				R.drawable.ic_computers
+		};
+
+		public ImageAdapter(Context context, List<String> objects) {
+			super(context, 0, objects);
+			mContext = context;
+			imageUrls = objects;
+			TypedArray a = obtainStyledAttributes(R.styleable.Theme);
+			mGalleryItemBackground = a.getResourceId(
+					R.styleable.Theme_android_galleryItemBackground, 0);
+
+			a.recycle();
+		}
+
+		public int getCount() {
+			return imageUrls.size();
+			// return mImageIds.length;
+		}
+
+		public Object getItem(int position) {
+			return position;
+		}
+
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@SuppressWarnings("deprecation")
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ImageView i = new ImageView(mContext);
+			Log.d("ViewpostActivity trying to set image for position",
+					String.valueOf(position));
+			String url = imageUrls.get(position);
+
+			Log.d("ViewPostActivity", i.toString());
+
+			if (url != null) {
+				Log.d("ViewPostActivity url", url);
+
+				Log.d("ViewPostACtivity Imageloader", imageLoader.toString());
+
+				Log.d("Image set at ", String.valueOf(position));
+				i.setLayoutParams(new Gallery.LayoutParams(700, 500));
+				i.setScaleType(ImageView.ScaleType.FIT_XY);
+				i.setBackgroundResource(mGalleryItemBackground);
+				imageLoader.displayImage(url, i);
+			}
+
+			return i;
+		}
+	}
 }

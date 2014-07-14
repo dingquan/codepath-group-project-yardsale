@@ -1,20 +1,15 @@
 package com.codepath.yardsale;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +23,9 @@ public class ViewPostActivity extends Activity {
 	TextView description;
 	TextView location;
 	TextView price;
-	ImageView ivImage;
+	@SuppressWarnings("deprecation")
+	Gallery gallery;
+	
 	Post post;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +43,10 @@ public class ViewPostActivity extends Activity {
 		description = (TextView) findViewById(R.id.tvAdsDescription);
 		location = (TextView) findViewById(R.id.tvAdsAddress);
 		price = (TextView) findViewById(R.id.tvAdsPrice);
-		//ivImage = (ImageView) findViewById(R.id.ivAds);
+		if(post.getImageUrls()!=null){
+			gallery = (Gallery) findViewById(R.id.gallery);
+			gallery.setAdapter(new ImageAdapter(this,post.getImageUrls()));
+		}
 	}
 	
 	private void populateData() {
@@ -57,80 +57,66 @@ public class ViewPostActivity extends Activity {
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
 		price.setText("$"+post.getPrice().toString());
-		//ivImage = (ImageView) findViewById(R.id.ivAds);
-		//ivImage.setImageURI(post.get);
-		
-		if(post.getImageUrls()!=null){
-			@SuppressWarnings("deprecation")
-			Gallery g = (Gallery) findViewById(R.id.gallery);
-		    g.setAdapter(new ImageAdapter(this,post.getImageUrls()));
-		}
 	}
 	
 	public class ImageAdapter extends ArrayAdapter {
-		   int mGalleryItemBackground;
-		   private Context mContext;
+		int mGalleryItemBackground;
+		private Context mContext;
 
-		   private List<String> imageUrls;
-		   ImageLoader imageLoader = ImageLoader.getInstance();
-		   private Integer[] mImageIds = {
-		           R.drawable.ic_books,
-		           R.drawable.ic_appliances,
-		           R.drawable.ic_computers
-		          
-		   };
+		private List<String> imageUrls;
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		private Integer[] mImageIds = { R.drawable.ic_books,
+				R.drawable.ic_appliances, R.drawable.ic_computers
 
-		   public ImageAdapter(Context context, List<String> objects) {
-				super(context, 0, objects);
-				 mContext = context;
-				 imageUrls = objects;
-			       TypedArray a = obtainStyledAttributes(R.styleable.Theme);
-			       mGalleryItemBackground = a.getResourceId(
-			         R.styleable.Theme_android_galleryItemBackground,
-			                   0);
-			       
-			       a.recycle();
-			}
-		      
-		   
+		};
 
-		   public int getCount() {
-		       return imageUrls.size();
-			  //return mImageIds.length;
-		   }
+		public ImageAdapter(Context context, List<String> objects) {
+			super(context, 0, objects);
+			mContext = context;
+			imageUrls = objects;
+			TypedArray a = obtainStyledAttributes(R.styleable.Theme);
+			mGalleryItemBackground = a.getResourceId(
+					R.styleable.Theme_android_galleryItemBackground, 0);
 
-		   public Object getItem(int position) {
-		       return position;
-		   }
-
-		   public long getItemId(int position) {
-		       return position;
-		   }
-
-		   @SuppressWarnings("deprecation")
-		public View getView(int position,
-		       View convertView, ViewGroup parent) {
-		       ImageView i = new ImageView(mContext);
-		       Log.d("ViewpostActivity trying to set image for position",String.valueOf(position));
-		       String url = imageUrls.get(position);
-		       
-		       Log.d("ViewPostActivity",i.toString());
-
-		       if(url != null){
-		    	   Log.d("ViewPostActivity url",url);
-		    	   
-		    	   Log.d("ViewPostACtivity Imageloader",imageLoader.toString());
-		    	   
-		    	   Log.d("Image set at ",String.valueOf(position));
-		    	   i.setLayoutParams(new Gallery.LayoutParams(700,500));
-			       i.setScaleType(ImageView.ScaleType.FIT_XY);
-			       i.setBackgroundResource(mGalleryItemBackground);
-			       imageLoader.displayImage(url,i);
-		      }
-		       
-
-		       return i;
-		   }
+			a.recycle();
 		}
+
+		public int getCount() {
+			return imageUrls.size();
+			// return mImageIds.length;
+		}
+
+		public Object getItem(int position) {
+			return position;
+		}
+
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@SuppressWarnings("deprecation")
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ImageView i = new ImageView(mContext);
+			Log.d("ViewpostActivity trying to set image for position",
+					String.valueOf(position));
+			String url = imageUrls.get(position);
+
+			Log.d("ViewPostActivity", i.toString());
+
+			if (url != null) {
+				Log.d("ViewPostActivity url", url);
+
+				Log.d("ViewPostACtivity Imageloader", imageLoader.toString());
+
+				Log.d("Image set at ", String.valueOf(position));
+				i.setLayoutParams(new Gallery.LayoutParams(700, 500));
+				i.setScaleType(ImageView.ScaleType.FIT_XY);
+				i.setBackgroundResource(mGalleryItemBackground);
+				imageLoader.displayImage(url, i);
+			}
+
+			return i;
+		}
+	}
 
 }
