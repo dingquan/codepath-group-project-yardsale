@@ -16,15 +16,6 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/ivPreview"
-                android:layout_marginTop="35dp"
-                android:text="Title" />
-
-            <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,24 +33,6 @@
                 android:layout_marginTop="20dp"
                 android:text="Location" />
 
-            <TextView
-                android:id="@+id/tvPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/etLocation"
-                android:layout_marginTop="20dp"
-                android:text="Price" />
-
-            <EditText
-                android:id="@+id/etTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/etDescription"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/tvTitle"
-                android:ems="10" />
-
             <EditText
                 android:id="@+id/etDescription"
                 android:layout_width="wrap_content"
@@ -71,15 +44,6 @@
                 android:ems="10"
                 android:inputType="textMultiLine" />
 
-            <EditText
-                android:id="@+id/etLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/etPrice"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/tvLocation"
-                android:ems="10" />
-
             <ImageView
                 android:id="@+id/ivPreview"
                 android:layout_width="112dp"
@@ -89,33 +53,29 @@
                 android:src="@drawable/ic_launcher" />
 
             <EditText
-                android:id="@+id/etPrice"
+                android:id="@+id/etLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvPrice"
-                android:layout_alignLeft="@+id/spCategory"
+                android:layout_alignBaseline="@+id/tvLocation"
+                android:layout_alignBottom="@+id/tvLocation"
                 android:layout_alignParentRight="true"
-                android:ems="6"
-                android:inputType="numberDecimal" >
+                android:ems="10" />
 
-                <requestFocus />
-            </EditText>
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ivPreview"
+                android:ems="10" />
 
             <TextView
-                android:id="@+id/tvCategry"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/ivPreview"
-                android:text="@string/title_category" />
-
-            <Spinner
-                android:id="@+id/spCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/etTitle"
-                android:layout_toRightOf="@+id/ivPreview" />
-
+                android:layout_height="20dp"
+                android:layout_alignBaseline="@+id/etTitle"
+                android:layout_alignBottom="@+id/etTitle"
+                android:text="Title" />
         </RelativeLayout>
     </ScrollView>
 
@@ -141,6 +101,47 @@
         android:text="Post" />
 
     <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spCategory"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="18dp"
+        android:text="@string/title_category" />
+
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvPhone"
+        android:layout_marginTop="19dp"
+        android:layout_toRightOf="@+id/btnPickPhoto" />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/btnPickPhoto"
+        android:ems="6"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/etPrice"
+        android:layout_toRightOf="@+id/btnPickPhoto"
+        android:ems="6"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
@@ -148,14 +149,12 @@
         android:layout_alignParentLeft="true"
         android:text="Phone" />
 
-    <EditText
-        android:id="@+id/etPhone"
+    <TextView
+        android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/scrollView1"
-        android:layout_toRightOf="@+id/btnPickPhoto"
-        android:ems="6"
-        android:inputType="phone" />
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="Price" />
 
 </RelativeLayout>
