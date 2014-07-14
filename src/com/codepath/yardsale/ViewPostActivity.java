@@ -1,10 +1,21 @@
 package com.codepath.yardsale;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +29,13 @@ public class ViewPostActivity extends Activity {
 	TextView location;
 	TextView price;
 	ImageView ivImage;
+	Post post;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_post);
+		String postJson = getIntent().getStringExtra("post");
+		post = (Post) JsonUtil.fromJson(postJson, Post.class);
 		
 		setupViews();
 		populateData();
@@ -32,47 +46,88 @@ public class ViewPostActivity extends Activity {
 		description = (TextView) findViewById(R.id.tvAdsDescription);
 		location = (TextView) findViewById(R.id.tvAdsAddress);
 		price = (TextView) findViewById(R.id.tvAdsPrice);
-		ivImage = (ImageView) findViewById(R.id.ivAds);
+		//ivImage = (ImageView) findViewById(R.id.ivAds);
 	}
 	
 	private void populateData() {
-		String postJson = getIntent().getStringExtra("post");
-		Post post = (Post) JsonUtil.fromJson(postJson, Post.class);
+		
 //		Toast.makeText(this, "Read post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
 		
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
 		price.setText("$"+post.getPrice().toString());
-		
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		List<String> postUrl = post.getImageUrl();
-		if(postUrl != null && postUrl.size()>0){
-			String url =postUrl.get(0);
-			imageLoader.displayImage(url, ivImage);			
-		}else{
-			String ctgry = post.getCategory().name();
-			System.out.println("PostArrayAdapter-->>"+ctgry);
-			if(ctgry.equals("TOYS_GAMES")){
-				ivImage.setImageResource(R.drawable.ic_toys);
-			}else if(ctgry.equals("FURNITURE")){
-				ivImage.setImageResource(R.drawable.ic_furniture);
-			}else if(ctgry.equals("ELECTRONICS")){
-				ivImage.setImageResource(R.drawable.ic_electronics);
-			}else if(ctgry.equals("CLOTHING_ACCESSRIES")){
-				ivImage.setImageResource(R.drawable.ic_clothing);
-			}else if(ctgry.equals("BOOKS_MAGAZINES")){
-				ivImage.setImageResource(R.drawable.ic_books);
-			}else if(ctgry.equals("COMPUTERS")){
-				ivImage.setImageResource(R.drawable.ic_computers);
-			}else if(ctgry.equals("APPLIANCES")){
-				ivImage.setImageResource(R.drawable.ic_appliances);
-			}else if(ctgry.equals("CARS")){
-				ivImage.setImageResource(R.drawable.ic_cars);
-			}else{
-				ivImage.setImageResource(R.drawable.ic_cells);
-			}
-		}
+		//ivImage = (ImageView) findViewById(R.id.ivAds);
+		//ivImage.setImageURI(post.get);
+		@SuppressWarnings("deprecation")
+		Gallery g = (Gallery) findViewById(R.id.gallery);
+		   g.setAdapter(new ImageAdapter(this,post.getImageUrl()));
 	}
+	
+	public class ImageAdapter extends ArrayAdapter {
+		   int mGalleryItemBackground;
+		   private Context mContext;
+
+		   private ArrayList<String> imageUrls;
+		   ImageLoader imageLoader = ImageLoader.getInstance();
+		   private Integer[] mImageIds = {
+		           R.drawable.ic_books,
+		           R.drawable.ic_appliances,
+		           R.drawable.ic_computers
+		          
+		   };
+
+		   public ImageAdapter(Context context, ArrayList<String> objects) {
+				super(context, 0, objects);
+				 mContext = context;
+				 imageUrls = objects;
+			       TypedArray a = obtainStyledAttributes(R.styleable.Theme);
+			       mGalleryItemBackground = a.getResourceId(
+			         R.styleable.Theme_android_galleryItemBackground,
+			                   0);
+			       
+			       a.recycle();
+			}
+		      
+		   
+
+		   public int getCount() {
+		       return imageUrls.size();
+			  //return mImageIds.length;
+		   }
+
+		   public Object getItem(int position) {
+		       return position;
+		   }
+
+		   public long getItemId(int position) {
+		       return position;
+		   }
+
+		   @SuppressWarnings("deprecation")
+		public View getView(int position,
+		       View convertView, ViewGroup parent) {
+		       ImageView i = new ImageView(mContext);
+		       Log.d("ViewpostActivity trying to set image for position",String.valueOf(position));
+		       String url = imageUrls.get(position);
+		       
+		       Log.d("ViewPostActivity",i.toString());
+
+		       if(url != null){
+		    	   Log.d("ViewPostActivity url",url);
+		    	   
+		    	   Log.d("ViewPostACtivity Imageloader",imageLoader.toString());
+		    	   
+		    	   Log.d("Image set at ",String.valueOf(position));
+		    	   i.setLayoutParams(new Gallery.LayoutParams(700,500));
+			       i.setScaleType(ImageView.ScaleType.FIT_XY);
+			       i.setBackgroundResource(mGalleryItemBackground);
+			       imageLoader.displayImage(url,i);
+		      }
+		       
+
+		       return i;
+		   }
+		}
 
 }

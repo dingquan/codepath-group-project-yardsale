@@ -154,6 +154,7 @@ public class CreatePostActivity extends BaseActivity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
 	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
 	            ArrayList<String> result=(ArrayList<String>) data.getSerializableExtra("result");
