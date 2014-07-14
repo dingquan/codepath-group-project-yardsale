@@ -166,7 +166,7 @@ public class CreatePostActivity extends BaseActivity {
 	          bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 	          byte[] image = stream.toByteArray();
 	          String ID = UUID.randomUUID().toString();
-	          names.add(ID);
+	         // names.add(ID);
 	  
 	          // Create the ParseFile
 	          ParseFile file = new ParseFile(ID, image);
@@ -203,8 +203,12 @@ public class CreatePostActivity extends BaseActivity {
 			geoLocation = getGeoFromAddress(locationStr);
 		}
 		post.setLocation(geoLocation);
-		post.setImageList(names);
-		
+		//post.setImageList(names);
+		ArrayList<String> urls = new ArrayList<String>();
+		for(ParseFile file :fileArray){
+			urls.add(file.getUrl());
+		}
+		post.setImageList(urls);
 		postDao.savePost(post,fileArray);
 		
 		// Prepare data intent

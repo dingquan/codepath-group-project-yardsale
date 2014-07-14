@@ -60,7 +60,7 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
 		tvDate.setText(dateStr);
 		
-		ArrayList<String> postUrl = post.getImageUrl();
+		ArrayList<String> postUrl = post.getImageList();
 		if(postUrl !=null){
 			Log.d("PosrArrayAdapter posrtUrl --->>>","null");
 		}else{

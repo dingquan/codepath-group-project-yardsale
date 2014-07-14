@@ -27,15 +27,7 @@ public class Post {
 	private ArrayList<String> imageList;
 	private ArrayList<String> imageUrl;
 	
-	public ArrayList<String> getImageUrl(){
-		return this.imageUrl;
-	}
-	
-	public void setImageUrl(ArrayList<String>urls){
-		Log.d("Post.java","Entered set ImageUrl"+urls.toString());
-		this.imageUrl = urls;
-		
-	}
+
 
 	public ArrayList<String> getImageList() {
 		return imageList;

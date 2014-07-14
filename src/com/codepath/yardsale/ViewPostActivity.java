@@ -60,10 +60,10 @@ public class ViewPostActivity extends Activity {
 		//ivImage = (ImageView) findViewById(R.id.ivAds);
 		//ivImage.setImageURI(post.get);
 		
-		if(post.getImageUrl()!=null){
+		if(post.getImageList()!=null){
 			@SuppressWarnings("deprecation")
 			Gallery g = (Gallery) findViewById(R.id.gallery);
-		    g.setAdapter(new ImageAdapter(this,post.getImageUrl()));
+		    g.setAdapter(new ImageAdapter(this,post.getImageList()));
 		}
 	}
 	

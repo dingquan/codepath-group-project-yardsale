@@ -44,7 +44,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		TextView tvPrice = (TextView)v.findViewById(R.id.tvPrice);
 		TextView tvDate = (TextView)v.findViewById(R.id.tvDate);
 		TextView tvLocation = (TextView)v.findViewById(R.id.tvLocation);
-		ArrayList<String> postUrl = post.getImageUrl();
+		ArrayList<String> postUrl = post.getImageList();
 		if(postUrl !=null){
 			Log.d("PosrArrayAdapter posrtUrl --->>>","null");
 		}else{
