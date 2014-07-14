@@ -18,7 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.codepath.yardsale.adapter.AdArrayAdapter;
+
+import com.codepath.yardsale.adapter.PostArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
@@ -39,7 +40,7 @@ public class ManagePostsActivity extends Activity {
 		postDao = new PostDao();
 
 		posts = new ArrayList<Post>();
-		aPosts = new AdArrayAdapter(this, posts);
+		aPosts = new PostArrayAdapter(this, posts);
 		lvAds = (ListView) findViewById(R.id.lvAds);
 		lvAds.setAdapter(aPosts);
 
