@@ -30,76 +30,84 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Post post = getItem(position);
 		
-		View v;
+		View v = convertView;
+		ViewHolder holder = null;
 		if (convertView == null) {
 			v = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
+			holder = new ViewHolder();
+			holder.image = (ImageView)v.findViewById(R.id.ivImage);
+			holder.title = (TextView)v.findViewById(R.id.tvTitle);
+			holder.description =  (TextView)v.findViewById(R.id.tvDescription);
+			holder.loaction = (TextView)v.findViewById(R.id.tvLocation);
+			holder.date = (TextView)v.findViewById(R.id.tvDate);
+			holder.price = (TextView)v.findViewById(R.id.tvPrice);
+			v.setTag(holder);
 		}
 		else{
-			v = convertView;
+			holder = (ViewHolder) v.getTag();
 		}
 		
-		ImageView ivImage = (ImageView)v.findViewById(R.id.ivImage);
-		TextView tvTitle = (TextView)v.findViewById(R.id.tvTitle);
-		TextView tvDescription = (TextView)v.findViewById(R.id.tvDescription);
-		TextView tvPrice = (TextView)v.findViewById(R.id.tvPrice);
-		TextView tvDate = (TextView)v.findViewById(R.id.tvDate);
-		TextView tvLocation = (TextView)v.findViewById(R.id.tvLocation);
+		
 		ArrayList<String> postUrl = post.getImageList();
-		if(postUrl !=null){
-			Log.d("PosrArrayAdapter posrtUrl --->>>","null");
-		}else{
-			Log.d("PosrArrayAdapter posrtUrl --->>>","not null");
-
-		}
+		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		if(postUrl != null && postUrl.size()>0){
 			String url =postUrl.get(0);
 			Log.d("PostArrayAdapter url string--->>",url);
-			imageLoader.displayImage(url, ivImage);
+			imageLoader.displayImage(url, holder.image);
 			
 			
 		}else{
 			String ctgry = post.getCategory().name();
 			System.out.println("PostArrayAdapter-->>"+ctgry);
 			if(ctgry.equals("TOYS_GAMES")){
-				ivImage.setImageResource(R.drawable.ic_toys);
+				holder.image.setImageResource(R.drawable.ic_toys);
 			}else if(ctgry.equals("FURNITURE")){
-				ivImage.setImageResource(R.drawable.ic_furniture);
+				holder.image.setImageResource(R.drawable.ic_furniture);
 			}else if(ctgry.equals("ELECTRONICS")){
-				ivImage.setImageResource(R.drawable.ic_electronics);
+				holder.image.setImageResource(R.drawable.ic_electronics);
 			}else if(ctgry.equals("CLOTHING_ACCESSRIES")){
-				ivImage.setImageResource(R.drawable.ic_clothing);
+				holder.image.setImageResource(R.drawable.ic_clothing);
 			}else if(ctgry.equals("BOOKS_MAGAZINES")){
-				ivImage.setImageResource(R.drawable.ic_books);
+				holder.image.setImageResource(R.drawable.ic_books);
 			}else if(ctgry.equals("COMPUTERS")){
-				ivImage.setImageResource(R.drawable.ic_computers);
+				holder.image.setImageResource(R.drawable.ic_computers);
 			}else if(ctgry.equals("APPLIANCES")){
-				ivImage.setImageResource(R.drawable.ic_appliances);
+				holder.image.setImageResource(R.drawable.ic_appliances);
 			}else if(ctgry.equals("CARS")){
-				ivImage.setImageResource(R.drawable.ic_cars);
+				holder.image.setImageResource(R.drawable.ic_cars);
 			}else{
-				ivImage.setImageResource(R.drawable.ic_cells);
+				holder.image.setImageResource(R.drawable.ic_cells);
 			}
 		}
 		
 		
 		//ImageLoader imageLoader = ImageLoader.getInstance();
 		Log.d("PostArrayAdapter title-->>",post.getTitle());
-		tvTitle.setText(post.getTitle());
+		holder.title.setText(post.getTitle());
 		String description = post.getDescription();
 		if (description.length() > 80){
 			description = description.substring(0, 80) + "...";
 		}
-		tvDescription.setText(description);
-		tvPrice.setText("$" + post.getPrice().toString());
-		tvLocation.setText(post.getContact().getAddress());
+		holder.description.setText(description);
+		holder.price.setText("$" + post.getPrice().toString());
+		holder.loaction.setText(post.getContact().getAddress());
 		
 		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
-		tvDate.setText(dateStr);
+		holder.date.setText(dateStr);
 
 		return v;
 	}
+	
+	static class ViewHolder {
+		  ImageView image;
+		  TextView title;
+		  TextView description;
+		  TextView loaction;
+		  TextView date;
+		  TextView price;
+		 }
 
 	
 }
