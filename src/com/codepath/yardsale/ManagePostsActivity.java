@@ -26,6 +26,7 @@ import com.codepath.yardsale.util.JsonUtil;
 
 
 public class ManagePostsActivity extends Activity {
+	private static final int REQUEST_CODE_EDIT_POST = 1;
 	private List<Post> posts;
 	private ArrayAdapter<Post> aPosts;
 	private ListView lvAds;
@@ -50,8 +51,6 @@ public class ManagePostsActivity extends Activity {
 		lookupOwnUserId();
 		setupHandlers();
 		loadOwnPosts();
-		setupListViewListener();
-
 	}
 	
 	private void lookupOwnUserId(){
@@ -74,24 +73,11 @@ public class ManagePostsActivity extends Activity {
 						CreatePostActivity.class);
 				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
 				i.putExtra("position", position);
-				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE_EDIT_POST);
 			}
 		});
 	}
 	
-	private void setupListViewListener() {
-		//Delete ad
-		/*lvAds.setOnItemLongClickListener(new OnItemLongClickListener() {
-		    public boolean onItemLongClick(AdapterView<?> parent, View view,int position,long rowId)
-			{    	
-		    	Post post = posts.get(position);
-		        postDao.deletePost(post);
-		        aPosts.remove(post);        
-				return true;
-			}
-		}); */
-	}
-
 	/**
 	 * load posts created by self
 	 */
@@ -113,6 +99,24 @@ public class ManagePostsActivity extends Activity {
         aPosts.remove(post);        
 
     }
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == this.REQUEST_CODE_EDIT_POST){
+			if (resultCode == RESULT_OK){
+				if (data == null){
+					return;
+				}
+				String postStr = data.getExtras().getString("post");
+				int position = data.getExtras().getInt("position");
+				if (postStr == null)
+					return;
+				Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
+				posts.set(position, post);
+				aPosts.notifyDataSetChanged();
+			}
+		}
+	}
 
 	private class SearchPostTask extends AsyncTask<SearchCriteria, Void, List<Post>> {
 

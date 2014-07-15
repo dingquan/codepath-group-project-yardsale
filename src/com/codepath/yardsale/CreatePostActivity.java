@@ -51,6 +51,10 @@ public class CreatePostActivity extends BaseActivity {
 	private List<ParseImages> parseImages;
 	private GeoLocation geoLocation;
 	
+	private boolean isNewPost = false;
+	private boolean imagesChanged = false;
+	private Integer position;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,13 +95,16 @@ public class CreatePostActivity extends BaseActivity {
 	{
 		//Existing ad
 		String postJson = getIntent().getStringExtra("post");
+		position = getIntent().getIntExtra("position", -1);
 		if (postJson == null || postJson.isEmpty())
 		{
 			post=null;
+			isNewPost = true;
 			gallery.setVisibility(View.INVISIBLE);
 			return;
 		}
 
+		isNewPost = false;
 		post = (Post) JsonUtil.fromJson(postJson, Post.class);
 
 		title.setText(post.getTitle());
@@ -178,6 +185,8 @@ public class CreatePostActivity extends BaseActivity {
 					// Upload the image into Parse Cloud
 					parseImage.saveInBackground();
 					parseImages.add(parseImage);
+					
+					imagesChanged = true;
 				}
 			}
 			if (resultCode == RESULT_CANCELED) {
@@ -188,7 +197,7 @@ public class CreatePostActivity extends BaseActivity {
 	
 	public void onSave(View v) {
 		//check if the ad is an edit or new
-		if (post == null)
+		if (isNewPost)
 		{
 			post = new Post();
 		}
@@ -208,18 +217,23 @@ public class CreatePostActivity extends BaseActivity {
 			geoLocation = getGeoFromAddress(locationStr);
 		}
 		post.setLocation(geoLocation);
-		List<String> urls = new ArrayList<String>();
-		for(ParseImages parseImage :parseImages){
-			urls.add(parseImage.getParseFile("imageFile").getUrl());
+		
+		if (imagesChanged){
+			List<String> urls = new ArrayList<String>();
+			for(ParseImages parseImage :parseImages){
+				urls.add(parseImage.getParseFile("imageFile").getUrl());
+			}
+			post.setImageNames(names);
+			post.setImageUrls(urls);			
 		}
-		post.setImageNames(names);
-		post.setImageUrls(urls);
 		postDao.savePost(post);
 		
 		// Prepare data intent
 		Intent data = new Intent();
 		// Pass relevant data back as a result
 		data.putExtra("post", JsonUtil.toJson(post));
+		data.putExtra("positoin", position);
+
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent
