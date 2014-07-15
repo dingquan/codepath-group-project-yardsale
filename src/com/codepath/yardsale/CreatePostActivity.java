@@ -216,7 +216,7 @@ public class CreatePostActivity extends BaseActivity {
 	
 	public void onSave(View v) {
 		
-		savePost();
+		//savePost();
 		
 		// Prepare data intent
 		Intent data = new Intent();
