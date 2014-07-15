@@ -25,16 +25,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvAdsTitle"
-        android:layout_below="@+id/tvAdsTitle"
-        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tvAdsCategory"
+        android:layout_marginTop="5dp"
         android:text="Description" />
 
     <TextView
         android:id="@+id/tvAdsCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnRepost"
-        android:layout_alignBottom="@+id/btnRepost"
+        android:layout_below="@+id/tvAdsTitle"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/ivImage"
         android:text="Category" />
 
@@ -44,14 +44,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvAdsStatus"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:text="Date Created" />
 
     <TextView
         android:id="@+id/tvAdsStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivImage"
-        android:layout_alignLeft="@+id/tvAdDescription"
+        android:layout_alignLeft="@+id/tvAdsTitle"
+        android:layout_below="@+id/tvAdDescription"
+        android:layout_marginTop="5dp"
         android:text="Status" />
 
     <Button
@@ -71,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tvAdsDateCreated"
         android:layout_alignBottom="@+id/tvAdsDateCreated"
-        android:layout_toLeftOf="@+id/tvAdsDateCreated"
-        android:layout_toRightOf="@+id/tvAdDescription"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/tvAdsStatus"
         android:text="Price" />
 
 </RelativeLayout>

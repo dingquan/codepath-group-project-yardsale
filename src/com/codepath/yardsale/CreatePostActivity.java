@@ -13,10 +13,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Gallery;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 public class CreatePostActivity extends BaseActivity {
 
@@ -39,8 +42,10 @@ public class CreatePostActivity extends BaseActivity {
 	private TextView location;
 	private TextView price;
 	private TextView phone;
+	private TextView tvUploading;
 	@SuppressWarnings("unused")
 	private Gallery gallery;
+	private ProgressBar pbLoading;
 
 	private String userId;
 	private SharedPreferences prefs;
@@ -83,30 +88,33 @@ public class CreatePostActivity extends BaseActivity {
 		
 		String locationJson = getIntent().getStringExtra("geo_location");
 
-		//Edit an Ad
-		populateData();
-
+		fetchPostData();
+		if (!isNewPost){
+			populateData();
+		}
 		if (locationJson != null && !locationJson.isEmpty()){
 			geoLocation = (GeoLocation) JsonUtil.fromJson(locationJson, GeoLocation.class);
 		}
 	}
 
-	public void populateData()
-	{
+	public void fetchPostData(){
 		//Existing ad
 		String postJson = getIntent().getStringExtra("post");
 		position = getIntent().getIntExtra("position", -1);
 		if (postJson == null || postJson.isEmpty())
 		{
-			post=null;
+			post = new Post();
 			isNewPost = true;
-			gallery.setVisibility(View.INVISIBLE);
-			return;
+			gallery.setVisibility(View.GONE);
 		}
-
-		isNewPost = false;
-		post = (Post) JsonUtil.fromJson(postJson, Post.class);
-
+		else{
+			isNewPost = false;
+			post = (Post) JsonUtil.fromJson(postJson, Post.class);
+		}
+	}
+	
+	public void populateData()
+	{
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
@@ -124,6 +132,7 @@ public class CreatePostActivity extends BaseActivity {
 		List<String> imageUrls = post.getImageUrls();
 		if (imageUrls != null && !imageUrls.isEmpty()){
 			gallery.setAdapter(new ImageArrayAdapter(this,post.getImageUrls()));
+			gallery.setVisibility(View.VISIBLE);
 		}
 		else{
 			gallery.setVisibility(View.GONE);
@@ -157,6 +166,8 @@ public class CreatePostActivity extends BaseActivity {
 		names = new ArrayList<String>();
 		parseImages = new ArrayList<ParseImages>();
 		gallery = (Gallery) findViewById(R.id.gallery);
+		pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+		tvUploading = (TextView) findViewById(R.id.tvUploading);
 	}
 	
 	// Trigger gallery selection for a photo
@@ -168,26 +179,11 @@ public class CreatePostActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
-				ArrayList<String> result = (ArrayList<String>) data.getSerializableExtra("result");
-				for (int i = 0; i < result.size(); i++) {
-					Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
-					// Convert it to byte
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					// Compress image to lower quality scale 1 - 100
-					bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-					byte[] image = stream.toByteArray();
-					String name = UUID.randomUUID().toString() + ".png";
-					names.add(name);
-
-					// Create the ParseFile
-					ParseFile file = new ParseFile(name, image);
-					ParseImages parseImage = new ParseImages(file, name);
-					// Upload the image into Parse Cloud
-					parseImage.saveInBackground();
-					parseImages.add(parseImage);
-					
-					imagesChanged = true;
-				}
+				List<String> result = (List<String>) data.getSerializableExtra("result");
+				pbLoading.setVisibility(ProgressBar.VISIBLE);
+				tvUploading.setVisibility(View.VISIBLE);
+				gallery.setVisibility(View.INVISIBLE);
+				new SaveImagesTask().execute(result);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -195,12 +191,8 @@ public class CreatePostActivity extends BaseActivity {
 		}
 	}
 	
-	public void onSave(View v) {
+	private void savePost(){
 		//check if the ad is an edit or new
-		if (isNewPost)
-		{
-			post = new Post();
-		}
 		post.setUserId(userId);
 		post.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
 		Contact contact = new Contact(phone.getText().toString(), location.getText().toString());
@@ -218,15 +210,13 @@ public class CreatePostActivity extends BaseActivity {
 		}
 		post.setLocation(geoLocation);
 		
-		if (imagesChanged){
-			List<String> urls = new ArrayList<String>();
-			for(ParseImages parseImage :parseImages){
-				urls.add(parseImage.getParseFile("imageFile").getUrl());
-			}
-			post.setImageNames(names);
-			post.setImageUrls(urls);			
-		}
 		postDao.savePost(post);
+
+	}
+	
+	public void onSave(View v) {
+		
+		savePost();
 		
 		// Prepare data intent
 		Intent data = new Intent();
@@ -239,4 +229,51 @@ public class CreatePostActivity extends BaseActivity {
 		finish(); // closes the activity, pass data to parent
 	}
 
+	private class SaveImagesTask extends AsyncTask<List<String>, Void, Post>{
+
+		@Override
+		protected Post doInBackground(List<String>... args) {
+			List<String> result = args[0];
+			for (int i = 0; i < result.size(); i++) {
+				Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
+				// Convert it to byte
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				// Compress image to lower quality scale 1 - 100
+				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+				byte[] image = stream.toByteArray();
+				String name = UUID.randomUUID().toString() + ".png";
+				names.add(name);
+
+				// Create the ParseFile
+				ParseFile file = new ParseFile(name, image);
+				ParseImages parseImage = new ParseImages(file, name);
+				// Upload the image into Parse Cloud
+				try {
+					parseImage.save();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				parseImages.add(parseImage);			
+				imagesChanged = true;
+			}
+			List<String> urls = new ArrayList<String>();
+			for(ParseImages parseImage :parseImages){
+				urls.add(parseImage.getParseFile("imageFile").getUrl());
+			}
+			post.setImageNames(names);
+			post.setImageUrls(urls);			
+			savePost();
+			return post;
+		}
+		
+		@Override
+		protected void onPostExecute(Post result) {
+			post = result;
+			populateData();
+			pbLoading.setVisibility(ProgressBar.INVISIBLE);
+			tvUploading.setVisibility(View.INVISIBLE);
+		}
+		
+	}
 }

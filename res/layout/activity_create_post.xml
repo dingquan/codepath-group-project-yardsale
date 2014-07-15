@@ -24,6 +24,26 @@
                 android:layout_alignParentTop="true" />
 
             <TextView
+                android:id="@+id/tvUploading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Uploading Images..."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="false"
+                android:layout_marginTop="100dp"
+                android:visibility="invisible" />
+
+            <TextView
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,9 +75,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvTitle"
+                android:layout_alignLeft="@+id/spCategory"
                 android:layout_marginRight="20dp"
-                android:ems="10"
-                android:layout_alignLeft="@+id/spCategory" />
+                android:ems="10" />
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -91,8 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvLocation"
-                android:ems="10"
-                android:layout_alignLeft="@+id/spCategory"/>
+                android:layout_alignLeft="@+id/spCategory"
+                android:ems="10" />
 
             <TextView
                 android:id="@+id/tvPrice"
@@ -125,8 +145,8 @@
                 android:id="@+id/etPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/spCategory"
                 android:layout_alignBottom="@+id/tvPhone"
+                android:layout_alignLeft="@+id/spCategory"
                 android:ems="10"
                 android:inputType="phone" >
             </EditText>
