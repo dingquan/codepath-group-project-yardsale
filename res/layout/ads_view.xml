@@ -4,13 +4,16 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_launcher" />
+            android:id="@+id/ivImage"
+            android:layout_width="112dp"
+            android:layout_height="84dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher" />
+
 
     <TextView
         android:id="@+id/tvAdDescription"
@@ -33,7 +36,6 @@
         android:textColor="#cc6600"
         android:textSize="24px"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/tvAdsDateCreated"
         android:layout_width="wrap_content"
@@ -42,12 +44,28 @@
         android:layout_alignParentRight="true"
         android:text="Date Created" />
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivImage"
-        android:layout_toRightOf="@+id/ivImage"
-        android:text="Price" />
+     <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivImage"
+            android:layout_alignLeft="@+id/ivImage"
+            android:paddingLeft="10dp"
+            android:background="#CC404040"
+            android:text="Price"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#fafafa" />
+
+     <TextView
+         android:id="@+id/tvLocation"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/tvPrice"
+         android:layout_alignBottom="@+id/tvPrice"
+         android:layout_centerHorizontal="true"
+         android:text="Location"
+         android:textAppearance="?android:attr/textAppearanceSmall"
+         android:textColor="#909090" />
 
 </RelativeLayout>

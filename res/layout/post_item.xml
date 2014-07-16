@@ -55,6 +55,7 @@
             android:background="#CC404040"
             android:paddingLeft="10dp"
             android:text="Price"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#fafafa" />
 
