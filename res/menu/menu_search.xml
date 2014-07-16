@@ -17,7 +17,7 @@
         android:showAsAction="always"
         android:title="post">
     </item>
-        <item
+    <item
         android:id="@+id/action_manage"
         android:icon="@drawable/ic_action_manage"
         android:menuCategory="system"
@@ -25,4 +25,5 @@
         android:showAsAction="always"
         android:title="post">
     </item>
+    
 </menu>

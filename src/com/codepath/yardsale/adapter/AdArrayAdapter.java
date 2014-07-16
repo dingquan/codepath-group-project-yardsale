@@ -40,9 +40,9 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		
 		TextView tvDescription = (TextView) v
 				.findViewById(R.id.tvAdDescription);
-		TextView tvStatus = (TextView) v.findViewById(R.id.tvAdsStatus);
+		//TextView tvStatus = (TextView) v.findViewById(R.id.tvAdsStatus);
 		TextView tvDate = (TextView) v.findViewById(R.id.tvAdsDateCreated);
-		TextView tvCategory = (TextView) v.findViewById(R.id.tvAdsCategory);
+		//TextView tvCategory = (TextView) v.findViewById(R.id.tvAdsCategory);
 		TextView tvPrice = (TextView) v.findViewById(R.id.tvPrice);
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		tvTitle.setText(post.getTitle());
@@ -53,8 +53,8 @@ public class AdArrayAdapter extends ArrayAdapter<Post> {
 		}
 		
 		tvDescription.setText(description);
-		tvStatus.setText(post.getStatus().toString());
-		tvCategory.setText(post.getCategory().toString());
+		//tvStatus.setText(post.getStatus().toString());
+		//tvCategory.setText(post.getCategory().toString());
 		tvPrice.setText(post.getPrice().toString());
 		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);

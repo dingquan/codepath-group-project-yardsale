@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<item
+        android:id="@+id/action_photo"
+        android:icon="@drawable/ic_photo"
+        android:menuCategory="system"
+        android:onClick="onPickPhoto"
+        android:showAsAction="always"
+        android:title="photo">
+    </item>
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
+        android:menuCategory="system"
+        android:onClick="onSave"
+        android:showAsAction="always"
+        android:title="save">
+    </item>
+</menu>

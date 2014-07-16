@@ -13,68 +13,41 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/tvAdsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvAdsCategory"
-        android:layout_alignTop="@+id/ivImage"
-        android:text="Title" />
-
-    <TextView
         android:id="@+id/tvAdDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvAdsTitle"
-        android:layout_below="@+id/tvAdsCategory"
-        android:layout_marginTop="5dp"
-        android:text="Description" />
-
-    <TextView
-        android:id="@+id/tvAdsCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/tvAdsTitle"
         android:layout_marginTop="5dp"
+        android:text="Description" 
+        android:textSize="18px"/>
+
+    <TextView
+        android:id="@+id/tvAdsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivImage"
         android:layout_toRightOf="@+id/ivImage"
-        android:text="Category" />
+        android:text="Title"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#cc6600"
+        android:textSize="24px"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvAdsDateCreated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvAdsStatus"
+        android:layout_alignBottom="@+id/ivImage"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:text="Date Created" />
-
-    <TextView
-        android:id="@+id/tvAdsStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvAdsTitle"
-        android:layout_below="@+id/tvAdDescription"
-        android:layout_marginTop="5dp"
-        android:text="Status" />
-
-    <Button
-        android:id="@+id/btnRepost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:onClick="OnDelete"
-        android:text="Delete" />
 
     <TextView
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvAdsDateCreated"
-        android:layout_alignBottom="@+id/tvAdsDateCreated"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/tvAdsStatus"
+        android:layout_alignBottom="@+id/ivImage"
+        android:layout_toRightOf="@+id/ivImage"
         android:text="Price" />
 
 </RelativeLayout>

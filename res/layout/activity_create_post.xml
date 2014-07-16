@@ -72,6 +72,7 @@
 
             <EditText
                 android:id="@+id/etTitle"
+                android:hint="Enter Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvTitle"
@@ -90,9 +91,10 @@
 
             <EditText
                 android:id="@+id/etDescription"
+                android:hint="Enter Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvDescription"
+                android:layout_below="@+id/etTitle"
                 android:layout_alignLeft="@+id/spCategory"
                 android:ems="10"
                 android:inputType="textMultiLine" />
@@ -108,6 +110,7 @@
 
             <EditText
                 android:id="@+id/etLocation"
+                android:hint="Enter Location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvLocation"
@@ -125,6 +128,7 @@
 
             <EditText
                 android:id="@+id/etPrice"
+                android:hint="Enter Price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvPrice"
@@ -143,6 +147,7 @@
 
             <EditText
                 android:id="@+id/etPhone"
+                android:hint="Enter Phone #"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvPhone"
@@ -151,27 +156,6 @@
                 android:inputType="phone" >
             </EditText>
 
-            <Button
-                android:id="@+id/btnPickPhoto"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/tvPhone"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:onClick="onPickPhoto"
-                android:text="Select Photo" />
-
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/btnPickPhoto"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:onClick="onSave"
-                android:text="Post" />
         </RelativeLayout>
     </ScrollView>
 

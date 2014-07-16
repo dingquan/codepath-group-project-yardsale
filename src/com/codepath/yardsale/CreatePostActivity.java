@@ -15,6 +15,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Gallery;
@@ -97,6 +100,13 @@ public class CreatePostActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_ad, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 	public void fetchPostData(){
 		//Existing ad
 		String postJson = getIntent().getStringExtra("post");
@@ -170,11 +180,7 @@ public class CreatePostActivity extends BaseActivity {
 		tvUploading = (TextView) findViewById(R.id.tvUploading);
 	}
 	
-	// Trigger gallery selection for a photo
-	public void onPickPhoto(View view) {
-		Intent i = new Intent(this,MultiPhotoSelectActivity.class);
-		startActivityForResult(i, 1);
-	}
+
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1) {
@@ -214,10 +220,14 @@ public class CreatePostActivity extends BaseActivity {
 
 	}
 	
-	public void onSave(View v) {
-		
-		//savePost();
-		
+	// Trigger gallery selection for a photo
+	public void onPickPhoto(MenuItem mi) {
+		Intent i = new Intent(this,MultiPhotoSelectActivity.class);
+		startActivityForResult(i, 1);
+	}
+	
+	
+	public void onSave(MenuItem mi) {
 		// Prepare data intent
 		Intent data = new Intent();
 		// Pass relevant data back as a result
