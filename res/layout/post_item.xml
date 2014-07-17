@@ -31,9 +31,9 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/color_title"
-            android:textSize="24px"
+            android:textSize="28px"
             android:textStyle="bold" />
 
         <TextView
@@ -58,7 +58,8 @@
             android:paddingLeft="10dp"
             android:text="@string/price"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/color_price" />
+            android:textColor="@color/color_price" 
+            android:textSize="18px"/>
 
         <TextView
             android:id="@+id/tvLocation"
@@ -68,7 +69,8 @@
             android:layout_alignBottom="@+id/tvPrice"
             android:layout_alignLeft="@+id/tvDescription"
             android:text="@string/title_location"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="18px" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -79,8 +81,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="14dp"
             android:text="@string/title_date"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#909090" />
+            android:textAppearance="?android:attr/textAppearanceSmall" 
+            android:textSize="18px"/>
 
     </RelativeLayout>
 </LinearLayout>

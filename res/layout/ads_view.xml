@@ -34,7 +34,7 @@
         android:text="@string/title_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/color_title"
-        android:textSize="24px"
+        android:textSize="28px"
         android:textStyle="bold"/>
     
     <TextView
@@ -44,7 +44,8 @@
         android:layout_alignBottom="@+id/ivImage"
         android:layout_alignParentRight="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/title_date" />
+        android:text="@string/title_date" 
+        android:textSize="18px"/>
 
      <TextView
             android:id="@+id/tvPrice"
@@ -57,7 +58,8 @@
             android:text="@string/price"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/color_price" />
+            android:textColor="@color/color_price" 
+            android:textSize="18px"/>
 
      <TextView
          android:id="@+id/tvLocation"
@@ -67,6 +69,7 @@
          android:layout_alignBottom="@+id/tvPrice"
          android:layout_centerHorizontal="true"
          android:text="@string/title_location"
-         android:textAppearance="?android:attr/textAppearanceSmall" />
+         android:textAppearance="?android:attr/textAppearanceSmall" 
+         android:textSize="18px"/>
 
 </RelativeLayout>

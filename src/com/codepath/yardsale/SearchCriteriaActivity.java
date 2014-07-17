@@ -41,7 +41,7 @@ public class SearchCriteriaActivity extends Activity {
 		String[] names = Category.getNames();
 		Arrays.sort(names);
 		List<String> categories = new ArrayList<String>();
-		categories.add("Any"); //the "Any" option
+		categories.add("Select Category"); //the "Any" option
 		categories.addAll(Arrays.asList(names));
 		ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
