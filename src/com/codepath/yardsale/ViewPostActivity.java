@@ -3,12 +3,18 @@ package com.codepath.yardsale;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Gallery;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
+import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 
@@ -19,6 +25,8 @@ public class ViewPostActivity extends Activity {
 	TextView price;
 	TextView phone;
 	TextView category;
+	private PostDao postDao = PostDao.getInstance();
+	private final int REQUEST_CODE_POST_AD =1;
 	@SuppressWarnings("deprecation")
 	Gallery gallery;
 	
@@ -53,6 +61,21 @@ public class ViewPostActivity extends Activity {
 		
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_delete, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public void onDelete(MenuItem mi) {
+		//Delete
+		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+        postDao.deletePost(post);
+        Intent i = new Intent(this,
+        		ManagePostsActivity.class);
+		startActivityForResult(i, REQUEST_CODE_POST_AD);
+	}
 	private void populateData() {
 		
 //		Toast.makeText(this, "Read post: " + post.getTitle(), Toast.LENGTH_SHORT).show();

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Yard Sale</string>
-    <string name="title_activity_view_post">View Items Details</string>
+    <string name="title_activity_view_post">View Ad Details</string>
     <string name="title_activity_create_post">Post a new AD</string>
     <string name="title_activity_manage_posts">Manage Posts</string>
     <string name="title_activity_search_criteria">Search</string>
