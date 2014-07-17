@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/color_background" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#cc6600"
+            android:textColor="@color/color_title"
             android:textSize="24px"
             android:textStyle="bold" />
 
@@ -42,9 +43,9 @@
             android:layout_alignLeft="@+id/tvTitle"
             android:layout_below="@+id/tvTitle"
             android:layout_marginTop="5dp"
-            android:text="Description"
-            android:textSize="18px"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:text="@string/title_description"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="18px" />
 
         <TextView
             android:id="@+id/tvPrice"
@@ -52,20 +53,22 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivImage"
             android:layout_alignLeft="@+id/ivImage"
-            android:background="#CC404040"
-            android:paddingLeft="10dp"
-            android:text="Price"
+            android:background="@color/color_pricebackground"
             android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/price"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#fafafa" />
+            android:textColor="@color/color_price" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp" >
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvPrice"
+            android:layout_alignBottom="@+id/tvPrice"
+            android:layout_alignLeft="@+id/tvDescription"
+            android:text="@string/title_location"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -74,21 +77,10 @@
             android:layout_alignBaseline="@+id/tvLocation"
             android:layout_alignBottom="@+id/tvLocation"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:text="Date"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#909090" />
-
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:text="Location"
+            android:layout_marginRight="14dp"
+            android:text="@string/title_date"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#909090" />
 
     </RelativeLayout>
-
 </LinearLayout>

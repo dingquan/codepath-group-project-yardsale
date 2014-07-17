@@ -7,6 +7,10 @@
     <string name="title_activity_manage_posts">Manage Posts</string>
     <string name="title_activity_search_criteria">Search</string>
     <string name="title_category">Category</string>
+    <string name="title_description">Description</string>
+    <string name="title_location">Location</string>
+    <string name="title_title">Title</string>
+    <string name="title_date">Date</string>
     <string name="price">Price</string>
     <string name="min">min</string>
     <string name="max">max</string>
@@ -14,5 +18,8 @@
     <string name="keyword">Keyword</string>
     <string name="title_activity_multi_photo_select">MultiPhotoSelectActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    <color name="color_background">#CCFFFF</color>
+	<color name ="color_title">#cc6600</color>
+	<color name="color_price">#fafafa</color>
+	<color name="color_pricebackground">#CC404040</color>
 </resources>

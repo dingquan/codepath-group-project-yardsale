@@ -2,91 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
-
-    <TextView
-        android:id="@+id/tvKeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/keyword"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    tools:context="${relativePackage}.${activityClass}" 
+    android:background="@color/color_background" >
 
     <EditText
         android:id="@+id/etKeyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvKeyword"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/tvKeyword"
-        android:ems="8" />
-
-    <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvKeyword"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/etKeyword"
-        android:onClick="searchPosts"
-        android:src="@drawable/ic_action_search_dark" />
-
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvKeyword"
-        android:layout_below="@+id/etKeyword"
-        android:layout_marginTop="30dp"
-        android:text="@string/title_category"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/ivSearch"
+        android:ems="10"
+        android:hint="@string/keyword"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvCategory"
-        android:layout_alignLeft="@+id/etKeyword"/>
-
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvCategory"
-        android:layout_below="@+id/tvCategory"
-        android:layout_marginTop="30dp"
-        android:text="@string/price"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/etMaxPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etMinPrice"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/etMinPrice"
-        android:ems="6"
-        android:hint="@string/max"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/tvCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPrice"
-        android:layout_below="@+id/etMinPrice"
-        android:layout_marginTop="30dp"
-        android:text="@string/city"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignLeft="@+id/etKeyword"
+        android:layout_below="@+id/etKeyword"
+        android:hint="@string/title_category"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
         android:id="@+id/etMinPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvPrice"
         android:layout_alignLeft="@+id/spCategory"
+        android:layout_below="@+id/spCategory"
         android:ems="5"
         android:hint="@string/min"
         android:inputType="number" />
@@ -95,11 +39,34 @@
         android:id="@+id/etCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvCity"
+        android:layout_below="@+id/etMinPrice"
         android:layout_alignLeft="@+id/etKeyword"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:ems="10"
+        android:hint="@string/city"
         android:inputType="text" />
+
+    <ImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/etKeyword"
+        android:onClick="searchPosts"
+        android:src="@drawable/ic_action_search_dark" />
+
+    <EditText
+        android:id="@+id/etMaxPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etCity"
+        android:layout_alignRight="@+id/etKeyword"
+        android:ems="6"
+        android:hint="@string/max"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
