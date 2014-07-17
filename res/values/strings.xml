@@ -18,8 +18,8 @@
     <string name="keyword">Keyword</string>
     <string name="title_activity_multi_photo_select">MultiPhotoSelectActivity</string>
     <string name="hello_world">Hello world!</string>
-    <color name="color_background">#B0E0E6</color>
-	<color name ="color_title">#cc6600</color>
+    <color name="color_background">#F0F8FF</color>
+	<color name ="color_text">#000080</color>
 	<color name="color_price">#fafafa</color>
 	<color name="color_pricebackground">#CC404040</color>
     <string name="title_activity_search_and_manage">Yard Sale Search Ad</string>

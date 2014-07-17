@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/ivImage"
         android:text="@string/title_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/color_title"
+        android:textColor="@color/color_text"
         android:textSize="28px"
         android:textStyle="bold"/>
     

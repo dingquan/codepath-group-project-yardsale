@@ -10,24 +10,20 @@
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <Gallery 
-				android:id="@+id/gallery"
-				android:layout_width="fill_parent"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentLeft="true"
-				android:layout_alignParentRight="true"
-				
-				android:layout_height="200dp"
-			/>
+            <Gallery
+                android:id="@+id/gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
 
             <TextView
                 android:id="@+id/tvPriceLabel"
@@ -36,7 +32,9 @@
                 android:layout_alignLeft="@+id/tvTitleLabel"
                 android:layout_below="@+id/tvTitleLabel"
                 android:layout_marginTop="24dp"
-                android:text="Price:" />
+                android:text="Price:" 
+                android:textSize="20px"
+		        android:textStyle="bold"/>/>
 
             <TextView
                 android:id="@+id/tvDescriptionLabel"
@@ -45,7 +43,9 @@
                 android:layout_alignLeft="@+id/tvPriceLabel"
                 android:layout_below="@+id/tvAdsPrice"
                 android:layout_marginTop="17dp"
-                android:text="Description:" />
+                android:text="Description:" 
+                android:textSize="20px"
+		        android:textStyle="bold"/>/>
 
             <TextView
                 android:id="@+id/tvAdsPrice"
@@ -54,6 +54,8 @@
                 android:layout_alignBaseline="@+id/tvPriceLabel"
                 android:layout_alignBottom="@+id/tvPriceLabel"
                 android:layout_alignLeft="@+id/tvAdsTitle"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18px"
                 android:text="Price" />
 
             <TextView
@@ -63,6 +65,8 @@
                 android:layout_alignBaseline="@+id/tvAddressLabel"
                 android:layout_alignBottom="@+id/tvAddressLabel"
                 android:layout_alignLeft="@+id/tvAdsPrice"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18px"
                 android:text="Address" />
 
             <TextView
@@ -72,7 +76,9 @@
                 android:layout_below="@+id/gallery"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="28dp"
-                android:text="Title:" />
+                android:text="Title:" 
+		        android:textSize="20px"
+		        android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvAdsTitle"
@@ -81,16 +87,21 @@
                 android:layout_alignBottom="@+id/tvTitleLabel"
                 android:layout_marginLeft="22dp"
                 android:layout_toRightOf="@+id/tvDescriptionLabel"
-                android:text="Title" />
+                android:text="Title" 
+                android:textColor="@color/color_text"
+		        android:textSize="28px"
+		        android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvAdsDescription"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvAdsPrice"
+                android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/tvDescriptionLabel"
+                android:layout_marginRight="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18px"
                 android:text="Description" />
 
             <TextView
@@ -101,7 +112,54 @@
                 android:layout_below="@+id/tvAdsDescription"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Address:" />
+                android:text="Address:" 
+                android:textSize="20px"
+		        android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvCatgoryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvPhoneLabel"
+                android:layout_below="@+id/tvPhoneLabel"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Category" 
+                android:textSize="20px"
+		        android:textStyle="bold"/>>
+
+            <TextView
+                android:id="@+id/tvPhoneLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAddressLabel"
+                android:layout_below="@+id/tvAdsAddress"
+                android:layout_marginTop="10dp"
+                android:text="Phone" 
+                android:textSize="20px"
+		        android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvAdsPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvCatgoryLabel"
+                android:layout_alignLeft="@+id/tvAdsAddress"
+                android:text="Phone"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18px" />
+
+            <TextView
+                android:id="@+id/tvAdsCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAdsPhone"
+                android:layout_below="@+id/tvPhoneLabel"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Category"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18px" />
 
         </RelativeLayout>
     </ScrollView>

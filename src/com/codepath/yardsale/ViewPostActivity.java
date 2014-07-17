@@ -17,6 +17,8 @@ public class ViewPostActivity extends Activity {
 	TextView description;
 	TextView location;
 	TextView price;
+	TextView phone;
+	TextView category;
 	@SuppressWarnings("deprecation")
 	Gallery gallery;
 	
@@ -37,6 +39,8 @@ public class ViewPostActivity extends Activity {
 		description = (TextView) findViewById(R.id.tvAdsDescription);
 		location = (TextView) findViewById(R.id.tvAdsAddress);
 		price = (TextView) findViewById(R.id.tvAdsPrice);
+		phone = (TextView) findViewById(R.id.tvAdsPhone);
+		category = (TextView) findViewById(R.id.tvAdsCategory);
 		gallery = (Gallery) findViewById(R.id.gallery);
 		
 		List<String> imageUrls = post.getImageUrls();
@@ -57,6 +61,8 @@ public class ViewPostActivity extends Activity {
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
 		price.setText("$"+post.getPrice().toString());
+		phone.setText(post.getContact().getPhone());
+		category.setText(post.getCategory().toString());
 	}
 
 }
