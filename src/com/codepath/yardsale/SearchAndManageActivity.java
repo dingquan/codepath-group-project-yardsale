@@ -38,6 +38,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		
 		// Bind the tabs to the ViewPager
 		 PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+		 tabs.setShouldExpand(true);
 		 tabs.setViewPager(vpPager);
 		 
 		searchResultFragment = (SearchResultFragment)adapterViewPager.getItem(0);
