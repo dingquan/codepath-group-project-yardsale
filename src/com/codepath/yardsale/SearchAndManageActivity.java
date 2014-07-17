@@ -1,7 +1,5 @@
 package com.codepath.yardsale;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,10 +12,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.yardsale.fragment.ManagePostsFragment;
 import com.codepath.yardsale.fragment.SearchResultFragment;
-import com.codepath.yardsale.model.GeoLocation;
-import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
@@ -28,16 +25,21 @@ public class SearchAndManageActivity extends FragmentActivity {
 	FragmentPagerAdapter adapterViewPager;
 	SearchResultFragment searchResultFragment;
 	ManagePostsFragment managePostsFragment;
+	ViewPager vpPager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_and_manage);
 		
-		ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+		vpPager = (ViewPager) findViewById(R.id.vpPager);
 		adapterViewPager = new PagerAdapter(getSupportFragmentManager());
 		vpPager.setAdapter(adapterViewPager);
 		
+		// Bind the tabs to the ViewPager
+		 PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+		 tabs.setViewPager(vpPager);
+		 
 		searchResultFragment = (SearchResultFragment)adapterViewPager.getItem(0);
 		managePostsFragment = (ManagePostsFragment)adapterViewPager.getItem(1);
 	}
@@ -84,6 +86,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 			Log.d("DEBUG", searchStr);
 			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
 			searchResultFragment.searchPostsByCriteria(criteria);
+			vpPager.setCurrentItem(0);
 		}
 	}
 	
