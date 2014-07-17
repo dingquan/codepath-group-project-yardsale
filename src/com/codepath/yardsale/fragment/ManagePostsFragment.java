@@ -1,80 +1,61 @@
-package com.codepath.yardsale;
+package com.codepath.yardsale.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.codepath.yardsale.adapter.AdArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
-
-public class ManagePostsActivity extends Activity {
+public class ManagePostsFragment extends BaseFragment {
 	private static final int REQUEST_CODE_EDIT_POST = 1;
-	private List<Post> posts;
-	private ArrayAdapter<Post> aPosts;
-	private ListView lvAds;
+	private static ManagePostsFragment managePostsFragment;
+
 	private String userId;
 	private SharedPreferences prefs;
-	private PostDao postDao = PostDao.getInstance();
-	private ProgressBar pbLoading;
+	
+	// newInstance constructor for creating fragment with arguments
+	public static ManagePostsFragment newInstance(int page, String title) {
+		if (managePostsFragment == null){
+			managePostsFragment = new ManagePostsFragment();
+			Bundle args = new Bundle();
+			args.putInt("someInt", page);
+			args.putString("someTitle", title);
+			managePostsFragment.setArguments(args);
+		}
+		return managePostsFragment;
+	}
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_manage_posts);
-
-		posts = new ArrayList<Post>();
-		//aPosts = new AdArr;
-		aPosts = new AdArrayAdapter(this, posts);
-		lvAds = (ListView) findViewById(R.id.lvAds);
-		lvAds.setAdapter(aPosts);
-		pbLoading = (ProgressBar)findViewById(R.id.pbLoading);
-
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		
 		lookupOwnUserId();
-		setupHandlers();
 		loadOwnPosts();
+
+		return view;
 	}
 	
 	private void lookupOwnUserId(){
-		prefs = getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
+		prefs = getActivity().getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
 		userId = prefs.getString("userId", "");
 		if (userId.isEmpty()){
 			userId = UUID.randomUUID().toString();
 			prefs.edit().putString("userId", userId).commit();
 		}
-	}
-	
-	private void setupHandlers() {
-
-		lvAds.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Intent i = new Intent(ManagePostsActivity.this,
-						CreatePostActivity.class);
-				i.putExtra("post", JsonUtil.toJson(posts.get(position)));
-				i.putExtra("position", position);
-				startActivityForResult(i, REQUEST_CODE_EDIT_POST);
-			}
-		});
 	}
 	
 	/**
@@ -91,18 +72,19 @@ public class ManagePostsActivity extends Activity {
 	
 	public void OnDelete(View view) {
 		
-		Toast.makeText(this, "Repost", Toast.LENGTH_SHORT).show();
-		int position = lvAds.getPositionForView((View) view.getParent());
+		Toast.makeText(getActivity(), "Repost", Toast.LENGTH_SHORT).show();
+		int position = lvPosts.getPositionForView((View) view.getParent());
 		Post post = posts.get(position);
+		PostDao postDao = PostDao.getInstance();
         postDao.deletePost(post);
         aPosts.remove(post);        
 
     }
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == this.REQUEST_CODE_EDIT_POST){
-			if (resultCode == RESULT_OK){
+			if (resultCode == getActivity().RESULT_OK){
 				if (data == null){
 					return;
 				}
@@ -127,6 +109,7 @@ public class ManagePostsActivity extends Activity {
 
 		@Override
 		protected List<Post> doInBackground(SearchCriteria... criterias) {
+	    	 PostDao postDao = new PostDao();
 	         List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
 	         return posts;
 		}

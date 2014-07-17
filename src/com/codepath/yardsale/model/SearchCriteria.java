@@ -7,6 +7,7 @@ public class SearchCriteria {
 	private GeoLocation location;
 	private String keyword;
 	private String userId;
+	private String nearCity;
 
 	public Category getCategory() {
 		return category;
@@ -54,5 +55,13 @@ public class SearchCriteria {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getNearCity() {
+		return nearCity;
+	}
+
+	public void setNearCity(String nearCity) {
+		this.nearCity = nearCity;
 	}
 }

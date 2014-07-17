@@ -44,7 +44,7 @@ public class SearchResultActivity extends BaseActivity
 	private ListView lvPosts;
 	private ProgressBar pbLoading;
 	
-	private PostDao postDao;
+	private PostDao postDao = PostDao.getInstance();
 
 	private LocationClient locationClient;
 	private Location lastKnownLocation;
@@ -54,7 +54,6 @@ public class SearchResultActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
 
-		postDao = new PostDao();
 		posts = new ArrayList<Post>();
 		aPosts = new PostArrayAdapter(this, posts);
 		lvPosts = (ListView) findViewById(R.id.lvPosts);
@@ -311,7 +310,6 @@ public class SearchResultActivity extends BaseActivity
 
 		@Override
 		protected List<Post> doInBackground(SearchCriteria... criterias) {
-	    	 PostDao postDao = new PostDao();
 	         List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
 	         return posts;
 		}

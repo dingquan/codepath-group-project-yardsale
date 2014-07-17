@@ -58,9 +58,10 @@ public class SearchCriteriaActivity extends Activity {
 
 		criteria.setCategory(Category.fromName(spCategory.getSelectedItem().toString()));
 		String city = etCity.getText().toString();
+		criteria.setNearCity(city);
+		
 		Intent i = new Intent();
 		i.putExtra("search_criteria", JsonUtil.toJson(criteria));
-		i.putExtra("city", city);
 		setResult(RESULT_OK, i);
 		finish();
 	}

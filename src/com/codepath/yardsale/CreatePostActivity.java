@@ -52,7 +52,7 @@ public class CreatePostActivity extends BaseActivity {
 
 	private String userId;
 	private SharedPreferences prefs;
-	private PostDao postDao;
+	private PostDao postDao = PostDao.getInstance();
 	private Post post;
 	
 	private ArrayList<String> names;
@@ -75,8 +75,6 @@ public class CreatePostActivity extends BaseActivity {
 			prefs.edit().putString("userId", userId).commit();
 		}
 		
-		postDao = new PostDao();
-
 		setUpViews();
 
 		// Create an ArrayAdapter using the string array and a default spinner layout
@@ -139,6 +137,10 @@ public class CreatePostActivity extends BaseActivity {
 		String category = post.getCategory().toString();
 		spinner.setSelection(getIndex(spinner, category));
 		
+		renderImages();
+	}
+	
+	public void renderImages(){
 		List<String> imageUrls = post.getImageUrls();
 		if (imageUrls != null && !imageUrls.isEmpty()){
 			gallery.setAdapter(new ImageArrayAdapter(this,post.getImageUrls()));
@@ -147,6 +149,7 @@ public class CreatePostActivity extends BaseActivity {
 		else{
 			gallery.setVisibility(View.GONE);
 		}
+
 	}
 	
 	//Get Spinner Index position
@@ -228,6 +231,9 @@ public class CreatePostActivity extends BaseActivity {
 	
 	
 	public void onSave(MenuItem mi) {
+		
+		savePost();
+		
 		// Prepare data intent
 		Intent data = new Intent();
 		// Pass relevant data back as a result
@@ -273,14 +279,13 @@ public class CreatePostActivity extends BaseActivity {
 			}
 			post.setImageNames(names);
 			post.setImageUrls(urls);			
-			savePost();
 			return post;
 		}
 		
 		@Override
 		protected void onPostExecute(Post result) {
 			post = result;
-			populateData();
+			renderImages();
 			pbLoading.setVisibility(ProgressBar.INVISIBLE);
 			tvUploading.setVisibility(View.INVISIBLE);
 		}

@@ -21,6 +21,14 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 
 public class PostDao {
+	private static PostDao postDao;
+	public static PostDao getInstance(){
+		if (postDao == null){
+			postDao = new PostDao();
+		}
+		return postDao;
+	}
+	
 	public List<Post> findPostsBySearchCriteria(SearchCriteria criteria){
 		List<Post> posts = new ArrayList<Post>();
 		ParseQuery<ParsePost> query = buildQuery(criteria);

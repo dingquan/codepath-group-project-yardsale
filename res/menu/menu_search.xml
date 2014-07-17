@@ -7,7 +7,7 @@
         android:menuCategory="system"
         android:onClick="onSearch"
         android:showAsAction="always"
-        android:title="search">
+        android:title="Search">
     </item>
     <item
         android:id="@+id/action_post"
@@ -15,15 +15,7 @@
         android:menuCategory="system"
         android:onClick="onPost"
         android:showAsAction="always"
-        android:title="post">
-    </item>
-    <item
-        android:id="@+id/action_manage"
-        android:icon="@drawable/ic_action_manage"
-        android:menuCategory="system"
-        android:onClick="onManage"
-        android:showAsAction="always"
-        android:title="post">
+        android:title="Post New Ad">
     </item>
     
 </menu>
