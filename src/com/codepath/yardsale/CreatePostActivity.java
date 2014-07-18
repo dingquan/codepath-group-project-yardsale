@@ -239,7 +239,7 @@ public class CreatePostActivity extends BaseActivity {
 		// Pass relevant data back as a result
 		data.putExtra("post", JsonUtil.toJson(post));
 		data.putExtra("positoin", position);
-
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent

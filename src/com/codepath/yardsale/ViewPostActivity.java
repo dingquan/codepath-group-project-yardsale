@@ -69,6 +69,11 @@ public class ViewPostActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	public void onBackPressed() {
+		finish();
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+		
+	};
 	public void onDelete(MenuItem mi) {
 		//Delete
 		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();

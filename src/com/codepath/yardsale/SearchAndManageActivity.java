@@ -66,6 +66,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		// diag.show(fm, "fragment_search_criteria");
 		Intent i = new Intent(SearchAndManageActivity.this, SearchCriteriaActivity.class);
 		startActivityForResult(i, REQUEST_CODE_SEARCH_CRITERIA);
+		overridePendingTransition(android.R.anim.slide_in_left,R.anim.slideinright);
 	}
 
 	public void onPost(MenuItem mi) {
