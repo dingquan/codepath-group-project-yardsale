@@ -11,7 +11,7 @@
     </item>
     <item
         android:id="@+id/action_post"
-        android:icon="@drawable/ic_action_post"
+        android:icon="@drawable/ic_action_new"
         android:menuCategory="system"
         android:onClick="onPost"
         android:showAsAction="always"
