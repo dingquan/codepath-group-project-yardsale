@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.codepath.yardsale.CreatePostActivity;
-import com.codepath.yardsale.ManagePostsActivity;
 import com.codepath.yardsale.SearchCriteriaActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.GeoLocation;
@@ -109,11 +108,6 @@ public class SearchResultFragment extends BaseFragment implements
 			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
 		}
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
-	}
-
-	public void onManage(MenuItem mi) {
-		Intent i = new Intent(getActivity(), ManagePostsActivity.class);
-		startActivity(i);
 	}
 
 //	@Override

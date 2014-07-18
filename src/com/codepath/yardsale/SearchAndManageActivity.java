@@ -37,12 +37,13 @@ public class SearchAndManageActivity extends FragmentActivity {
 		vpPager.setAdapter(adapterViewPager);
 		
 		// Bind the tabs to the ViewPager
-		 PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-		 tabs.setShouldExpand(true);
-		 tabs.setViewPager(vpPager);
+		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+		tabs.setShouldExpand(true);
+		tabs.setViewPager(vpPager);
 		 
 		searchResultFragment = (SearchResultFragment)adapterViewPager.getItem(0);
 		managePostsFragment = (ManagePostsFragment)adapterViewPager.getItem(1);
+		
 	}
 	
 	@Override
@@ -52,6 +53,13 @@ public class SearchAndManageActivity extends FragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		int fragmentId = getIntent().getIntExtra("fragmentId", 0);
+		vpPager.setCurrentItem(fragmentId);
+	}
+	
 	public void onSearch(MenuItem mi) {
 		// FragmentManager fm = getFragmentManager();
 		// SearchCriteriaDialog diag = SearchCriteriaDialog.newInstance();
@@ -87,13 +95,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 			Log.d("DEBUG", searchStr);
 			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
 			searchResultFragment.searchPostsByCriteria(criteria);
-			vpPager.setCurrentItem(0);
 		}
-	}
-	
-	public void onManage(MenuItem mi) {
-		Intent i = new Intent(SearchAndManageActivity.this, ManagePostsActivity.class);
-		startActivity(i);
 	}
 	
 	public static class PagerAdapter extends FragmentPagerAdapter {

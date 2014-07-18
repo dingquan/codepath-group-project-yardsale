@@ -43,10 +43,18 @@ public class ManagePostsFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		
+
+		return view;
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
 		lookupOwnUserId();
 		loadOwnPosts();
 
-		return view;
 	}
 	
 	private void lookupOwnUserId(){

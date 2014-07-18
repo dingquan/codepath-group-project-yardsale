@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
+import com.codepath.yardsale.fragment.ManagePostsFragment;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 
@@ -72,9 +73,9 @@ public class ViewPostActivity extends Activity {
 		//Delete
 		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
         postDao.deletePost(post);
-        Intent i = new Intent(this,
-        		ManagePostsActivity.class);
-		startActivityForResult(i, REQUEST_CODE_POST_AD);
+        Intent i = new Intent(this,	SearchAndManageActivity.class);
+        i.putExtra("fragmentId", 1);
+		startActivity(i);
 	}
 	private void populateData() {
 		
