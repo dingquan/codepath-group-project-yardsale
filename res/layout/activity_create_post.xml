@@ -32,7 +32,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:text="Uploading Images..."
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:visibility="invisible" />
 
             <ProgressBar
@@ -54,7 +54,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_below="@+id/gallery"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="18px" />
+                android:textSize="20px" />
 
             <EditText
                 android:id="@+id/etTitle"
@@ -65,7 +65,10 @@
                 android:layout_alignParentRight="true"
                 android:ems="10"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="18px"
+                android:layout_marginTop="20dp"
+                android:textSize="28px"
+                android:textStyle="bold"
+                android:textColor="@color/color_text"
                 android:hint="Enter Title" />
 
             <EditText
@@ -77,9 +80,9 @@
                 android:layout_below="@+id/etPhone"
                 android:ems="10"
                 android:hint="Enter Description"
+                android:layout_marginTop="20dp"
                 android:inputType="textMultiLine"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="18px" />
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <EditText
                 android:id="@+id/etLocation"
@@ -90,8 +93,8 @@
                 android:layout_below="@+id/etTitle"
                 android:ems="10"
                 android:hint="Enter Location"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="18px" />
+                android:layout_marginTop="20dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etPrice"
@@ -102,9 +105,9 @@
                 android:layout_below="@+id/etLocation"
                 android:ems="10"
                 android:hint="Enter Price"
+                android:layout_marginTop="20dp"
                 android:inputType="numberDecimal"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="18px" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -115,9 +118,9 @@
                 android:layout_below="@+id/etPrice"
                 android:ems="10"
                 android:hint="Enter Phone #"
+                android:layout_marginTop="20dp"
                 android:inputType="phone"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="18px" >
+                android:textAppearance="?android:attr/textAppearanceSmall" >
 
             </EditText>
 
