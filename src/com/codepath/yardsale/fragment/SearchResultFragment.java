@@ -10,12 +10,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.codepath.yardsale.CreatePostActivity;
 import com.codepath.yardsale.SearchCriteriaActivity;
+import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
@@ -57,6 +63,14 @@ public class SearchResultFragment extends BaseFragment implements
 	}
 
 	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = super.onCreateView(inflater, container, savedInstanceState);
+		setupHandlers();
+		return v;
+	}
+	
+	@Override
 	public void onStart() {
 		super.onStart();
 		// Connect the client.
@@ -73,7 +87,24 @@ public class SearchResultFragment extends BaseFragment implements
 		super.onStop();
 	}
 
+	private void setupHandlers() {
+		lvPosts.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent i = new Intent(getActivity(), ViewPostActivity.class);
+				Post post = posts.get(position);
+				String postStr = JsonUtil.toJson(post);
+				Log.d("DEBUG", "view details of post: " + postStr);
+				i.putExtra("post", postStr);
+				i.putExtra("position", position);
+				startActivity(i);
+			}
+
+		});
+
+	}
 
 	private void searchNearbyRecentPosts(Location location) {
 		SearchCriteria criteria = new SearchCriteria();

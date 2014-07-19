@@ -73,6 +73,9 @@ public class ViewPostActivity extends Activity {
 		//Delete
 		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
         postDao.deletePost(post);
+		Intent i = new Intent();
+		i.putExtra("post", JsonUtil.toJson(post));
+		setResult(RESULT_OK, i);
 		finish();
 	}
 	private void populateData() {

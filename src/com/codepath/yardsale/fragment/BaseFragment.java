@@ -48,27 +48,7 @@ public abstract class BaseFragment extends Fragment {
 		lvPosts.setAdapter(aPosts);
 		pbLoading = (ProgressBar) view.findViewById(R.id.pbLoading);
 
-		setupHandlers();
 		return view;
-	}
-	
-	private void setupHandlers() {
-		lvPosts.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Intent i = new Intent(getActivity(), ViewPostActivity.class);
-				Post post = posts.get(position);
-				String postStr = JsonUtil.toJson(post);
-				Log.d("DEBUG", "view details of post: " + postStr);
-				i.putExtra("post", postStr);
-				i.putExtra("position", position);
-				startActivity(i);
-			}
-
-		});
-
 	}
 	
 	GeoLocation getGeoFromAddress(String strAddress){

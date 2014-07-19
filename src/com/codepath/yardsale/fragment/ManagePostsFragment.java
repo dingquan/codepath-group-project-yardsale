@@ -8,12 +8,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.codepath.yardsale.CreatePostActivity;
+import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
@@ -43,20 +48,32 @@ public class ManagePostsFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		
+		setupHandlers();
+		lookupOwnUserId();
+		loadOwnPosts();
 
 		return view;
 	}
 	
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		
-		lookupOwnUserId();
-		loadOwnPosts();
+	private void setupHandlers() {
+		lvPosts.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent i = new Intent(getActivity(), CreatePostActivity.class);
+				Post post = posts.get(position);
+				String postStr = JsonUtil.toJson(post);
+				Log.d("DEBUG", "edit details of post: " + postStr);
+				i.putExtra("post", postStr);
+				i.putExtra("position", position);
+				startActivity(i);
+			}
+
+		});
 
 	}
-	
+
 	private void lookupOwnUserId(){
 		prefs = getActivity().getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
 		userId = prefs.getString("userId", "");
