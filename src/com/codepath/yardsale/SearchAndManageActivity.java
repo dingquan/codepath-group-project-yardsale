@@ -52,13 +52,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 		inflater.inflate(R.menu.menu_search, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		int fragmentId = getIntent().getIntExtra("fragmentId", 0);
-		vpPager.setCurrentItem(fragmentId);
-	}
 	
 	public void onSearch(MenuItem mi) {
 		// FragmentManager fm = getFragmentManager();

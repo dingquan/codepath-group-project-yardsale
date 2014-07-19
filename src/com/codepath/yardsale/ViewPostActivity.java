@@ -73,9 +73,7 @@ public class ViewPostActivity extends Activity {
 		//Delete
 		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
         postDao.deletePost(post);
-        Intent i = new Intent(this,	SearchAndManageActivity.class);
-        i.putExtra("fragmentId", 1);
-		startActivity(i);
+		finish();
 	}
 	private void populateData() {
 		

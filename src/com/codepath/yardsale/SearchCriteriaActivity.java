@@ -62,7 +62,6 @@ public class SearchCriteriaActivity extends Activity {
 		
 		Intent i = new Intent();
 		i.putExtra("search_criteria", JsonUtil.toJson(criteria));
-		i.putExtra("fragmentId", 0);
 		setResult(RESULT_OK, i);
 		finish();
 	}

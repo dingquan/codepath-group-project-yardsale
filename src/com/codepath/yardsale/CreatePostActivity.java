@@ -201,6 +201,10 @@ public class CreatePostActivity extends BaseActivity {
 	}
 	
 	private void savePost(){
+		if (title.getText().toString().isEmpty()){
+			//todo: show alert dialog
+			return;
+		}
 		//check if the ad is an edit or new
 		post.setUserId(userId);
 		post.setCategory(Category.fromName(spinner.getSelectedItem().toString()));
