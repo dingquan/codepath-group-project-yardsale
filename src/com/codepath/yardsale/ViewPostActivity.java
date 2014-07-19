@@ -69,11 +69,6 @@ public class ViewPostActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	public void onBackPressed() {
-		finish();
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
-		
-	};
 	public void onDelete(MenuItem mi) {
 		//Delete
 		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
@@ -89,7 +84,8 @@ public class ViewPostActivity extends Activity {
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
-		price.setText("$"+post.getPrice().toString());
+		String fprice= String.format("%.2f", post.getPrice());
+		price.setText("$"+fprice);
 		phone.setText(post.getContact().getPhone());
 		category.setText(post.getCategory().toString());
 	}

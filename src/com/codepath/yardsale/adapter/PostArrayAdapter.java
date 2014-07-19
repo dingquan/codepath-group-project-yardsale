@@ -88,7 +88,8 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 			description = description.substring(0, 80) + "...";
 		}
 		holder.description.setText(description);
-		holder.price.setText("$" + post.getPrice().toString());
+		String fprice= String.format("%.2f", post.getPrice());
+		holder.price.setText("$" + fprice);
 		holder.loaction.setText(post.getContact().getAddress());
 		
 		Date date = new Date(post.getCreatedAt());
