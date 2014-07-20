@@ -59,6 +59,14 @@ public class SearchResultFragment extends BaseFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		locationClient = new LocationClient(getActivity(), this, this);
+	}
+	
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = super.onCreateView(inflater, container, savedInstanceState);
+		setupHandlers();
 		// Connect the client.
 		if (isGooglePlayServicesAvailable()) {
 			locationClient.connect();
@@ -66,13 +74,6 @@ public class SearchResultFragment extends BaseFragment implements
 		else{
 			searchNearbyRecentPosts(null);
 		}
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = super.onCreateView(inflater, container, savedInstanceState);
-		setupHandlers();
 		return v;
 	}
 	
