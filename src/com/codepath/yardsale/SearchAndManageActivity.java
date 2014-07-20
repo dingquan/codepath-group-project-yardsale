@@ -82,6 +82,10 @@ public class SearchAndManageActivity extends FragmentActivity {
     	anim.setTarget(mi);
     	anim.start();
 	}
+	
+	public void onRefresh(MenuItem mi){
+		searchResultFragment.refresh();
+	}
 
 
 	@Override

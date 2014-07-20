@@ -40,6 +40,7 @@ public class SearchResultFragment extends BaseFragment implements
 
 	private LocationClient locationClient;
 	private Location lastKnownLocation;
+	private SearchCriteria savedCriteria;
 
 	// newInstance constructor for creating fragment with arguments
 	public static SearchResultFragment newInstance(int page, String title) {
@@ -76,7 +77,9 @@ public class SearchResultFragment extends BaseFragment implements
 		if (isGooglePlayServicesAvailable()) {
 			locationClient.connect();
 		}
-		searchNearbyRecentPosts(lastKnownLocation);
+		else{
+			searchNearbyRecentPosts(null);
+		}
 	}
 
 	@Override
@@ -132,11 +135,9 @@ public class SearchResultFragment extends BaseFragment implements
 		}
 		
 		Log.d("DEBUG", JsonUtil.toJson(criteria));
-		PostDao postDao = PostDao.getInstance();
-		List<Post> results = postDao.findPostsBySearchCriteria(criteria);
-		aPosts.clear();
-		aPosts.addAll(results);
+		pbLoading.setVisibility(ProgressBar.VISIBLE);
 
+		new SearchPostTask().execute(criteria);
 	}
 	
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
@@ -240,7 +241,7 @@ public class SearchResultFragment extends BaseFragment implements
 //					Toast.LENGTH_SHORT).show();
 		}
 
-		// searchNearbyRecentPosts(lastKnownLocation);
+		searchNearbyRecentPosts(lastKnownLocation);
 	}
 
 	@Override
@@ -256,6 +257,7 @@ public class SearchResultFragment extends BaseFragment implements
 
 		@Override
 		protected void onPostExecute(List<Post> posts) {
+			aPosts.clear();
 			aPosts.addAll(posts);
 			pbLoading.setVisibility(ProgressBar.INVISIBLE);
 		}
@@ -263,8 +265,16 @@ public class SearchResultFragment extends BaseFragment implements
 		@Override
 		protected List<Post> doInBackground(SearchCriteria... criterias) {
 			PostDao postDao = PostDao.getInstance();
-			List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
+			SearchCriteria criteria = criterias[0];
+			savedCriteria = criteria;
+			List<Post> posts = postDao.findPostsBySearchCriteria(criteria);
 			return posts;
+		}
+	}
+	
+	public void refresh() {
+		if (savedCriteria != null){
+			searchPostsByCriteria(savedCriteria);
 		}
 	}
 }

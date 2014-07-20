@@ -10,6 +10,14 @@
         android:title="Search">
     </item>
     <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:menuCategory="system"
+        android:onClick="onRefresh"
+        android:showAsAction="always"
+        android:title="Refresh">
+    </item>
+    <item
         android:id="@+id/action_post"
         android:icon="@drawable/ic_action_new"
         android:menuCategory="system"
@@ -17,5 +25,5 @@
         android:showAsAction="always"
         android:title="New Post">
     </item>
-    
+
 </menu>
