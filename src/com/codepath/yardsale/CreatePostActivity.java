@@ -307,5 +307,13 @@ public class CreatePostActivity extends BaseActivity {
 			tvUploading.setVisibility(View.INVISIBLE);
 			
 		}
+
+		
+		public void onBackPressed() {
+	 		finish();
+	 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+	 		
+	 	};
+
 	}
 }

@@ -164,7 +164,16 @@
                 android:text="Category"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="20px" />
-
+ 
+		<ImageView
+	        android:id="@+id/ivSMS"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignTop="@+id/etKeyword"
+	        android:onClick="onSMS"
+	        android:layout_marginTop="20dp"
+	        android:src="@drawable/ic_action_sms" />
         </RelativeLayout>
     </ScrollView>
 

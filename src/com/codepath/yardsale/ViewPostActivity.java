@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class ViewPostActivity extends Activity {
 	TextView price;
 	TextView phone;
 	TextView category;
+	String fprice;
 	private PostDao postDao = PostDao.getInstance();
 	private final int REQUEST_CODE_POST_AD =1;
 	@SuppressWarnings("deprecation")
@@ -61,14 +63,21 @@ public class ViewPostActivity extends Activity {
 		}
 		
 	}
-	
-
+	//Send SMS
+	public void onSMS(View v){
+		
+		String phoneNumber="14082035769";
+		String message ="Title: "+ post.getTitle() +" Price: $"+fprice + " Location: "+post.getContact().getAddress();
+		SmsManager sm = SmsManager.getDefault();
+		sm.sendTextMessage(phoneNumber, null, message, null, null);
+		Toast.makeText(this, "SMS is sent", Toast.LENGTH_SHORT).show();
+	}
 	private void populateData() {
 		
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());
 		location.setText(post.getContact().getAddress());
-		String fprice= String.format("%.2f", post.getPrice());
+		fprice= String.format("%.2f", post.getPrice());
 		price.setText("$"+fprice);
 		phone.setText(post.getContact().getPhone());
 		category.setText(post.getCategory().toString());

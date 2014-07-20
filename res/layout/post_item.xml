@@ -82,6 +82,6 @@
             android:text="@string/title_date"
             android:textAppearance="?android:attr/textAppearanceSmall" 
             android:textSize="20px"/>
-
+       
     </RelativeLayout>
 </LinearLayout>

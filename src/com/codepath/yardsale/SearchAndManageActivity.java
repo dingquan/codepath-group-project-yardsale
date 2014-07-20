@@ -2,6 +2,7 @@ package com.codepath.yardsale;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +10,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.yardsale.fragment.ManagePostsFragment;
@@ -78,6 +82,7 @@ public class SearchAndManageActivity extends FragmentActivity {
     	anim.setTarget(mi);
     	anim.start();
 	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

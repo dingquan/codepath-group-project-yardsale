@@ -6,13 +6,13 @@
     <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/color_text</item>
         
-        <item name="android:textColor">#00FFFF</item>
+        <item name="android:textColor">#F8F8F8</item>
         
     </style>
     <style name="MyCustomTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
 	    <item name="android:textColor">#FFFFFF</item>
 	</style>
   	<style name="MyCustomTheme.ActionBar.Text" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/actionBarText</item>
+        <item name="android:textColor">#F0F0F0</item>
     </style>
 </resources>

@@ -14,7 +14,9 @@
         android:layout_toLeftOf="@+id/ivSearch"
         android:ems="10"
         android:hint="@string/keyword"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:textColor="@color/color_text"/>
 
     <Spinner
         android:id="@+id/spCategory"
@@ -23,6 +25,7 @@
         android:layout_alignLeft="@+id/etKeyword"
         android:layout_below="@+id/etKeyword"
         android:hint="@string/title_category"
+        android:layout_marginTop="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
@@ -33,7 +36,9 @@
         android:layout_below="@+id/spCategory"
         android:ems="5"
         android:hint="@string/min"
-        android:inputType="number" />
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
         android:id="@+id/etCity"
@@ -44,8 +49,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:ems="10"
+        android:layout_marginTop="20dp"
         android:hint="@string/city"
-        android:inputType="text" />
+        android:inputType="text" 
+		android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
         android:id="@+id/ivSearch"
@@ -54,6 +61,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/etKeyword"
         android:onClick="searchPosts"
+        android:layout_marginTop="20dp"
         android:src="@drawable/ic_action_search_dark" />
 
     <EditText
@@ -64,7 +72,9 @@
         android:layout_alignRight="@+id/etKeyword"
         android:ems="6"
         android:hint="@string/max"
-        android:inputType="number" >
+        android:layout_marginTop="20dp"
+        android:inputType="number" 
+        android:textAppearance="?android:attr/textAppearanceSmall">
 
         <requestFocus />
     </EditText>
