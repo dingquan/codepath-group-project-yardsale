@@ -22,5 +22,7 @@
 	<color name ="color_text">#000080</color>
 	<color name="color_price">#fafafa</color>
 	<color name="color_pricebackground">#CC404040</color>
+	<color name="actionBarText">#FFFFFF</color>
+
     <string name="title_activity_search_and_manage">Yard Sale Search Ad</string>
 </resources>
