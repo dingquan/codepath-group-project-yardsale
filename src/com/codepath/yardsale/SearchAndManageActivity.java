@@ -1,5 +1,7 @@
 package com.codepath.yardsale;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,7 +61,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		// diag.show(fm, "fragment_search_criteria");
 		Intent i = new Intent(SearchAndManageActivity.this, SearchCriteriaActivity.class);
 		startActivityForResult(i, REQUEST_CODE_SEARCH_CRITERIA);
-		overridePendingTransition(android.R.anim.slide_in_left,R.anim.slideinright);
+		overridePendingTransition(android.R.anim.slide_in_left,R.anim.slideoutright);
 	}
 
 	public void onPost(MenuItem mi) {
@@ -71,6 +73,9 @@ public class SearchAndManageActivity extends FragmentActivity {
 //			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
 //		}
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
+		Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
+    	anim.setTarget(mi);
+    	anim.start();
 	}
 
 	@Override

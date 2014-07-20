@@ -91,4 +91,9 @@ public class ViewPostActivity extends Activity {
 		category.setText(post.getCategory().toString());
 	}
 
+	public void onBackPressed() {
+ 		finish();
+ 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+ 		
+ 	};
 }

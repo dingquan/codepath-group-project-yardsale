@@ -3,6 +3,8 @@ package com.codepath.yardsale;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -128,7 +130,9 @@ public class MultiPhotoSelectActivity extends Activity {
         returnIntent.putExtra("result",selectedItems);
         setResult(RESULT_OK,returnIntent);
         finish();
-    	
+        Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
+    	anim.setTarget(v);
+    	anim.start();
     }
  
     /*private void startImageGalleryActivity(int position) {

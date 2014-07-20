@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -243,7 +245,7 @@ public class CreatePostActivity extends BaseActivity {
 		// Pass relevant data back as a result
 		data.putExtra("post", JsonUtil.toJson(post));
 		data.putExtra("positoin", position);
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright );
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent
@@ -292,6 +294,7 @@ public class CreatePostActivity extends BaseActivity {
 			renderImages();
 			pbLoading.setVisibility(ProgressBar.INVISIBLE);
 			tvUploading.setVisibility(View.INVISIBLE);
+			
 		}
 		
 	}
