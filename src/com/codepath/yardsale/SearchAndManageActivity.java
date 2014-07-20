@@ -32,6 +32,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 	MenuItem miRefresh;
 	MenuItem miCreate;
 	MenuItem miSearch;
+	
 	ViewPager vpPager;
 	
 	@Override
@@ -74,6 +75,9 @@ public class SearchAndManageActivity extends FragmentActivity {
 					}
 					if (miRefresh != null){
 						miRefresh.setVisible(false);						
+					}
+					if (miSearch != null){
+						miSearch.setVisible(false);
 					}
 				}
 			}

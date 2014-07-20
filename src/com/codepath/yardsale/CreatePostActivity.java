@@ -92,6 +92,7 @@ public class CreatePostActivity extends BaseActivity {
 
 		fetchPostData();
 		if (!isNewPost){
+			getActionBar().setTitle("Edit Post");
 			populateData();
 		}
 		if (locationJson != null && !locationJson.isEmpty()){
