@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,7 +24,6 @@ import android.widget.Gallery;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
@@ -52,6 +49,7 @@ public class CreatePostActivity extends BaseActivity {
 	@SuppressWarnings("unused")
 	private Gallery gallery;
 	private ProgressBar pbLoading;
+	private MenuItem miDelete;
 
 	private String userId;
 	private SharedPreferences prefs;
@@ -100,12 +98,21 @@ public class CreatePostActivity extends BaseActivity {
 			geoLocation = (GeoLocation) JsonUtil.fromJson(locationJson, GeoLocation.class);
 		}
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_ad, menu);
+		miDelete = menu.findItem(R.id.action_delete);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (getIntent().getStringExtra("post") == null){
+			miDelete.setVisible(false); //hide delete button when creating a new post
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 	
 	public void fetchPostData(){

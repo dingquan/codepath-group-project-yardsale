@@ -2,7 +2,6 @@ package com.codepath.yardsale;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,13 +9,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.telephony.SmsManager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.yardsale.fragment.ManagePostsFragment;
@@ -32,6 +29,9 @@ public class SearchAndManageActivity extends FragmentActivity {
 	FragmentPagerAdapter adapterViewPager;
 	SearchResultFragment searchResultFragment;
 	ManagePostsFragment managePostsFragment;
+	MenuItem miRefresh;
+	MenuItem miCreate;
+	
 	ViewPager vpPager;
 	
 	@Override
@@ -47,7 +47,34 @@ public class SearchAndManageActivity extends FragmentActivity {
 		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		tabs.setShouldExpand(true);
 		tabs.setViewPager(vpPager);
-		 
+		
+		tabs.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int position) {
+				if (position == 0){
+					miCreate.setVisible(false);
+					miRefresh.setVisible(true);
+				}
+				else if (position == 1){
+					miCreate.setVisible(true);
+					miRefresh.setVisible(false);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
 		searchResultFragment = (SearchResultFragment)adapterViewPager.getItem(0);
 		managePostsFragment = (ManagePostsFragment)adapterViewPager.getItem(1);
 		
@@ -57,6 +84,9 @@ public class SearchAndManageActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_search, menu);
+		miRefresh = menu.findItem(R.id.action_refresh);
+		miCreate = menu.findItem(R.id.action_post);
+		miCreate.setVisible(false);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
