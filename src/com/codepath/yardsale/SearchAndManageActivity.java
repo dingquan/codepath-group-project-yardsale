@@ -47,6 +47,8 @@ public class SearchAndManageActivity extends FragmentActivity {
 		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		tabs.setShouldExpand(true);
 		tabs.setViewPager(vpPager);
+		tabs.setIndicatorHeight(4);
+		tabs.setIndicatorColor(0xFF000099);
 		
 		tabs.setOnPageChangeListener(new OnPageChangeListener() {
 			
@@ -104,7 +106,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		// diag.show(fm, "fragment_search_criteria");
 		Intent i = new Intent(SearchAndManageActivity.this, SearchCriteriaActivity.class);
 		startActivityForResult(i, REQUEST_CODE_SEARCH_CRITERIA);
-		overridePendingTransition(android.R.anim.slide_in_left,R.anim.slideoutright);
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 	}
 
 	public void onPost(MenuItem mi) {
