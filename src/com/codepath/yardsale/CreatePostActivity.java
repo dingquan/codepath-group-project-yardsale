@@ -278,8 +278,11 @@ public class CreatePostActivity extends BaseActivity {
 				Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
 				// Convert it to byte
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				if (bitmap.getWidth() > 1024){
+					bitmap = Bitmap.createScaledBitmap(bitmap, 1024, 768, false);
+				}
 				// Compress image to lower quality scale 1 - 100
-				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
 				byte[] image = stream.toByteArray();
 				String name = UUID.randomUUID().toString() + ".png";
 				names.add(name);
