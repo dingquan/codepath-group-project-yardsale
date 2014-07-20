@@ -45,41 +45,38 @@
                 android:layout_marginTop="100dp"
                 android:visibility="invisible" />
 
-
-
             <Spinner
                 android:id="@+id/spCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/gallery"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
-                android:layout_below="@+id/gallery"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:layout_marginRight="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spCategory"
                 android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignRight="@+id/spCategory"
+                android:layout_below="@+id/spCategory"
                 android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/color_text"
-                android:hint="Enter Title" />
+                android:ems="10"
+                android:hint="Enter Title"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/etPhone"
                 android:ems="10"
                 android:hint="Enter Description"
                 android:layout_marginTop="20dp"
+                android:layout_alignRight="@+id/etTitle"
                 android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -88,11 +85,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignParentRight="true"
+                android:layout_alignRight="@+id/etTitle"
                 android:layout_below="@+id/etTitle"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="Enter Location"
-                android:layout_marginTop="20dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -100,11 +97,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignParentRight="true"
+                android:layout_alignRight="@+id/etTitle"
                 android:layout_below="@+id/etLocation"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="Enter Price"
-                android:layout_marginTop="20dp"
                 android:inputType="numberDecimal"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -113,11 +110,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/etPrice"
                 android:ems="10"
                 android:hint="Enter Phone #"
                 android:layout_marginTop="20dp"
+                android:layout_alignRight="@+id/etTitle"
                 android:inputType="phone"
                 android:textAppearance="?android:attr/textAppearanceMedium" >
 

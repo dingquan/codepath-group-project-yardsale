@@ -33,8 +33,9 @@
                 android:layout_below="@+id/tvTitleLabel"
                 android:layout_marginTop="20dp"
                 android:text="Price:" 
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20px"
-		        android:textStyle="bold"/>/>
+		        android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvDescriptionLabel"
@@ -46,7 +47,7 @@
                 android:text="Description:" 
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20px"
-		        android:textStyle="bold"/>/>
+		        android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvAdsPrice"
@@ -119,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvDescriptionLabel"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_below="@+id/tvAdsDescription"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
@@ -137,7 +139,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Category" 
                 android:textSize="20px"
-		        android:textStyle="bold"/>>
+		        android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvPhoneLabel"

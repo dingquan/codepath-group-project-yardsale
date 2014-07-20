@@ -31,7 +31,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 	ManagePostsFragment managePostsFragment;
 	MenuItem miRefresh;
 	MenuItem miCreate;
-	
+	MenuItem miSearch;
 	ViewPager vpPager;
 	
 	@Override
@@ -61,10 +61,16 @@ public class SearchAndManageActivity extends FragmentActivity {
 					if (miRefresh != null){
 						miRefresh.setVisible(true);						
 					}
+					if (miSearch != null){
+						miSearch.setVisible(true);
+					}
 				}
 				else if (position == 1){
 					if (miCreate != null){
 						miCreate.setVisible(true);
+					}
+					if (miSearch != null){
+						miSearch.setVisible(false);
 					}
 					if (miRefresh != null){
 						miRefresh.setVisible(false);						
@@ -96,6 +102,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		inflater.inflate(R.menu.menu_search, menu);
 		miRefresh = menu.findItem(R.id.action_refresh);
 		miCreate = menu.findItem(R.id.action_post);
+		miSearch = menu.findItem(R.id.action_search);
 		miCreate.setVisible(false);
 		return super.onCreateOptionsMenu(menu);
 	}

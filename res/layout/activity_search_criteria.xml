@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spCategory"
         android:layout_below="@+id/spCategory"
-        android:ems="5"
+        android:ems="6"
         android:hint="@string/min"
         android:layout_marginTop="20dp"
         android:inputType="number"
