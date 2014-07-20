@@ -32,7 +32,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:text="Uploading Images..."
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#909090"
                 android:visibility="invisible" />
 
@@ -54,7 +54,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_below="@+id/gallery"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
                 android:id="@+id/etTitle"
@@ -64,7 +64,7 @@
                 android:layout_alignLeft="@+id/spCategory"
                 android:layout_alignParentRight="true"
                 android:ems="10"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/color_text"
@@ -81,7 +81,7 @@
                 android:hint="Enter Description"
                 android:layout_marginTop="20dp"
                 android:inputType="textMultiLine"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
                 android:id="@+id/etLocation"
@@ -93,7 +93,7 @@
                 android:ems="10"
                 android:hint="Enter Location"
                 android:layout_marginTop="20dp"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etPrice"
@@ -106,7 +106,7 @@
                 android:hint="Enter Price"
                 android:layout_marginTop="20dp"
                 android:inputType="numberDecimal"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -119,7 +119,7 @@
                 android:hint="Enter Phone #"
                 android:layout_marginTop="20dp"
                 android:inputType="phone"
-                android:textAppearance="?android:attr/textAppearanceSmall" >
+                android:textAppearance="?android:attr/textAppearanceMedium" >
 
             </EditText>
 

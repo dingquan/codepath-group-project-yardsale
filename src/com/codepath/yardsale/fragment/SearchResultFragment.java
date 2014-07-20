@@ -2,6 +2,7 @@ package com.codepath.yardsale.fragment;
 
 import java.util.List;
 
+import android.R.color;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -48,6 +49,7 @@ public class SearchResultFragment extends BaseFragment implements
 			args.putInt("someInt", page);
 			args.putString("someTitle", title);
 			searchResultFragment.setArguments(args);
+			//searchResultFragment.getView().setBackgroundColor(color.holo_orange_dark);
 		}
 		return searchResultFragment;
 	}
@@ -56,6 +58,7 @@ public class SearchResultFragment extends BaseFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		locationClient = new LocationClient(getActivity(), this, this);
+		
 	}
 
 	@Override

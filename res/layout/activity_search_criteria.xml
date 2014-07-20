@@ -14,7 +14,7 @@
         android:layout_toLeftOf="@+id/ivSearch"
         android:ems="10"
         android:hint="@string/keyword"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
         android:textColor="@color/color_text"/>
 
@@ -26,7 +26,7 @@
         android:layout_below="@+id/etKeyword"
         android:hint="@string/title_category"
         android:layout_marginTop="20dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/etMinPrice"
@@ -38,7 +38,7 @@
         android:hint="@string/min"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/etCity"
@@ -52,7 +52,7 @@
         android:layout_marginTop="20dp"
         android:hint="@string/city"
         android:inputType="text" 
-		android:textAppearance="?android:attr/textAppearanceSmall" />
+		android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
         android:id="@+id/ivSearch"
@@ -74,7 +74,7 @@
         android:hint="@string/max"
         android:layout_marginTop="20dp"
         android:inputType="number" 
-        android:textAppearance="?android:attr/textAppearanceSmall">
+        android:textAppearance="?android:attr/textAppearanceMedium">
 
         <requestFocus />
     </EditText>

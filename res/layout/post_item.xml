@@ -45,7 +45,7 @@
             android:layout_below="@+id/tvTitle"
             android:layout_marginTop="5dp"
             android:text="@string/title_description"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="20px" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="@string/price"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/color_price" 
             android:textSize="20px"/>
 
@@ -69,7 +69,7 @@
             android:layout_alignBottom="@+id/ivImage"
             android:layout_alignLeft="@+id/tvDescription"
             android:text="@string/title_location"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="20px" />
 
         <TextView
@@ -80,7 +80,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="14dp"
             android:text="@string/title_date"
-            android:textAppearance="?android:attr/textAppearanceSmall" 
+            android:textAppearance="?android:attr/textAppearanceMedium" 
             android:textSize="20px"/>
        
     </RelativeLayout>
