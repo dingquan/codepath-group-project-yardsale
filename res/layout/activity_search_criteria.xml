@@ -11,21 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_toLeftOf="@+id/ivSearch"
         android:ems="10"
         android:hint="@string/keyword"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold"
-        android:textColor="@color/color_text"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <Spinner
         android:id="@+id/spCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/etKeyword"
+        android:layout_alignRight="@+id/etKeyword"
         android:layout_below="@+id/etKeyword"
-        android:hint="@string/title_category"
         android:layout_marginTop="20dp"
+        android:hint="@string/title_category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -44,25 +44,13 @@
         android:id="@+id/etCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etMinPrice"
         android:layout_below="@+id/etMinPrice"
-        android:layout_alignLeft="@+id/etKeyword"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/ivSearch"
         android:ems="10"
-        android:layout_marginTop="20dp"
         android:hint="@string/city"
-        android:inputType="text" 
-		android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/etKeyword"
-        android:onClick="searchPosts"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_action_search_dark" />
+        android:inputType="text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/etMaxPrice"
@@ -78,5 +66,14 @@
 
         <requestFocus />
     </EditText>
+
+    <ImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spCategory"
+        android:layout_alignParentRight="true"
+        android:onClick="searchPosts"
+        android:src="@drawable/ic_action_search_dark" />
 
 </RelativeLayout>

@@ -47,7 +47,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		tabs.setShouldExpand(true);
 		tabs.setViewPager(vpPager);
-		tabs.setIndicatorHeight(4);
+		tabs.setIndicatorHeight(7);
 		tabs.setIndicatorColor(0xFF000099);
 		
 		tabs.setOnPageChangeListener(new OnPageChangeListener() {

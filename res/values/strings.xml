@@ -25,5 +25,5 @@
 	<color name="color_pricebackground">#CC404040</color>
 	<color name="actionBarText">#3399FF</color>
 	<string name="sms_phone">14082035769</string>
-    <string name="title_activity_search_and_manage">Yard Sale Search</string>
+    <string name="title_activity_search_and_manage">Yard Sale</string>
 </resources>
