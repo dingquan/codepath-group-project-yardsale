@@ -63,8 +63,6 @@ public class MultiPhotoSelectActivity extends Activity {
         }
  
         options = new DisplayImageOptions.Builder()
-            .showStubImage(R.drawable.stub_image)
-            .showImageForEmptyUri(R.drawable.image_for_empty_url)
             .cacheInMemory()
             .cacheOnDisc()
             .build();
