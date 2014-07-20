@@ -59,7 +59,13 @@ public class SearchResultFragment extends BaseFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		locationClient = new LocationClient(getActivity(), this, this);
-		
+		// Connect the client.
+		if (isGooglePlayServicesAvailable()) {
+			locationClient.connect();
+		}
+		else{
+			searchNearbyRecentPosts(null);
+		}
 	}
 
 	@Override
@@ -70,18 +76,6 @@ public class SearchResultFragment extends BaseFragment implements
 		return v;
 	}
 	
-	@Override
-	public void onStart() {
-		super.onStart();
-		// Connect the client.
-		if (isGooglePlayServicesAvailable()) {
-			locationClient.connect();
-		}
-		else{
-			searchNearbyRecentPosts(null);
-		}
-	}
-
 	@Override
 	public void onStop() {
 		// Disconnecting the client invalidates it.

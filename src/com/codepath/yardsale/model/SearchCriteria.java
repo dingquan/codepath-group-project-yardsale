@@ -22,7 +22,7 @@ public class SearchCriteria {
 	}
 
 	public void setMinPrice(Integer minPrice) {
-		this.minPrice = maxPrice;
+		this.minPrice = minPrice;
 	}
 
 	public Integer getMaxPrice() {
