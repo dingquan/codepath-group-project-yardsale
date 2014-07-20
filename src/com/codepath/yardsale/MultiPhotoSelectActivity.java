@@ -1,6 +1,5 @@
 package com.codepath.yardsale;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import android.animation.Animator;
@@ -10,12 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,14 +24,10 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
 
 public class MultiPhotoSelectActivity extends Activity {
     private ArrayList<String> imageUrls;
@@ -85,13 +81,20 @@ public class MultiPhotoSelectActivity extends Activity {
         });*/
     }
  
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_pick_photo, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
     @Override
     protected void onStop() {
         imageLoader.stop();
         super.onStop();
     }
  
-    public void btnChoosePhotosClick(View v){
+    public void onConfirm(MenuItem mi){
  
         ArrayList<String> selectedItems = imageAdapter.getCheckedItems();
 //        Toast.makeText(MultiPhotoSelectActivity.this, "Total photos selected: "+selectedItems.size(), Toast.LENGTH_SHORT).show();
@@ -130,9 +133,9 @@ public class MultiPhotoSelectActivity extends Activity {
         returnIntent.putExtra("result",selectedItems);
         setResult(RESULT_OK,returnIntent);
         finish();
-        Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
-    	anim.setTarget(v);
-    	anim.start();
+//        Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
+//    	anim.setTarget(v);
+//    	anim.start();
     }
  
     /*private void startImageGalleryActivity(int position) {

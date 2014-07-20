@@ -53,12 +53,20 @@ public class SearchAndManageActivity extends FragmentActivity {
 			@Override
 			public void onPageSelected(int position) {
 				if (position == 0){
-					miCreate.setVisible(false);
-					miRefresh.setVisible(true);
+					if (miCreate != null){
+						miCreate.setVisible(false);
+					}
+					if (miRefresh != null){
+						miRefresh.setVisible(true);						
+					}
 				}
 				else if (position == 1){
-					miCreate.setVisible(true);
-					miRefresh.setVisible(false);
+					if (miCreate != null){
+						miCreate.setVisible(true);
+					}
+					if (miRefresh != null){
+						miRefresh.setVisible(false);						
+					}
 				}
 			}
 

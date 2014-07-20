@@ -13,16 +13,6 @@
         android:horizontalSpacing="4dip"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:layout_above="@+id/button1"
         android:verticalSpacing="2dip" />
- 
-    <Button
-        android:id="@+id/button1"
-        android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:onClick="btnChoosePhotosClick"
-        android:text="Select Photos" />
  
 </RelativeLayout>

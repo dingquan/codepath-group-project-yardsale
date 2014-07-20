@@ -17,7 +17,7 @@
     <string name="max">Max Price</string>
     <string name="city">Near City</string>
     <string name="keyword">Keyword</string>
-    <string name="title_activity_multi_photo_select">MultiPhotoSelectActivity</string>
+    <string name="title_activity_multi_photo_select">Select Photos</string>
     <string name="hello_world">Hello world!</string>
     <color name="color_background">#F0F8FF</color>
 	<color name ="color_text">#000099</color>
