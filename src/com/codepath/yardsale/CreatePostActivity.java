@@ -26,6 +26,7 @@ import android.widget.Gallery;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
@@ -226,7 +227,6 @@ public class CreatePostActivity extends BaseActivity {
 		post.setLocation(geoLocation);
 		
 		postDao.savePost(post);
-
 	}
 	
 	// Trigger gallery selection for a photo
@@ -235,6 +235,16 @@ public class CreatePostActivity extends BaseActivity {
 		startActivityForResult(i, 1);
 	}
 	
+	public void onDelete(MenuItem mi) {
+		//Delete
+        postDao.deletePost(post);
+		Intent i = new Intent();
+		i.putExtra("post", JsonUtil.toJson(post));
+		i.putExtra("positoin", position);
+		i.putExtra("action", "delete");
+		setResult(RESULT_OK, i);
+		finish();
+	}
 	
 	public void onSave(MenuItem mi) {
 		
@@ -245,7 +255,8 @@ public class CreatePostActivity extends BaseActivity {
 		// Pass relevant data back as a result
 		data.putExtra("post", JsonUtil.toJson(post));
 		data.putExtra("positoin", position);
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright );
+		data.putExtra("action", "save");
+//		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent
@@ -296,6 +307,5 @@ public class CreatePostActivity extends BaseActivity {
 			tvUploading.setVisibility(View.INVISIBLE);
 			
 		}
-		
 	}
 }

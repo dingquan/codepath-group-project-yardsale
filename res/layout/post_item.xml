@@ -13,12 +13,13 @@
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="112dp"
-            android:layout_height="84dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/mini" />
 
@@ -49,7 +50,7 @@
 
         <TextView
             android:id="@+id/tvPrice"
-            android:layout_width="112dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivImage"
             android:layout_alignLeft="@+id/ivImage"
@@ -65,8 +66,7 @@
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvPrice"
-            android:layout_alignBottom="@+id/tvPrice"
+            android:layout_alignBottom="@+id/ivImage"
             android:layout_alignLeft="@+id/tvDescription"
             android:text="@string/title_location"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -76,7 +76,6 @@
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tvLocation"
             android:layout_alignBottom="@+id/tvLocation"
             android:layout_alignParentRight="true"
             android:layout_marginRight="14dp"

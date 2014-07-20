@@ -62,25 +62,8 @@ public class ViewPostActivity extends Activity {
 		
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_delete, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
 
-	public void onDelete(MenuItem mi) {
-		//Delete
-		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
-        postDao.deletePost(post);
-		Intent i = new Intent();
-		i.putExtra("post", JsonUtil.toJson(post));
-		setResult(RESULT_OK, i);
-		finish();
-	}
 	private void populateData() {
-		
-//		Toast.makeText(this, "Read post: " + post.getTitle(), Toast.LENGTH_SHORT).show();
 		
 		title.setText(post.getTitle());
 		description.setText(post.getDescription());

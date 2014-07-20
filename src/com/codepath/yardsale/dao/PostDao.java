@@ -19,6 +19,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 public class PostDao {
 	private static PostDao postDao;
@@ -98,9 +99,21 @@ public class PostDao {
 		}
 	}
 	
-	public void savePost(Post post) {
-		ParsePost parsePost = new ParsePost(post);
-		parsePost.saveInBackground();
+	public void savePost(final Post post) {
+		final ParsePost parsePost = new ParsePost(post);
+		parsePost.saveInBackground(new SaveCallback(){
+
+			@Override
+			public void done(ParseException e) {
+			     if (e == null) {
+			         post.setId(parsePost.getObjectId());
+			       } else {
+			         Log.e("ERROR", e.getMessage());
+			     }
+			}
+			
+		});		
+
 	}
 	
 	/**

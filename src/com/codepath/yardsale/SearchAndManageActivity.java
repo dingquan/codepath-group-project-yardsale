@@ -17,12 +17,13 @@ import android.view.MenuItem;
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.yardsale.fragment.ManagePostsFragment;
 import com.codepath.yardsale.fragment.SearchResultFragment;
+import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
 public class SearchAndManageActivity extends FragmentActivity {
-	private static final int REQUEST_CODE_CREATE_POST = 1;
-	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
+	public static final int REQUEST_CODE_CREATE_POST = 1;
+	public static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
 
 	FragmentPagerAdapter adapterViewPager;
 	SearchResultFragment searchResultFragment;
@@ -81,11 +82,12 @@ public class SearchAndManageActivity extends FragmentActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_CODE_CREATE_POST) {
-			// nothing much to do here really.
-
-			// String postStr = data.getExtras().getString("post");
-			// Toast.makeText(this, "returned from create post" +
-			// postStr,Toast.LENGTH_SHORT).show();
+			if (resultCode == RESULT_OK){
+				String postStr = data.getExtras().getString("post");
+				Post newPost = (Post)JsonUtil.fromJson(postStr, Post.class);
+				managePostsFragment.addPost(newPost);
+				vpPager.setCurrentItem(1);
+			}
 		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
 			if (data == null){
 				return; //noop. user hit backbutton
@@ -94,6 +96,10 @@ public class SearchAndManageActivity extends FragmentActivity {
 			Log.d("DEBUG", searchStr);
 			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
 			searchResultFragment.searchPostsByCriteria(criteria);
+			vpPager.setCurrentItem(0);
+		}
+		else{
+			super.onActivityResult(requestCode, resultCode, data);
 		}
 	}
 	

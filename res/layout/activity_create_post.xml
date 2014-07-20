@@ -33,6 +33,7 @@
                 android:layout_marginTop="30dp"
                 android:text="Uploading Images..."
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#909090"
                 android:visibility="invisible" />
 
             <ProgressBar
@@ -53,8 +54,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_below="@+id/gallery"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="20px" />
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <EditText
                 android:id="@+id/etTitle"
@@ -64,9 +64,8 @@
                 android:layout_alignLeft="@+id/spCategory"
                 android:layout_alignParentRight="true"
                 android:ems="10"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_marginTop="20dp"
-                android:textSize="28px"
                 android:textStyle="bold"
                 android:textColor="@color/color_text"
                 android:hint="Enter Title" />

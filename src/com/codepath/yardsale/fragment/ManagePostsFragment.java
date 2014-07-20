@@ -13,19 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ProgressBar;
 
 import com.codepath.yardsale.CreatePostActivity;
-import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
 public class ManagePostsFragment extends BaseFragment {
-	private static final int REQUEST_CODE_EDIT_POST = 1;
+	private static final int REQUEST_CODE_EDIT_POST = 3;
 	private static ManagePostsFragment managePostsFragment;
 
 	private String userId;
@@ -67,7 +65,7 @@ public class ManagePostsFragment extends BaseFragment {
 				Log.d("DEBUG", "edit details of post: " + postStr);
 				i.putExtra("post", postStr);
 				i.putExtra("position", position);
-				startActivity(i);
+				startActivityForResult(i, REQUEST_CODE_EDIT_POST);
 			}
 
 		});
@@ -95,30 +93,26 @@ public class ManagePostsFragment extends BaseFragment {
         
 	}
 	
-	public void OnDelete(View view) {
-		
-		Toast.makeText(getActivity(), "Repost", Toast.LENGTH_SHORT).show();
-		int position = lvPosts.getPositionForView((View) view.getParent());
-		Post post = posts.get(position);
-		PostDao postDao = PostDao.getInstance();
-        postDao.deletePost(post);
-        aPosts.remove(post);        
-
-    }
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == this.REQUEST_CODE_EDIT_POST){
+		if (requestCode == REQUEST_CODE_EDIT_POST){
 			if (resultCode == getActivity().RESULT_OK){
 				if (data == null){
 					return;
 				}
 				String postStr = data.getExtras().getString("post");
 				int position = data.getExtras().getInt("position");
-				if (postStr == null)
-					return;
-				Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
-				posts.set(position, post);
+				String action = data.getExtras().getString("action");
+				if ("save".equals(action)){
+					if (postStr == null)
+						return;
+					Post post = (Post) JsonUtil.fromJson(postStr, Post.class);
+					posts.set(position, post);
+				}
+				else if ("delete".equals(action)){
+					posts.remove(position);
+				}
 				aPosts.notifyDataSetChanged();
 			}
 		}
@@ -138,5 +132,10 @@ public class ManagePostsFragment extends BaseFragment {
 	         List<Post> posts = postDao.findPostsBySearchCriteria(criterias[0]);
 	         return posts;
 		}
+	}
+
+	public void addPost(Post newPost) {
+		aPosts.insert(newPost, 0);
+		aPosts.notifyDataSetChanged();
 	}
 }

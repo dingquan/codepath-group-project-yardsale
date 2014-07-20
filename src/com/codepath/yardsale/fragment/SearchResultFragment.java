@@ -11,16 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ProgressBar;
 
-import com.codepath.yardsale.CreatePostActivity;
-import com.codepath.yardsale.SearchCriteriaActivity;
 import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.GeoLocation;
@@ -38,8 +34,8 @@ public class SearchResultFragment extends BaseFragment implements
 	
 	private static SearchResultFragment searchResultFragment;
 	
-	private static final int REQUEST_CODE_CREATE_POST = 1;
-	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
+	public static final int REQUEST_CODE_CREATE_POST = 1;
+	public static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
 
 	private LocationClient locationClient;
 	private Location lastKnownLocation;
@@ -122,53 +118,6 @@ public class SearchResultFragment extends BaseFragment implements
 		new SearchPostTask().execute(criteria);
 	}
 
-	public void onSearch(MenuItem mi) {
-		// FragmentManager fm = getFragmentManager();
-		// SearchCriteriaDialog diag = SearchCriteriaDialog.newInstance();
-		// diag.show(fm, "fragment_search_criteria");
-		Intent i = new Intent(getActivity(), SearchCriteriaActivity.class);
-		startActivityForResult(i, REQUEST_CODE_SEARCH_CRITERIA);
-	}
-
-	public void onPost(MenuItem mi) {
-		Intent i = new Intent(getActivity(), CreatePostActivity.class);
-		if (lastKnownLocation != null) {
-			GeoLocation geoLocation = new GeoLocation();
-			geoLocation.setLatitude(lastKnownLocation.getLatitude());
-			geoLocation.setLongitude(lastKnownLocation.getLongitude());
-			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
-		}
-		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
-	}
-
-//	@Override
-//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		if (requestCode == REQUEST_CODE_CREATE_POST) {
-//			// nothing much to do here really.
-//
-//			// String postStr = data.getExtras().getString("post");
-//			// Toast.makeText(this, "returned from create post" +
-//			// postStr,Toast.LENGTH_SHORT).show();
-//		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
-//			if (data == null) {
-//				return; // noop. user hit backbutton
-//			}
-//			String searchStr = data.getExtras().getString("search_criteria");
-//			String city = data.getExtras().getString("city");
-//			GeoLocation geoLocation = getGeoFromAddress(city);
-//			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(
-//					searchStr, SearchCriteria.class);
-//			criteria.setLocation(geoLocation);
-//			Log.d("DEBUG", JsonUtil.toJson(criteria));
-//			List<Post> results = postDao.findPostsBySearchCriteria(criteria);
-//			aPosts.clear();
-//			aPosts.addAll(results);
-//		} else if (requestCode == CONNECTION_FAILURE_RESOLUTION_REQUEST) {
-//			if (resultCode == getActivity().RESULT_OK) {
-//
-//			}
-//		}
-//	}
 
 	public void searchPostsByCriteria(SearchCriteria criteria){
 		if (criteria == null)
@@ -275,17 +224,17 @@ public class SearchResultFragment extends BaseFragment implements
 	public void onConnected(Bundle dataBundle) {
 		lastKnownLocation = locationClient.getLastLocation();
 		if (lastKnownLocation != null) {
-			Toast.makeText(
-					getActivity(),
-					"GPS location was found! ("
-							+ lastKnownLocation.getLatitude() + ", "
-							+ lastKnownLocation.getLongitude() + ")",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(
+//					getActivity(),
+//					"GPS location was found! ("
+//							+ lastKnownLocation.getLatitude() + ", "
+//							+ lastKnownLocation.getLongitude() + ")",
+//					Toast.LENGTH_SHORT).show();
 
 		} else {
-			Toast.makeText(getActivity(),
-					"Current location was null, enable GPS on emulator!",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getActivity(),
+//					"Current location was null, enable GPS on emulator!",
+//					Toast.LENGTH_SHORT).show();
 		}
 
 		// searchNearbyRecentPosts(lastKnownLocation);
@@ -294,8 +243,8 @@ public class SearchResultFragment extends BaseFragment implements
 	@Override
 	public void onDisconnected() {
 		// Display the connection status
-		Toast.makeText(getActivity(), "Disconnected. Please re-connect.",
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getActivity(), "Disconnected. Please re-connect.",
+//				Toast.LENGTH_SHORT).show();
 
 	}
 

@@ -7,7 +7,7 @@
         android:menuCategory="system"
         android:onClick="onPickPhoto"
         android:showAsAction="always"
-        android:title="photo">
+        android:title="Select Photo">
     </item>
     <item
         android:id="@+id/action_save"
@@ -15,6 +15,14 @@
         android:menuCategory="system"
         android:onClick="onSave"
         android:showAsAction="always"
-        android:title="save">
+        android:title="Save">
+    </item>
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_action_delete"
+        android:menuCategory="system"
+        android:onClick="onDelete"
+        android:showAsAction="always"
+        android:title="Delete">
     </item>
 </menu>

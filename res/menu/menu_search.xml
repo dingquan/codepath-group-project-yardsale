@@ -15,7 +15,7 @@
         android:menuCategory="system"
         android:onClick="onPost"
         android:showAsAction="always"
-        android:title="Post New Ad">
+        android:title="New Post">
     </item>
     
 </menu>
