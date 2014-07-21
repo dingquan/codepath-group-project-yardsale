@@ -5,6 +5,14 @@
         android:id="@+id/action_photo"
         android:icon="@drawable/ic_photo"
         android:menuCategory="system"
+        android:onClick="onLaunchCamera"
+        android:showAsAction="always"
+        android:title="Take Photo">
+    </item>
+    <item
+        android:id="@+id/action_attachPhoto"
+        android:icon="@drawable/ic_attachphoto"
+        android:menuCategory="system"
         android:onClick="onPickPhoto"
         android:showAsAction="always"
         android:title="Select Photo">

@@ -1,6 +1,7 @@
 package com.codepath.yardsale;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +14,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +29,7 @@ import android.widget.Gallery;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
 import com.codepath.yardsale.dao.PostDao;
@@ -40,6 +46,9 @@ public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
 	public final static String REQUEST_CODE_EDIT_ADS ="0";
+	public final String APP_TAG = "MyCustomApp";
+	public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+	public String photoFileName ;
 	private Spinner spinner;
 	private TextView title;
 	private TextView description;
@@ -200,18 +209,32 @@ public class CreatePostActivity extends BaseActivity {
 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		List<String> result = new ArrayList<String>();
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
-				List<String> result = (List<String>) data.getSerializableExtra("result");
-				pbLoading.setVisibility(ProgressBar.VISIBLE);
-				tvUploading.setVisibility(View.VISIBLE);
-				gallery.setVisibility(View.INVISIBLE);
-				new SaveImagesTask().execute(result);
+				result = (List<String>) data.getSerializableExtra("result");
+				
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
 			}
-		}
+		}else if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+		       if (resultCode == RESULT_OK) {
+			         Uri takenPhotoUri = getPhotoFileUri(photoFileName);
+			         result.add(takenPhotoUri.getPath());
+			         // by this point we have the camera photo on disk
+			         //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
+			         // Load the taken image into a preview
+			         //ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
+			         //ivPreview.setImageBitmap(takenImage);   
+			       } else { // Result was a failure
+			    	   Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+			       }
+			    }
+		pbLoading.setVisibility(ProgressBar.VISIBLE);
+		tvUploading.setVisibility(View.VISIBLE);
+		gallery.setVisibility(View.INVISIBLE);
+		new SaveImagesTask().execute(result);
 	}
 	
 	private void savePost(){
@@ -240,9 +263,8 @@ public class CreatePostActivity extends BaseActivity {
 		postDao.savePost(post);
 		ParsePush push = new ParsePush();
 		push.setChannel(tag.getText().toString());
-		push.setMessage("Your widhList item "+tag.getText().toString()+" has just arrived !!");
-		push.sendInBackground();
-
+		push.setMessage("Your wishList item "+tag.getText().toString()+" has just arrived !!");
+		
 	}
 	
 	// Trigger gallery selection for a photo
@@ -260,6 +282,32 @@ public class CreatePostActivity extends BaseActivity {
 		i.putExtra("action", "delete");
 		setResult(RESULT_OK, i);
 		finish();
+	}
+	
+	public void onLaunchCamera(MenuItem mi) {
+	    // create Intent to take a picture and return control to the calling application
+		photoFileName = UUID.randomUUID().toString()+".png";
+	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
+	    // Start the image capture intent to take photo
+	    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+
+	
+
+	// Returns the Uri for a photo stored on disk given the fileName
+	public Uri getPhotoFileUri(String fileName) {
+	    // Get safe storage directory for photos
+	    File mediaStorageDir = new File(
+	        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), APP_TAG);
+
+	    // Create the storage directory if it does not exist
+	    if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+	        Log.d(APP_TAG, "failed to create directory");
+	    }
+
+	    // Return the file target for the photo based on filename
+	    return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + fileName));
 	}
 	
 	public void onSave(MenuItem mi) {
@@ -283,6 +331,11 @@ public class CreatePostActivity extends BaseActivity {
 		@Override
 		protected Post doInBackground(List<String>... args) {
 			List<String> result = args[0];
+			if(result.size()>0){
+				Log.d("CreatePostActivity do in background","is not empty");
+			}else{
+				Log.d("CreatePostActivity do in background","is empty");
+			}
 			for (int i = 0; i < result.size(); i++) {
 				Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
 				// Convert it to byte
