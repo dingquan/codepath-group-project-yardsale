@@ -55,9 +55,9 @@ public class ImageArrayAdapter extends ArrayAdapter<String> {
 			Log.d("ViewPostACtivity Imageloader", imageLoader.toString());
 
 			Log.d("Image set at ", String.valueOf(position));
-			i.setLayoutParams(new Gallery.LayoutParams(700, 500));
-			i.setScaleType(ImageView.ScaleType.FIT_XY);
-			i.setBackgroundResource(mGalleryItemBackground);
+			i.setLayoutParams(new Gallery.LayoutParams(Gallery.LayoutParams.MATCH_PARENT, Gallery.LayoutParams.WRAP_CONTENT));
+			i.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//			i.setBackgroundResource(mGalleryItemBackground);
 			imageLoader.displayImage(url, i);
 		}
 

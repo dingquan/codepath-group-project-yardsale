@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -53,6 +54,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 		tabs.setViewPager(vpPager);
 		tabs.setIndicatorHeight(7);
 		tabs.setIndicatorColor(0xFF000099);
+		tabs.setDividerColor(0x00ffffff);
 		
 		tabs.setOnPageChangeListener(new OnPageChangeListener() {
 			
