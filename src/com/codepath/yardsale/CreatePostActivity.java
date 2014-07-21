@@ -35,6 +35,7 @@ import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParsePush;
 public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
@@ -46,6 +47,7 @@ public class CreatePostActivity extends BaseActivity {
 	private TextView price;
 	private TextView phone;
 	private TextView tvUploading;
+	private TextView tag;
 	@SuppressWarnings("unused")
 	private Gallery gallery;
 	private ProgressBar pbLoading;
@@ -192,6 +194,7 @@ public class CreatePostActivity extends BaseActivity {
 		gallery = (Gallery) findViewById(R.id.gallery);
 		pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 		tvUploading = (TextView) findViewById(R.id.tvUploading);
+		tag = (TextView) findViewById(R.id.etTag);
 	}
 	
 
@@ -235,6 +238,11 @@ public class CreatePostActivity extends BaseActivity {
 		post.setLocation(geoLocation);
 		
 		postDao.savePost(post);
+		ParsePush push = new ParsePush();
+		push.setChannel(tag.getText().toString());
+		push.setMessage("Your widhList item "+tag.getText().toString()+" has just arrived !!");
+		push.sendInBackground();
+
 	}
 	
 	// Trigger gallery selection for a photo

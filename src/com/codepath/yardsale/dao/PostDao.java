@@ -11,15 +11,18 @@ import android.util.Log;
 
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
+import com.codepath.yardsale.dao.parse.WishList;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
+import com.codepath.yardsale.model.WishItems;
 import com.codepath.yardsale.util.JsonUtil;
+import com.parse.DeleteCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
+import com.parse.PushService;
 
 public class PostDao {
 	private static PostDao postDao;
@@ -99,21 +102,15 @@ public class PostDao {
 		}
 	}
 	
-	public void savePost(final Post post) {
-		final ParsePost parsePost = new ParsePost(post);
-		parsePost.saveInBackground(new SaveCallback(){
-
-			@Override
-			public void done(ParseException e) {
-			     if (e == null) {
-			         post.setId(parsePost.getObjectId());
-			       } else {
-			         Log.e("ERROR", e.getMessage());
-			     }
-			}
-			
-		});		
-
+	public void savePost(Post post) {
+		ParsePost parsePost = new ParsePost(post);
+		parsePost.saveInBackground();
+	}
+	
+	public void saveWish(WishItems item) {
+		WishList wishItem = new WishList(item);
+		wishItem.saveInBackground();
+		
 	}
 	
 	/**
@@ -223,5 +220,37 @@ public class PostDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public ArrayList<WishItems> getWishListItems(String userId) throws ParseException {
+		ArrayList<WishList>wishList = new ArrayList<WishList>();
+		ArrayList<WishItems> result = new ArrayList<WishItems>();
+		ParseQuery<WishList> query = ParseQuery.getQuery(WishList.class);
+		query.whereEqualTo("userId", userId);
+		wishList = (ArrayList<WishList>) query.find();
+		
+		for(WishList eachWish : wishList){
+			System.out.println("PostDao eachWish-->>" + eachWish.getItem() + eachWish.getObjectId());
+			WishItems eachItem = eachWish.toWishItems();
+			System.out.println("PostDao getWishlistItems eachitem-->> "+ eachItem.getId());
+			result.add(eachItem);
+		}
+		return result;
+	}
+
+	public void deleteWish(ArrayList<WishItems> itemsTodelete) {
+		for(WishItems eachitem : itemsTodelete){
+			System.out.println("PostDao Item to delete-->"+eachitem.getItem()+eachitem.getId());
+			WishList item = new WishList(eachitem);
+			System.out.println("postDao wishlist item to delete"+ item.getItem()+item.getObjectId());
+			item.deleteInBackground(new DeleteCallback() {
+				
+				@Override
+				public void done(ParseException arg0) {
+					System.out.println(arg0);
+				}
+			});
+		}
+		
 	}
 }

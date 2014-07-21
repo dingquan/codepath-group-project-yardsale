@@ -25,5 +25,13 @@
         android:showAsAction="always"
         android:title="New Post">
     </item>
+    <item
+        android:id="@+id/action_wishlist"
+        android:icon="@drawable/ic_action_wish"
+        android:menuCategory="system"
+        android:onClick="onAddingWish"
+        android:showAsAction="always"
+        android:title="Adda a wish item">
+    </item>
 
 </menu>

@@ -94,7 +94,7 @@
 
             <EditText
                 android:id="@+id/etPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
                 android:layout_alignRight="@+id/etTitle"
@@ -104,6 +104,20 @@
                 android:hint="Enter Price"
                 android:inputType="numberDecimal"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/etTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/etPrice"
+                android:layout_alignParentRight="true"
+                android:ems="10"
+                android:hint="Tag"
+                android:layout_below="@+id/etLocation"
+                android:layout_marginLeft="30dp"
+                android:inputType="text"
+                android:textAppearance="?android:attr/textAppearanceMedium" >
+
+            </EditText>
 
             <EditText
                 android:id="@+id/etPhone"

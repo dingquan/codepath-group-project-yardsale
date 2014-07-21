@@ -15,16 +15,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.yardsale.fragment.ManagePostsFragment;
 import com.codepath.yardsale.fragment.SearchResultFragment;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
+import com.parse.ParseAnalytics;
 
 public class SearchAndManageActivity extends FragmentActivity {
-	public static final int REQUEST_CODE_CREATE_POST = 1;
-	public static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
+	private static final int REQUEST_CODE_CREATE_POST = 1;
+	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
+	private static final int REQUEST_CODE_ADD_WISH = 3;
 
 	FragmentPagerAdapter adapterViewPager;
 	SearchResultFragment searchResultFragment;
@@ -97,6 +100,8 @@ public class SearchAndManageActivity extends FragmentActivity {
 
 		searchResultFragment = (SearchResultFragment)adapterViewPager.getItem(0);
 		managePostsFragment = (ManagePostsFragment)adapterViewPager.getItem(1);
+		ParseAnalytics.trackAppOpened(getIntent());
+
 		
 	}
 	
@@ -110,6 +115,8 @@ public class SearchAndManageActivity extends FragmentActivity {
 		miCreate.setVisible(false);
 		return super.onCreateOptionsMenu(menu);
 	}
+	
+	
 	
 	public void onSearch(MenuItem mi) {
 		// FragmentManager fm = getFragmentManager();
@@ -132,6 +139,11 @@ public class SearchAndManageActivity extends FragmentActivity {
 		Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
     	anim.setTarget(mi);
     	anim.start();
+	}
+
+   public void onAddingWish(MenuItem mi) {
+		Intent i = new Intent(SearchAndManageActivity.this, WishListActivity.class);
+		startActivityForResult(i, REQUEST_CODE_ADD_WISH);
 	}
 	
 	public void onRefresh(MenuItem mi){

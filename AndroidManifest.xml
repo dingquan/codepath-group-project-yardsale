@@ -13,7 +13,21 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.codepath.yardsale.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.codepath.yardsale.permission.C2D_MESSAGE" />
+
+<uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:name=".YardSaleApplication"
         android:allowBackup="true"
@@ -41,6 +55,10 @@
             android:label="@string/title_activity_multi_photo_select" >
         </activity>
         <activity
+            android:name=".WishListActivity"
+            android:label="@string/title_activity_wish_list" >
+        </activity>
+        <activity
             android:name=".SearchAndManageActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -49,6 +67,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="com.parse.PushService" />
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+           <intent-filter>
+           <action android:name="android.intent.action.BOOT_COMPLETED" />
+           <action android:name="android.intent.action.USER_PRESENT" />
+           </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.GcmBroadcastReceiver"
+           android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+ 
+    
+            <category android:name="com.codepath.yardsale" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
