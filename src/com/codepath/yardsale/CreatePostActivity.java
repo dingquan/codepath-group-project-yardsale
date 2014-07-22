@@ -260,10 +260,7 @@ public class CreatePostActivity extends BaseActivity {
 		}
 		post.setLocation(geoLocation);
 		
-		postDao.savePost(post);
-		ParsePush push = new ParsePush();
-		push.setChannel(tag.getText().toString());
-		push.setMessage("Your wishList item "+tag.getText().toString()+" has just arrived !!");
+		postDao.savePost(post,tag.getText().toString());
 		
 	}
 	

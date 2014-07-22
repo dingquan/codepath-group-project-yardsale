@@ -27,6 +27,7 @@
 	<string name="sms_phone">14082035769</string>
     <string name="title_activity_search_and_manage">Yard Sale</string>
     <string name="title_activity_wish_list">My Wish List</string>
-    
-    
+    <string name="title_activity_notificationacrivity">Notificationacrivity</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+
 </resources>

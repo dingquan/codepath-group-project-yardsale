@@ -12,20 +12,25 @@ import android.util.Log;
 import com.codepath.yardsale.dao.parse.ParseImages;
 import com.codepath.yardsale.dao.parse.ParsePost;
 import com.codepath.yardsale.dao.parse.WishList;
+import com.codepath.yardsale.model.Category;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.model.WishItems;
 import com.codepath.yardsale.util.JsonUtil;
+import com.google.gson.JsonObject;
 import com.parse.DeleteCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.PushService;
+import com.parse.SaveCallback;
 
 public class PostDao {
 	private static PostDao postDao;
+	private String tag;
 	public static PostDao getInstance(){
 		if (postDao == null){
 			postDao = new PostDao();
@@ -66,6 +71,12 @@ public class PostDao {
 				queries.add(descQuery);
 				query = ParseQuery.or(queries);
 			}
+			if(c.getTitle() != null){
+				query = query.whereEqualTo("title", c.getTitle());
+			}
+			if(c.getDescription() !=null){
+				query = query.whereEqualTo("description", c.getDescription());
+			}
 			if (c.getCategory() != null) {
 				query = query.whereEqualTo("category", c.getCategory().name());
 			}
@@ -98,13 +109,42 @@ public class PostDao {
 
 	public void savePosts(List<Post> posts){
 		for (Post post: posts){
-			savePost(post);
+			savePost(post,null);
 		}
 	}
 	
-	public void savePost(Post post) {
+	public void savePost(Post post, String tag) {
 		ParsePost parsePost = new ParsePost(post);
 		parsePost.saveInBackground();
+		SearchCriteria criteria = new SearchCriteria();
+		criteria.setUserId(parsePost.getUserId());
+		criteria.setTitle(parsePost.getTitle());
+		criteria.setDescription(parsePost.getDescription());
+		List<Post> result = new ArrayList<Post>();
+		result = findPostsBySearchCriteria(criteria);
+		JSONObject data =  new JSONObject();
+		if(result.size()==1){
+			String postStr = JsonUtil.toJson(result.get(0));
+			Log.d("PostDao notification obj DEBUG", "view details of post: " + postStr);
+			//i.putExtra("post", postStr);
+			try {
+				data.put("post",postStr );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 ParsePush push = new ParsePush();
+			 push.setChannel(tag);
+			 push.setData(data);
+			push.setMessage("Your wishList item "+tag+" has just arrived !!");
+			
+			
+		}else{
+			Log.d("PostDao savePost","more then  result");
+		}
+		
+		
+       
 	}
 	
 	public void saveWish(WishItems item) {

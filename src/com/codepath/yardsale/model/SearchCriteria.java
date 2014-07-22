@@ -8,6 +8,16 @@ public class SearchCriteria {
 	private String keyword;
 	private String userId;
 	private String nearCity;
+	private String Title;
+	private String description;
+
+	public String getTitle() {
+		return Title;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
 
 	public Category getCategory() {
 		return category;
@@ -23,6 +33,14 @@ public class SearchCriteria {
 
 	public void setMinPrice(Integer minPrice) {
 		this.minPrice = minPrice;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getMaxPrice() {
