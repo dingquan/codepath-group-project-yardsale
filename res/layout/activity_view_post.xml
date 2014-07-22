@@ -33,8 +33,7 @@
                 android:layout_below="@+id/tvTitleLabel"
                 android:layout_marginTop="20dp"
                 android:text="Price:" 
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px"
+                android:textAppearance="?android:attr/textAppearanceSmall"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -45,8 +44,7 @@
                 android:layout_below="@+id/tvAdsPrice"
                 android:layout_marginTop="20dp"
                 android:text="Description:" 
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px"
+                android:textAppearance="?android:attr/textAppearanceSmall"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -56,8 +54,7 @@
                 android:layout_alignBaseline="@+id/tvPriceLabel"
                 android:layout_alignBottom="@+id/tvPriceLabel"
                 android:layout_alignLeft="@+id/tvAdsTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Price" />
 
             <TextView
@@ -67,8 +64,7 @@
                 android:layout_alignBaseline="@+id/tvAddressLabel"
                 android:layout_alignBottom="@+id/tvAddressLabel"
                 android:layout_alignLeft="@+id/tvAdsPrice"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px"
+				android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Address" />
 
             <TextView
@@ -78,8 +74,8 @@
                 android:layout_below="@+id/gallery"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="25dp"
-                android:text="Title:" 
-		        android:textSize="28px"
+                android:text="Title:"    
+		        android:textAppearance="?android:attr/textAppearanceSmall"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -92,7 +88,7 @@
                 android:layout_marginTop="25dp"
                 android:text="Title" 
                 android:textColor="@color/color_text"
-		        android:textSize="28px"
+		        android:textAppearance="?android:attr/textAppearanceMedium"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -103,8 +99,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/tvDescriptionLabel"
                 android:layout_marginRight="5dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+
                 android:text="Description" />
 
             <TextView
@@ -112,12 +108,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvDescriptionLabel"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_below="@+id/tvAdsDescription"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Address:" 
-                android:textSize="20px"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -128,9 +123,9 @@
                 android:layout_below="@+id/tvPhoneLabel"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Category" 
-                android:textSize="20px"
+
 		        android:textStyle="bold"/>
 
             <TextView
@@ -140,9 +135,8 @@
                 android:layout_alignLeft="@+id/tvAddressLabel"
                 android:layout_below="@+id/tvAdsAddress"
                 android:layout_marginTop="20dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Phone" 
-                android:textSize="20px"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Phone"
 		        android:textStyle="bold"/>
 
             <TextView
@@ -152,8 +146,8 @@
                 android:layout_above="@+id/tvAdsCategory"
                 android:layout_alignLeft="@+id/tvAdsAddress"
                 android:text="Phone"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+ 			/>
 
             <TextView
                 android:id="@+id/tvAdsCategory"
@@ -164,8 +158,8 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Category"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20px" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+ />
  
 
         </RelativeLayout>

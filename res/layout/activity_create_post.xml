@@ -53,7 +53,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etTitle"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="Enter Title"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etDescription"
@@ -78,7 +78,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_alignRight="@+id/etTitle"
                 android:inputType="textMultiLine"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <EditText
                 android:id="@+id/etLocation"
@@ -90,7 +90,7 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="Enter Location"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etPrice"
@@ -103,7 +103,7 @@
                 android:ems="10"
                 android:hint="Enter Price"
                 android:inputType="numberDecimal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
             <EditText
                 android:id="@+id/etTag"
                 android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
                 android:layout_below="@+id/etLocation"
                 android:layout_marginLeft="30dp"
                 android:inputType="text"
-                android:textAppearance="?android:attr/textAppearanceMedium" >
+                android:textAppearance="?android:attr/textAppearanceSmall" >
 
             </EditText>
 
@@ -130,7 +130,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_alignRight="@+id/etTitle"
                 android:inputType="phone"
-                android:textAppearance="?android:attr/textAppearanceMedium" >
+                android:textAppearance="?android:attr/textAppearanceSmall" >
 
             </EditText>
 
