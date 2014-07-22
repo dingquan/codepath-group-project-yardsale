@@ -22,7 +22,7 @@
     </style>
 
     <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/actionBarText</item>
+
         <item name="android:textColor">#F8F8F8</item>
     </style>
 
