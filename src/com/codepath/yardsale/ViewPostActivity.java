@@ -28,6 +28,7 @@ public class ViewPostActivity extends Activity {
 	TextView phone;
 	TextView category;
 	String fprice;
+	MenuItem miSMS;
 	private PostDao postDao = PostDao.getInstance();
 	private final int REQUEST_CODE_POST_AD =1;
 	@SuppressWarnings("deprecation")
@@ -43,6 +44,14 @@ public class ViewPostActivity extends Activity {
 		
 		setupViews();
 		populateData();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_view, menu);
+		miSMS = menu.findItem(R.id.action_sms);
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	private void setupViews() {
@@ -64,7 +73,7 @@ public class ViewPostActivity extends Activity {
 		
 	}
 	//Send SMS
-	public void onSMS(View v){
+	public void onSMS(MenuItem mi){
 		
 		String phoneNumber="14082035769";
 		String message ="Title: "+ post.getTitle() +" Price: $"+fprice + " Location: "+post.getContact().getAddress();
