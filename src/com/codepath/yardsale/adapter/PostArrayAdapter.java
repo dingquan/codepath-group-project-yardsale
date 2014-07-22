@@ -45,6 +45,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 			holder = (ViewHolder) v.getTag();
 		}
 		
+		holder.image.setImageResource(R.color.transparent);
 		
 		List<String> postUrl = post.getImageUrls();
 		
@@ -56,32 +57,32 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 			
 			
 		}else{
-			String ctgry = post.getCategory().name();
-			System.out.println("PostArrayAdapter-->>"+ctgry);
-			if(ctgry.equals("TOYS_GAMES")){
-				holder.image.setImageResource(R.drawable.ic_toys);
-			}else if(ctgry.equals("FURNITURE")){
-				holder.image.setImageResource(R.drawable.ic_furniture);
-			}else if(ctgry.equals("ELECTRONICS")){
-				holder.image.setImageResource(R.drawable.ic_electronics);
-			}else if(ctgry.equals("CLOTHING_ACCESSRIES")){
-				holder.image.setImageResource(R.drawable.ic_clothing);
-			}else if(ctgry.equals("BOOKS_MAGAZINES")){
-				holder.image.setImageResource(R.drawable.ic_books);
-			}else if(ctgry.equals("COMPUTERS")){
-				holder.image.setImageResource(R.drawable.ic_computers);
-			}else if(ctgry.equals("APPLIANCES")){
-				holder.image.setImageResource(R.drawable.ic_appliances);
-			}else if(ctgry.equals("CARS")){
-				holder.image.setImageResource(R.drawable.ic_cars);
-			}else{
-				holder.image.setImageResource(R.drawable.ic_cells);
-			}
+			holder.image.setImageResource(R.drawable.ic_no_photo);
+//			String ctgry = post.getCategory().name();
+//			System.out.println("PostArrayAdapter-->>"+ctgry);
+//			if(ctgry.equals("TOYS_GAMES")){
+//				holder.image.setImageResource(R.drawable.ic_toys);
+//			}else if(ctgry.equals("FURNITURE")){
+//				holder.image.setImageResource(R.drawable.ic_furniture);
+//			}else if(ctgry.equals("ELECTRONICS")){
+//				holder.image.setImageResource(R.drawable.ic_electronics);
+//			}else if(ctgry.equals("CLOTHING_ACCESSRIES")){
+//				holder.image.setImageResource(R.drawable.ic_clothing);
+//			}else if(ctgry.equals("BOOKS_MAGAZINES")){
+//				holder.image.setImageResource(R.drawable.ic_books);
+//			}else if(ctgry.equals("COMPUTERS")){
+//				holder.image.setImageResource(R.drawable.ic_computers);
+//			}else if(ctgry.equals("APPLIANCES")){
+//				holder.image.setImageResource(R.drawable.ic_appliances);
+//			}else if(ctgry.equals("CARS")){
+//				holder.image.setImageResource(R.drawable.ic_cars);
+//			}else{
+//				holder.image.setImageResource(R.drawable.ic_cells);
+//			}
 		}
 		
 		
 		//ImageLoader imageLoader = ImageLoader.getInstance();
-		Log.d("PostArrayAdapter title-->>",post.getTitle());
 		holder.title.setText(post.getTitle());
 		String description = post.getDescription();
 		if (description.length() > 80){
