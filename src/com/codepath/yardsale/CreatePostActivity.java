@@ -239,7 +239,7 @@ public class CreatePostActivity extends BaseActivity {
 	
 	private void savePost(){
 		if (title.getText().toString().isEmpty()){
-			//todo: show alert dialog
+			//TODO: show alert dialog
 			return;
 		}
 		//check if the ad is an edit or new
@@ -314,9 +314,12 @@ public class CreatePostActivity extends BaseActivity {
 		// Prepare data intent
 		Intent data = new Intent();
 		// Pass relevant data back as a result
-		data.putExtra("post", JsonUtil.toJson(post));
-		data.putExtra("positoin", position);
+		if (post.getTitle() != null && !post.getTitle().isEmpty()){
+			data.putExtra("post", JsonUtil.toJson(post));
+			data.putExtra("position", position);
+		}
 		data.putExtra("action", "save");
+		
 //		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response

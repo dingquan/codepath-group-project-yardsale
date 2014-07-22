@@ -158,8 +158,10 @@ public class SearchAndManageActivity extends FragmentActivity {
 		if (requestCode == REQUEST_CODE_CREATE_POST) {
 			if (resultCode == RESULT_OK){
 				String postStr = data.getExtras().getString("post");
-				Post newPost = (Post)JsonUtil.fromJson(postStr, Post.class);
-				managePostsFragment.addPost(newPost);
+				if (postStr != null && !postStr.isEmpty()){
+					Post newPost = (Post)JsonUtil.fromJson(postStr, Post.class);
+					managePostsFragment.addPost(newPost);
+				}
 				vpPager.setCurrentItem(1);
 			}
 		} else if (requestCode == REQUEST_CODE_SEARCH_CRITERIA) {
