@@ -52,10 +52,10 @@ public class WishListadapter extends ArrayAdapter<WishItems> {
 	     public void onClick(View v) {  
 	      CheckBox cb = (CheckBox) v ;  
 	      WishItems item =  (WishItems) cb.getTag();  
-	      Toast.makeText(getContext(),
-	       "Clicked on Checkbox: " + cb.getText() +
-	       " is " + cb.isChecked(), 
-	       Toast.LENGTH_LONG).show();
+//	      Toast.makeText(getContext(),
+//	       "Clicked on Checkbox: " + cb.getText() +
+//	       " is " + cb.isChecked(), 
+//	       Toast.LENGTH_LONG).show();
 	      item.setSelected(cb.isChecked());
 	     }  
 	    });  

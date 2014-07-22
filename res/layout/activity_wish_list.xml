@@ -7,40 +7,42 @@
 
     <EditText
         android:id="@+id/etWishItem"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/btnAdd"
         android:inputType="text"
-        android:ems="10" >
-        
-        </EditText>
+        android:textAppearance="?android:attr/textAppearanceSmall" >
+
+    </EditText>
 
     <Button
         android:id="@+id/btnAdd"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etWishItem"
         android:layout_alignBottom="@+id/etWishItem"
-        android:layout_toRightOf="@+id/etWishItem"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_button"
+        android:minHeight="36dp"
         android:onClick="AddItem"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="10dp"
-        android:text="Button" />
+        android:text="Add" />
 
     <ListView
         android:id="@+id/lvWishItems"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/etWishItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/etWishItem"
+        android:layout_alignParentTop="true"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentTop="true" >
-
+        android:textAppearance="?android:attr/textAppearanceSmall" >
     </ListView>
-    
+
 </RelativeLayout>
