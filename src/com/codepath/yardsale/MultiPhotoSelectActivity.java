@@ -197,6 +197,9 @@ public class MultiPhotoSelectActivity extends Activity {
             CheckBox mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
 
+            //set it to a transparent image first to get rid of the flickering effect
+            imageView.setImageResource(R.color.transparent);
+            
             imageLoader.displayImage("file://"+imageUrls.get(position), imageView, options, new SimpleImageLoadingListener() {
             	@Override
                 public void onLoadingComplete(String imageUri,View v,Bitmap loadedImage) {

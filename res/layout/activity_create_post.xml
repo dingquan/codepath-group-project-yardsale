@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" 
-    android:background="@color/color_background" >
+    android:background="@color/color_background"
+    tools:context="${relativePackage}.${activityClass}" >
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -47,12 +47,12 @@
 
             <Spinner
                 android:id="@+id/spCategory"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/gallery"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
@@ -66,19 +66,6 @@
                 android:ems="10"
                 android:hint="Enter Title"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <EditText
-                android:id="@+id/etDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/spCategory"
-                android:layout_below="@+id/etPhone"
-                android:ems="10"
-                android:hint="Enter Description"
-                android:layout_marginTop="20dp"
-                android:layout_alignRight="@+id/etTitle"
-                android:inputType="textMultiLine"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <EditText
                 android:id="@+id/etLocation"
@@ -104,36 +91,47 @@
                 android:hint="Enter Price"
                 android:inputType="numberDecimal"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-            <EditText
-                android:id="@+id/etTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/etPrice"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:hint="Tag"
-                android:layout_below="@+id/etLocation"
-                android:layout_marginLeft="30dp"
-                android:inputType="text"
-                android:textAppearance="?android:attr/textAppearanceSmall" >
-
-            </EditText>
 
             <EditText
                 android:id="@+id/etPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/spCategory"
+                android:layout_alignRight="@+id/etTitle"
                 android:layout_below="@+id/etPrice"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:hint="Enter Phone #"
-                android:layout_marginTop="20dp"
-                android:layout_alignRight="@+id/etTitle"
                 android:inputType="phone"
                 android:textAppearance="?android:attr/textAppearanceSmall" >
-
             </EditText>
 
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/spCategory"
+                android:layout_alignRight="@+id/etTitle"
+                android:layout_below="@+id/etPhone"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Enter Description"
+                android:inputType="textMultiLine"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/etTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/spCategory"
+                android:layout_alignRight="@+id/etTitle"
+                android:layout_below="@+id/etDescription"
+				android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Tag"
+                android:inputType="text"
+                android:textAppearance="?android:attr/textAppearanceSmall" >
+            </EditText>
         </RelativeLayout>
     </ScrollView>
 

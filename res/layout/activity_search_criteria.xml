@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="18sp"
+        android:layout_marginLeft="20dp"
         android:layout_toLeftOf="@+id/ivSearch"
         android:ems="10"
         android:hint="@string/keyword"
@@ -24,7 +24,7 @@
         android:layout_alignLeft="@+id/etKeyword"
         android:layout_alignRight="@+id/etKeyword"
         android:layout_below="@+id/etKeyword"
-        android:layout_marginTop="18sp"
+        android:layout_marginTop="20dp"
         android:hint="@string/title_category"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -36,7 +36,7 @@
         android:layout_below="@+id/spCategory"
         android:ems="6"
         android:hint="@string/min"
-        android:layout_marginTop="18sp"
+        android:layout_marginTop="20dp"
         android:inputType="number"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -47,6 +47,7 @@
         android:layout_alignLeft="@+id/etMinPrice"
         android:layout_below="@+id/etMinPrice"
         android:layout_toLeftOf="@+id/ivSearch"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/city"
         android:inputType="text"
@@ -60,7 +61,7 @@
         android:layout_alignRight="@+id/etKeyword"
         android:ems="6"
         android:hint="@string/max"
-        android:layout_marginTop="18sp"
+        android:layout_marginTop="20dp"
         android:inputType="number" 
         android:textAppearance="?android:attr/textAppearanceSmall">
 

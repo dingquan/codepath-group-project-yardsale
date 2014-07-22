@@ -124,7 +124,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Category" 
+                android:text="Category:" 
 
 		        android:textStyle="bold"/>
 
@@ -136,7 +136,7 @@
                 android:layout_below="@+id/tvAdsAddress"
                 android:layout_marginTop="20dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Phone"
+                android:text="Phone:"
 		        android:textStyle="bold"/>
 
             <TextView
