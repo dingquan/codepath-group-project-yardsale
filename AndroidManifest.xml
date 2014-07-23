@@ -45,24 +45,39 @@
         <activity
             android:name=".ViewPostActivity"
             android:label="@string/title_activity_view_post" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchAndManageActivity" />
         </activity>
         <activity
             android:name=".CreatePostActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_create_post" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchAndManageActivity" />
         </activity>
         <activity
             android:name=".SearchCriteriaActivity"
             android:label="@string/title_activity_search_criteria" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchAndManageActivity" />
         </activity>
         <activity
             android:name=".MultiPhotoSelectActivity"
             android:label="@string/title_activity_multi_photo_select" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CreatePostActivity" />
         </activity>
         <activity
             android:name=".WishListActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_wish_list" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchAndManageActivity" />
         </activity>
         <activity
             android:name=".SearchAndManageActivity"

@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,11 +90,12 @@ public class CreatePostActivity extends BaseActivity {
 		
 		setUpViews();
 
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		String[] categoryNames = Category.getNames();
 		Arrays.sort(categoryNames);
 		List<String> categories = new ArrayList<String>();
-		categories.add("Select Category"); //the "Any" option
 		categories.addAll(Arrays.asList(categoryNames));
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -129,6 +131,17 @@ public class CreatePostActivity extends BaseActivity {
 			miDelete.setVisible(false); //hide delete button when creating a new post
 		}
 		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	public void fetchPostData(){

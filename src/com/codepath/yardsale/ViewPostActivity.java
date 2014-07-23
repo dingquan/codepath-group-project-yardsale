@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,6 +44,7 @@ public class ViewPostActivity extends Activity {
 		post = (Post) JsonUtil.fromJson(postJson, Post.class);
 		
 		setupViews();
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		populateData();
 	}
 	
@@ -52,6 +54,17 @@ public class ViewPostActivity extends Activity {
 		inflater.inflate(R.menu.menu_view, menu);
 		miSMS = menu.findItem(R.id.action_sms);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	private void setupViews() {
