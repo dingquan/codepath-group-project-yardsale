@@ -31,8 +31,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="18sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/color_text"
             android:textStyle="bold" />
 
