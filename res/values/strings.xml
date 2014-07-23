@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Yard Sale</string>
+    <string name="app_name">Trading Post</string>
     <string name="title_activity_view_post">View Post</string>
     <string name="title_activity_create_post">New Post</string>
     <string name="title_activity_edit_post">Edit Post</string>
