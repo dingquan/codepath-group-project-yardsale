@@ -90,7 +90,7 @@ public class WishListActivity extends Activity {
 	
 	
 	public void AddItem(View v){
-		String item = wishItem.getText().toString();
+		String item = wishItem.getText().toString().trim();
 		if(ParseInstallation.getCurrentInstallation() == null){
 			System.out.println("ParseInstallation is null");
 		}else{
@@ -105,7 +105,7 @@ public class WishListActivity extends Activity {
 		adapter.clear();
 		items.add(newwishItem);
 		adapter.addAll(items);
-		wishItem.setText(" ");
+		wishItem.setText("");
 		adapter.notifyDataSetChanged();
 				
 		
