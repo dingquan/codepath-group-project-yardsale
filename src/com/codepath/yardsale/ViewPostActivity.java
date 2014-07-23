@@ -94,6 +94,6 @@ public class ViewPostActivity extends Activity {
 
 	public void onBackPressed() {
  		finish();
- 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+ 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
  	};
 }

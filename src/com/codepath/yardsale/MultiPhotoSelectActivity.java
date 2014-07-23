@@ -186,6 +186,11 @@ public class MultiPhotoSelectActivity extends Activity {
         public long getItemId(int position) {
             return position;
         }
+        
+        public void onBackPressed() {
+	 		finish();
+	 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+	 	};
  
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

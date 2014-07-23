@@ -31,7 +31,8 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivImage"
             android:text="Title"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="18sp"
             android:textColor="@color/color_text"
             android:textStyle="bold" />
 
@@ -43,6 +44,7 @@
             android:layout_below="@+id/tvTitle"
             android:layout_marginTop="5dp"
             android:text="@string/title_description"
+            android:textSize="10sp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             />
 
@@ -54,7 +56,6 @@
             android:layout_alignLeft="@+id/ivImage"
             android:background="@color/color_pricebackground"
             android:gravity="center"
-            android:paddingLeft="10dp"
             android:text="@string/price"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/color_price" 

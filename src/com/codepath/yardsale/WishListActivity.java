@@ -130,4 +130,9 @@ public class WishListActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+	
+	public void onBackPressed() {
+ 		finish();
+ 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+ 	};
 }

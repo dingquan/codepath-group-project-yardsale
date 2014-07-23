@@ -65,4 +65,9 @@ public class SearchCriteriaActivity extends Activity {
 		setResult(RESULT_OK, i);
 		finish();
 	}
+	
+	public void onBackPressed() {
+ 		finish();
+ 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+ 	};
 }
