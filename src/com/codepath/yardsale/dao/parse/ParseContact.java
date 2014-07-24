@@ -48,7 +48,8 @@ public class ParseContact extends ParseObject {
 	}
 	
 	public void setCity(String city){
-		put("city", city);
+		if (city != null)
+			put("city", city);
 	}
 	
 	public String getState(){
@@ -56,6 +57,7 @@ public class ParseContact extends ParseObject {
 	}
 	
 	public void setState(String state){
-		put("state", state);
+		if (state != null)
+			put("state", state);
 	}
 }

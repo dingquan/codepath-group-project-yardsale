@@ -2,8 +2,10 @@ package com.codepath.yardsale;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.telephony.SmsManager;
@@ -16,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.yardsale.adapter.ImageArrayAdapter;
-import com.codepath.yardsale.dao.PostDao;
-import com.codepath.yardsale.fragment.ManagePostsFragment;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.util.JsonUtil;
 
@@ -30,8 +30,7 @@ public class ViewPostActivity extends Activity {
 	TextView category;
 	String fprice;
 	MenuItem miSMS;
-	private PostDao postDao = PostDao.getInstance();
-	private final int REQUEST_CODE_POST_AD =1;
+
 	@SuppressWarnings("deprecation")
 	Gallery gallery;
 	
@@ -40,14 +39,36 @@ public class ViewPostActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_post);
-		String postJson = getIntent().getStringExtra("post");
-		post = (Post) JsonUtil.fromJson(postJson, Post.class);
+		fetchPostData();
 		
 		setupViews();
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		populateData();
 	}
 	
+	/**
+	 * The activity is launched either from the search result view or notification
+	 * @return
+	 */
+	private void fetchPostData() {
+		// check to see if it's launched from SearchAndManageActivity list view
+		String postJson = getIntent().getStringExtra("post");
+		if (postJson != null){
+			post = (Post) JsonUtil.fromJson(postJson, Post.class);
+			return;
+		}
+		String notificationData = getIntent().getStringExtra("com.parse.Data");
+		if (notificationData != null){
+			try {
+				JSONObject json = new JSONObject(notificationData);
+				post = (Post) JsonUtil.fromJson(json.getString("post"), Post.class);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();

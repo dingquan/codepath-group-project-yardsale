@@ -98,8 +98,7 @@ public class WishListActivity extends Activity {
 		 adapter.clear();
 		 adapter.addAll(items);
 		 adapter.notifyDataSetChanged();
-		    
-		    
+
 	}
 	
 	
@@ -111,7 +110,7 @@ public class WishListActivity extends Activity {
 			System.out.println("parseInstallation not null"+ParseInstallation.getCurrentInstallation());
 		}
 
-		PushService.subscribe(getBaseContext(), item, WishListActivity.class);
+		PushService.subscribe(getBaseContext(), item, ViewPostActivity.class);
 		WishItems newwishItem = new WishItems();
 		newwishItem.setItem(item);
 		newwishItem.setUserId(userId);
