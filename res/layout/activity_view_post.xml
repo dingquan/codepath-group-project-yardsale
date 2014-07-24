@@ -23,7 +23,8 @@
                 android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvPriceLabel"
@@ -146,8 +147,7 @@
                 android:layout_above="@+id/tvAdsCategory"
                 android:layout_alignLeft="@+id/tvAdsAddress"
                 android:text="Phone"
-                android:textAppearance="?android:attr/textAppearanceSmall"
- 			/>
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/tvAdsCategory"
