@@ -106,8 +106,17 @@ public class ViewPostActivity extends Activity {
 		}
 		
 	}
+	//Share post
+	public void onSMS(MenuItem mi)
+	{
+		String message = "Title: "+ post.getTitle() +" Price: $"+fprice + " Location: "+post.getContact().getAddress();
+		Intent share = new Intent(Intent.ACTION_SEND);
+		share.setType("text/plain");
+		share.putExtra(Intent.EXTRA_TEXT, message);
+		startActivity(Intent.createChooser(share, "Share Post"));
+	}
 	//Send SMS
-	public void onSMS(MenuItem mi){
+	public void onSMS_notused(MenuItem mi){
 		
 		String phoneNumber="14082035769";
 		String message ="Title: "+ post.getTitle() +" Price: $"+fprice + " Location: "+post.getContact().getAddress();
