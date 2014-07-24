@@ -3,8 +3,11 @@ package com.codepath.yardsale.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -47,6 +50,13 @@ public abstract class BaseFragment extends Fragment{
 		return view;
 	}
 	
+	protected Boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+	}
+
 	GeoLocation getGeoFromAddress(String strAddress){
 		Geocoder coder = new Geocoder(getActivity());
 		List<Address> address;

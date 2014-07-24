@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
 
@@ -59,7 +60,6 @@ public class ManagePostsFragment extends BaseFragment implements SwipeRefreshLay
 		setupHandlers();
 		lookupOwnUserId();
 		loadOwnPosts(true);
-
 		return view;
 	}
 	
@@ -105,6 +105,11 @@ public class ManagePostsFragment extends BaseFragment implements SwipeRefreshLay
 	 * load posts created by self
 	 */
 	private void loadOwnPosts(boolean showProgressBar) {
+		if (!isNetworkAvailable()){
+			Toast.makeText(getActivity(), "Oops! Looks like you have zero bar. Please check your network settings.", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setUserId(userId);
 		

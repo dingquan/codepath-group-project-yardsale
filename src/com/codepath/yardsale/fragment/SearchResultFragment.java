@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
 
@@ -98,6 +99,12 @@ public class SearchResultFragment extends BaseFragment implements
 
 	@Override 
 	public void onRefresh() {
+		if (!isNetworkAvailable()){
+			Toast.makeText(getActivity(), "Oops! Looks like you have zero bar. Please check your network settings.", Toast.LENGTH_LONG).show();
+			slSwipeLayout.setRefreshing(false);
+			return;
+		}
+
         new Handler().post(new Runnable() {
             @Override public void run() {
             	refresh();
@@ -127,6 +134,11 @@ public class SearchResultFragment extends BaseFragment implements
 	}
 
 	private void searchNearbyRecentPosts(Location location) {
+		if (!isNetworkAvailable()){
+			Toast.makeText(getActivity(), "Oops! Looks like you have zero bar. Please check your network settings.", Toast.LENGTH_LONG).show();
+			return;
+		}
+
 		SearchCriteria criteria = new SearchCriteria();
 		if (location != null) {
 			GeoLocation geoLocation = new GeoLocation();
@@ -146,6 +158,7 @@ public class SearchResultFragment extends BaseFragment implements
 	public void searchPostsByCriteria(SearchCriteria criteria, boolean showProgressBar){
 		if (criteria == null)
 			return;
+				
 		String nearCity = criteria.getNearCity();
 		if (nearCity != null && !nearCity.isEmpty()){
 			GeoLocation geoLocation = getGeoFromAddress(nearCity);
