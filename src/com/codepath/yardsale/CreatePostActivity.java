@@ -2,6 +2,7 @@ package com.codepath.yardsale;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,6 +63,7 @@ public class CreatePostActivity extends BaseActivity {
 	private TextView price;
 	private TextView phone;
 	private TextView tvUploading;
+	private ImageView ivLocate;
 	@SuppressWarnings("unused")
 	private Gallery gallery;
 	private ProgressBar pbLoading;
@@ -75,11 +81,17 @@ public class CreatePostActivity extends BaseActivity {
 	private boolean isNewPost = false;
 	private boolean imagesChanged = false;
 	private Integer position;
+	private Location lastKnownLocation;
+	
+	private Geocoder geoCoder;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		
+		lastKnownLocation = getIntent().getParcelableExtra("location");
+		geoCoder = new Geocoder(this);
 		
 		prefs = getSharedPreferences("com.codepath.yardsale", Context.MODE_PRIVATE);
 		userId = prefs.getString("userId", "");
@@ -143,6 +155,24 @@ public class CreatePostActivity extends BaseActivity {
 	        return true;
 	    }
 	    return super.onOptionsItemSelected(item);
+	}
+	
+	public void onLocate(View v){
+		if (lastKnownLocation != null){
+			List<Address> addresses;
+			try {
+				addresses = geoCoder.getFromLocation(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1);
+				if (addresses.size() > 0){
+					Address addr = addresses.get(0);
+					location.setText(addr.getAddressLine(0) + ", " + addr.getLocality() + ", " + addr.getAdminArea());
+					return;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		Toast.makeText(this, "Location unavailable. Please enter address manually.", Toast.LENGTH_SHORT).show();
 	}
 	
 	public void fetchPostData(){
@@ -221,6 +251,7 @@ public class CreatePostActivity extends BaseActivity {
 		gallery = (Gallery) findViewById(R.id.gallery);
 		pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 		tvUploading = (TextView) findViewById(R.id.tvUploading);
+		ivLocate = (ImageView) findViewById(R.id.ivLocate);
 	}
 	
 

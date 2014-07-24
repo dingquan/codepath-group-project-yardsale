@@ -137,12 +137,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 
 	public void onPost(MenuItem mi) {
 		Intent i = new Intent(SearchAndManageActivity.this, CreatePostActivity.class);
-//		if (lastKnownLocation != null){
-//			GeoLocation geoLocation = new GeoLocation();
-//			geoLocation.setLatitude(lastKnownLocation.getLatitude());
-//			geoLocation.setLongitude(lastKnownLocation.getLongitude());
-//			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
-//		}
+		i.putExtra("location", searchResultFragment.getLastKnownLocation());
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 	}

@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -46,7 +47,6 @@ public class SearchResultFragment extends BaseFragment implements
 	private SearchCriteria savedCriteria;
 	private SwipeRefreshLayout slSwipeLayout;
 
-
 	// newInstance constructor for creating fragment with arguments
 	public static SearchResultFragment newInstance(int page, String title) {
 		if (searchResultFragment == null){
@@ -63,7 +63,7 @@ public class SearchResultFragment extends BaseFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		locationClient = new LocationClient(getActivity(), this, this);		
+		locationClient = new LocationClient(getActivity(), this, this);
 	}
 	
 
@@ -261,7 +261,6 @@ public class SearchResultFragment extends BaseFragment implements
 //					"Current location was null, enable GPS on emulator!",
 //					Toast.LENGTH_SHORT).show();
 		}
-
 		searchNearbyRecentPosts(lastKnownLocation);
 	}
 
@@ -297,5 +296,9 @@ public class SearchResultFragment extends BaseFragment implements
 		if (savedCriteria != null){
 			searchPostsByCriteria(savedCriteria, false);
 		}
+	}
+
+	public Parcelable getLastKnownLocation() {
+		return lastKnownLocation;
 	}
 }

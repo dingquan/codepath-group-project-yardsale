@@ -16,10 +16,9 @@ import android.view.MenuItem;
 
 public abstract class BaseActivity extends Activity {
 	 
-    //protected ImageLoader imageLoader = ImageLoader.getInstance();
- 
-	GeoLocation getGeoFromAddress(Contact contact){
-		if (contact == null || contact.getAddress() == null || contact.getAddress().isEmpty()){
+	protected GeoLocation getGeoFromAddress(Contact contact) {
+		if (contact == null || contact.getAddress() == null
+				|| contact.getAddress().isEmpty()) {
 			Log.e("ERROR", "contact is empty");
 			return null;
 		}
@@ -27,20 +26,20 @@ public abstract class BaseActivity extends Activity {
 		List<Address> address;
 
 		try {
-		    address = coder.getFromLocationName(contact.getAddress(),1);
-		    if (address == null) {
-		        return null;
-		    }
-		    Address location = address.get(0);
-		    Log.d("DEBUG", "## location: " + location.getLatitude() + ", " + location.getLongitude());
-		    contact.setCity(location.getLocality());
-		    contact.setState(location.getAdminArea());
-		    GeoLocation p = new GeoLocation();
-		    p.setLatitude(location.getLatitude());
-		    p.setLongitude(location.getLongitude());
-		    return p;
-		}
-		catch (Exception e){
+			address = coder.getFromLocationName(contact.getAddress(), 1);
+			if (address == null) {
+				return null;
+			}
+			Address location = address.get(0);
+			Log.d("DEBUG", "## location: " + location.getLatitude() + ", "
+					+ location.getLongitude());
+			contact.setCity(location.getLocality());
+			contact.setState(location.getAdminArea());
+			GeoLocation p = new GeoLocation();
+			p.setLatitude(location.getLatitude());
+			p.setLongitude(location.getLongitude());
+			return p;
+		} catch (Exception e) {
 			Log.e("ERROR", e.getMessage());
 		}
 		return null;

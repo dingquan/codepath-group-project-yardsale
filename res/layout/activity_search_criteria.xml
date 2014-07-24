@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/spCategory"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:onClick="searchPosts"
         android:src="@drawable/ic_action_search_dark" />
 

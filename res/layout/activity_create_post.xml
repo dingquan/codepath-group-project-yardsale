@@ -7,7 +7,7 @@
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
@@ -22,8 +22,9 @@
                 android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"  
-                android:focusable="true"/>
+                android:layout_alignParentTop="true"
+                android:focusable="true"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvUploading"
@@ -51,10 +52,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/gallery"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                 />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <EditText
                 android:id="@+id/etTitle"
@@ -119,6 +119,15 @@
                 android:hint="Enter Description"
                 android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <ImageView
+                android:id="@+id/ivLocate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/etLocation"
+                android:layout_toRightOf="@+id/etLocation"
+                android:onClick="onLocate"
+                android:src="@drawable/ic_locate" />
 
         </RelativeLayout>
     </ScrollView>
