@@ -83,10 +83,14 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		
 		
 		//ImageLoader imageLoader = ImageLoader.getInstance();
-		holder.title.setText(post.getTitle());
+		String title = post.getTitle();
+		if (title.length() > 25){
+			title = title.substring(0, 25) + "...";
+		}
+		holder.title.setText(title);
 		String description = post.getDescription();
-		if (description.length() > 80){
-			description = description.substring(0, 80) + "...";
+		if (description.length() > 60){
+			description = description.substring(0, 60) + "...";
 		}
 		holder.description.setText(description);
 		String fprice= String.format("%.2f", post.getPrice());
