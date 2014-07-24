@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -76,28 +78,46 @@ public class WishListActivity extends Activity {
 	}
 	
 	public void onDelete(MenuItem mi) {
-		int count = adapter.getCount();
-		 ArrayList<WishItems> adapterList = new ArrayList<WishItems>();
-		 ArrayList<WishItems> itemsTodelete = new ArrayList<WishItems>();
-		 for(int i=0;i<count;i++){
-		    	WishItems item = adapter.getItem(i);
-		        adapterList.add(item);
-		 }
-		 for(WishItems eachitem : adapterList){
-			 System.out.println("wishListActivity onDelete object id=="+eachitem.getId());
-			 if(eachitem.isSelected()){
-				 itemsTodelete.add(eachitem);
-				 System.out.println("WishListActivity item to delete"+eachitem.getItem());
-				 items.remove(eachitem);
-				 PushService.unsubscribe(getApplicationContext(), eachitem.getItem());
+		 AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		    alert.setTitle("Are you sure you want to Delete?");
+		    alert.setMessage("Deleting the items means you will not get any notification for it");
 
-			 }else{
-				 System.out.println(eachitem.getItem()+" not selected to delete");
-			 }
-		 }
-		 dao.deleteWish(itemsTodelete);
-		 adapter.clear();
-		 adapter.addAll(items);
+		    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int whichButton) {
+		        	int count = adapter.getCount();
+		   		 ArrayList<WishItems> adapterList = new ArrayList<WishItems>();
+		   		 ArrayList<WishItems> itemsTodelete = new ArrayList<WishItems>();
+		   		 for(int i=0;i<count;i++){
+		   		    	WishItems item = adapter.getItem(i);
+		   		        adapterList.add(item);
+		   		 }
+		   		 for(WishItems eachitem : adapterList){
+		   			 System.out.println("wishListActivity onDelete object id=="+eachitem.getId());
+		   			 if(eachitem.isSelected()){
+		   				 itemsTodelete.add(eachitem);
+		   				 System.out.println("WishListActivity item to delete"+eachitem.getItem());
+		   				 items.remove(eachitem);
+		   				 PushService.unsubscribe(getApplicationContext(), eachitem.getItem());
+
+		   			 }else{
+		   				 System.out.println(eachitem.getItem()+" not selected to delete");
+		   			 }
+		   		 }
+		   		 dao.deleteWish(itemsTodelete);
+		   		 adapter.clear();
+		   		 adapter.addAll(items);
+		        }
+		    });
+
+		    alert.setNegativeButton("Cancel",
+		        new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int whichButton) {
+		            	dialog.dismiss();
+		            }
+		        });
+
+		    alert.show();
+		
 	}
 	
 	
