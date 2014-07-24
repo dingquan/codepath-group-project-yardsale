@@ -273,7 +273,7 @@ public class CreatePostActivity extends BaseActivity {
 		post.setStatus("Active");
 		String locationStr = location.getText().toString();
 		if (locationStr != null && !locationStr.isEmpty()){
-			geoLocation = getGeoFromAddress(locationStr);
+			geoLocation = getGeoFromAddress(contact);
 		}
 		post.setLocation(geoLocation);
 		

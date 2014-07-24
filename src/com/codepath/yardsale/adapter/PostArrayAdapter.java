@@ -36,7 +36,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 			holder.image = (ImageView)v.findViewById(R.id.ivImage);
 			holder.title = (TextView)v.findViewById(R.id.tvTitle);
 			holder.description =  (TextView)v.findViewById(R.id.tvDescription);
-			holder.loaction = (TextView)v.findViewById(R.id.tvLocation);
+			holder.location = (TextView)v.findViewById(R.id.tvLocation);
 			holder.date = (TextView)v.findViewById(R.id.tvDate);
 			holder.price = (TextView)v.findViewById(R.id.tvPrice);
 			v.setTag(holder);
@@ -91,7 +91,11 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		holder.description.setText(description);
 		String fprice= String.format("%.2f", post.getPrice());
 		holder.price.setText("$" + fprice);
-		holder.loaction.setText(post.getContact().getAddress());
+		String city = post.getContact().getCity();
+		if (city != null && !city.isEmpty())
+			holder.location.setText(post.getContact().getCity());
+		else
+			holder.location.setText(post.getContact().getAddress());
 		
 		Date date = new Date(post.getCreatedAt());
 		String dateStr = DateFormat.getDateFormat(v.getContext()).format(date);
@@ -104,7 +108,7 @@ public class PostArrayAdapter extends ArrayAdapter<Post> {
 		  ImageView image;
 		  TextView title;
 		  TextView description;
-		  TextView loaction;
+		  TextView location;
 		  TextView date;
 		  TextView price;
 		 }

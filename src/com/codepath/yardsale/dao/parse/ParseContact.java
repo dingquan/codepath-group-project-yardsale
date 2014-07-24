@@ -14,12 +14,16 @@ public class ParseContact extends ParseObject {
 		super();
 		setPhone(contact.getPhone());
 		setAddress(contact.getAddress());
+		setCity(contact.getCity());
+		setState(contact.getState());
 	}
 
 	public Contact toContact() {
 		Contact contact = new Contact();
 		contact.setAddress(getAddress());
 		contact.setPhone(getPhone());
+		contact.setState(getState());
+		contact.setCity(getCity());
 		return contact;
 	}
 	
@@ -37,5 +41,21 @@ public class ParseContact extends ParseObject {
 
 	public void setAddress(String address) {
 		put("address", address);
+	}
+	
+	public String getCity(){
+		return getString("city");
+	}
+	
+	public void setCity(String city){
+		put("city", city);
+	}
+	
+	public String getState(){
+		return getString("state");
+	}
+	
+	public void setState(String state){
+		put("state", state);
 	}
 }
