@@ -139,6 +139,7 @@ public class CreatePostActivity extends BaseActivity {
 	    // Respond to the action bar's Up/Home button
 	    case android.R.id.home:
 	        NavUtils.navigateUpFromSameTask(this);
+	        overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 	        return true;
 	    }
 	    return super.onOptionsItemSelected(item);
@@ -284,6 +285,7 @@ public class CreatePostActivity extends BaseActivity {
 	public void onPickPhoto(MenuItem mi) {
 		Intent i = new Intent(this,MultiPhotoSelectActivity.class);
 		startActivityForResult(i, 1);
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 	}
 	
 	public void onDelete(MenuItem mi) {
@@ -336,11 +338,17 @@ public class CreatePostActivity extends BaseActivity {
 		}
 		data.putExtra("action", "save");
 		
-//		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutleft);
+		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 		// Activity finished ok, return the data
 		setResult(RESULT_OK, data); // set result code and bundle data for response
 		finish(); // closes the activity, pass data to parent
 	}
+
+	
+	public void onBackPressed() {
+ 		finish();
+ 		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
+ 	};
 
 	private class SaveImagesTask extends AsyncTask<List<String>, Void, Post>{
 
@@ -395,10 +403,5 @@ public class CreatePostActivity extends BaseActivity {
 			tvUploading.setVisibility(View.INVISIBLE);
 			
 		}
-		
-		public void onBackPressed() {
-	 		finish();
-	 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
-	 	};
 	}
 }

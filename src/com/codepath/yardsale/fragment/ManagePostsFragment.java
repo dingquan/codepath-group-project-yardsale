@@ -85,6 +85,7 @@ public class ManagePostsFragment extends BaseFragment implements SwipeRefreshLay
 				i.putExtra("post", postStr);
 				i.putExtra("position", position);
 				startActivityForResult(i, REQUEST_CODE_EDIT_POST);
+				getActivity().overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 			}
 
 		});

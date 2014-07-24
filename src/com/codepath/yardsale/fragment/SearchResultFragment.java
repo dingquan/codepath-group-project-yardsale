@@ -119,6 +119,7 @@ public class SearchResultFragment extends BaseFragment implements
 				i.putExtra("post", postStr);
 				i.putExtra("position", position);
 				startActivity(i);
+				getActivity().overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 			}
 
 		});

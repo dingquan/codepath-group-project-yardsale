@@ -84,6 +84,7 @@ public class ViewPostActivity extends Activity {
 	    // Respond to the action bar's Up/Home button
 	    case android.R.id.home:
 	        NavUtils.navigateUpFromSameTask(this);
+	        overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 	        return true;
 	    }
 	    return super.onOptionsItemSelected(item);
@@ -140,6 +141,6 @@ public class ViewPostActivity extends Activity {
 
 	public void onBackPressed() {
  		finish();
- 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+ 		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
  	};
 }

@@ -30,13 +30,14 @@ public class SearchAndManageActivity extends FragmentActivity {
 	private static final int REQUEST_CODE_SEARCH_CRITERIA = 2;
 	private static final int REQUEST_CODE_ADD_WISH = 3;
 
-	FragmentPagerAdapter adapterViewPager;
-	SearchResultFragment searchResultFragment;
-	ManagePostsFragment managePostsFragment;
-	MenuItem miCreate;
-	MenuItem miSearch;
+	private FragmentPagerAdapter adapterViewPager;
+	private SearchResultFragment searchResultFragment;
+	private ManagePostsFragment managePostsFragment;
+	private MenuItem miCreate;
+	private MenuItem miSearch;
 	
-	ViewPager vpPager;
+	private ViewPager vpPager;
+	private Integer currentPage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,19 @@ public class SearchAndManageActivity extends FragmentActivity {
 	}
 	
 	@Override
+	protected void onPause() {
+		currentPage = vpPager.getCurrentItem();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		if (currentPage != null)
+			vpPager.setCurrentItem(currentPage);
+		super.onResume();
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_search, menu);
@@ -130,14 +144,13 @@ public class SearchAndManageActivity extends FragmentActivity {
 //			i.putExtra("geo_location", JsonUtil.toJson(geoLocation));
 //		}
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
-		Animator anim = AnimatorInflater.loadAnimator(this, R.animator.fadeout);
-    	anim.setTarget(mi);
-    	anim.start();
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 	}
 
    public void onAddingWish(MenuItem mi) {
 		Intent i = new Intent(SearchAndManageActivity.this, WishListActivity.class);
 		startActivityForResult(i, REQUEST_CODE_ADD_WISH);
+		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
 	}
 	
 	@Override
