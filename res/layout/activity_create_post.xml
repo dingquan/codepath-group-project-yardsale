@@ -120,19 +120,6 @@
                 android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/etTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/spCategory"
-                android:layout_alignRight="@+id/etTitle"
-                android:layout_below="@+id/etDescription"
-				android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="Tag"
-                android:inputType="text"
-                android:textAppearance="?android:attr/textAppearanceSmall" >
-            </EditText>
         </RelativeLayout>
     </ScrollView>
 

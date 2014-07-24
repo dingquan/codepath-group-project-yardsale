@@ -30,7 +30,6 @@ import com.parse.SaveCallback;
 
 public class PostDao {
 	private static PostDao postDao;
-	private String tag;
 	public static PostDao getInstance(){
 		if (postDao == null){
 			postDao = new PostDao();
@@ -109,26 +108,34 @@ public class PostDao {
 
 	public void savePosts(List<Post> posts){
 		for (Post post: posts){
-			savePost(post,null);
+			savePost(post);
 		}
 	}
 
-	public void savePost(Post post, String tag) {
+	public void savePost(Post post) {
 		ParsePost parsePost = new ParsePost(post);
-			parsePost.saveInBackground();
-			JSONObject data =  new JSONObject();
-		try {
-			data.put("post", JsonUtil.toJson(post));
-			data.put("alert", "Your wishList item " + tag + " has just arrived !!");
-			data.put("title", "Wish granted!");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		parsePost.saveInBackground();		
+		sendNotifications(post);
+	}
+
+	private void sendNotifications(Post post) {
+
+		for (String keyword : post.getTitle().split("\\s+")){
+			JSONObject data = new JSONObject();
+			try {
+				data.put("post", JsonUtil.toJson(post));
+				data.put("alert", "Your wish list item " + keyword + " has just arrived !!");
+				data.put("title", "Wish granted!");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			ParsePush push = new ParsePush();
+			push.setChannel(keyword);
+			push.setData(data);
+			push.sendInBackground();
 		}
-		ParsePush push = new ParsePush();
-		push.setChannel(tag);
-		push.setData(data);
-		push.sendInBackground();
 	}
 
 	public void saveWish(WishItems item) {

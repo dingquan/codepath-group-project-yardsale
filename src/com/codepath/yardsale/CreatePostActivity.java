@@ -39,6 +39,7 @@ import com.codepath.yardsale.model.Category;
 import com.codepath.yardsale.model.Contact;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
+import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -47,7 +48,7 @@ public class CreatePostActivity extends BaseActivity {
 
 	public final static int PICK_PHOTO_CODE = 1046;
 	public final static String REQUEST_CODE_EDIT_ADS ="0";
-	public final String APP_TAG = "MyCustomApp";
+	public final String APP_TAG = "TradingPost";
 	public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
 	public String photoFileName ;
 	private Spinner spinner;
@@ -57,7 +58,6 @@ public class CreatePostActivity extends BaseActivity {
 	private TextView price;
 	private TextView phone;
 	private TextView tvUploading;
-	private TextView tag;
 	@SuppressWarnings("unused")
 	private Gallery gallery;
 	private ProgressBar pbLoading;
@@ -220,7 +220,6 @@ public class CreatePostActivity extends BaseActivity {
 		gallery = (Gallery) findViewById(R.id.gallery);
 		pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 		tvUploading = (TextView) findViewById(R.id.tvUploading);
-		tag = (TextView) findViewById(R.id.etTag);
 	}
 	
 
@@ -277,7 +276,7 @@ public class CreatePostActivity extends BaseActivity {
 		}
 		post.setLocation(geoLocation);
 		
-		postDao.savePost(post,tag.getText().toString());
+		postDao.savePost(post);
 		
 	}
 	
@@ -396,7 +395,7 @@ public class CreatePostActivity extends BaseActivity {
 			tvUploading.setVisibility(View.INVISIBLE);
 			
 		}
-
+		
 		public void onBackPressed() {
 	 		finish();
 	 		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);

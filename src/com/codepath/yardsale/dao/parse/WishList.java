@@ -34,10 +34,6 @@ public class WishList extends ParseObject {
 		return wishItem;
 	}
 	
-	
-	
-	
-	
 	public void setUserId(String userId) {
 		put("userId", userId);
 	}

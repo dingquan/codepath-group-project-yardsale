@@ -97,8 +97,6 @@ public class WishListActivity extends Activity {
 		 dao.deleteWish(itemsTodelete);
 		 adapter.clear();
 		 adapter.addAll(items);
-		 adapter.notifyDataSetChanged();
-
 	}
 	
 	
@@ -119,8 +117,6 @@ public class WishListActivity extends Activity {
 		items.add(newwishItem);
 		adapter.addAll(items);
 		wishItem.setText("");
-		adapter.notifyDataSetChanged();
-				
 		
 	}
 
@@ -134,7 +130,6 @@ public class WishListActivity extends Activity {
 			}
 			if(items.size()>0){
 				adapter.addAll(items);
-				adapter.notifyDataSetChanged();
 			} else{
 				Log.d("WishListActivity","items list is empty");
 			}
