@@ -110,9 +110,11 @@ public class ViewPostActivity extends Activity {
 	//Share post
 	public void onSMS(MenuItem mi)
 	{
-		String message = "Title: "+ post.getTitle() +" Price: $"+fprice + " Location: "+post.getContact().getAddress();
+		String message = " Description: "+ post.getDescription()+" Price: $"+fprice + " Location: "+post.getContact().getAddress()+ " Phone:"+ post.getContact().getPhone();
+		String subject = "Check this Post: " +  post.getTitle();
 		Intent share = new Intent(Intent.ACTION_SEND);
 		share.setType("text/plain");
+		share.putExtra(Intent.EXTRA_SUBJECT, subject);
 		share.putExtra(Intent.EXTRA_TEXT, message);
 		startActivity(Intent.createChooser(share, "Share Post"));
 	}
