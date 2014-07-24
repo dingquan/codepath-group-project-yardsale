@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.telephony.SmsManager;
@@ -102,12 +103,23 @@ public class ViewPostActivity extends Activity {
 		List<String> imageUrls = post.getImageUrls();
 		if (imageUrls != null && !imageUrls.isEmpty()){
 			gallery.setAdapter(new ImageArrayAdapter(this,post.getImageUrls()));
+			gallery.setVisibility(View.VISIBLE);
 		}
 		else{
 			gallery.setVisibility(View.GONE);
 		}
 		
+		phone.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+        		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + post.getContact().getPhone()));
+        		startActivity(intent);
+            }
+        });
+		
 	}
+	
 	//Share post
 	public void onSMS(MenuItem mi)
 	{
@@ -119,6 +131,7 @@ public class ViewPostActivity extends Activity {
 		share.putExtra(Intent.EXTRA_TEXT, message);
 		startActivity(Intent.createChooser(share, "Share Post"));
 	}
+	
 	//Send SMS
 	public void onSMS_notused(MenuItem mi){
 		
@@ -128,6 +141,7 @@ public class ViewPostActivity extends Activity {
 		sm.sendTextMessage(phoneNumber, null, message, null, null);
 		Toast.makeText(this, "SMS is sent", Toast.LENGTH_SHORT).show();
 	}
+	
 	private void populateData() {
 		
 		title.setText(post.getTitle());
