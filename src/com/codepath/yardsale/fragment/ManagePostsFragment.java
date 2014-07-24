@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +19,20 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
 
 import com.codepath.yardsale.CreatePostActivity;
+import com.codepath.yardsale.R;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.Post;
 import com.codepath.yardsale.model.SearchCriteria;
 import com.codepath.yardsale.util.JsonUtil;
 
-public class ManagePostsFragment extends BaseFragment {
+public class ManagePostsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener  {
 	private static final int REQUEST_CODE_EDIT_POST = 3;
 	private static ManagePostsFragment managePostsFragment;
 
 	private String userId;
 	private SharedPreferences prefs;
-	
+	private SwipeRefreshLayout slSwipeLayout;
+
 	// newInstance constructor for creating fragment with arguments
 	public static ManagePostsFragment newInstance(int page, String title) {
 		if (managePostsFragment == null){
@@ -45,14 +49,29 @@ public class ManagePostsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		
+		slSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+		slSwipeLayout.setOnRefreshListener(this);
+		slSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
+                android.R.color.holo_green_light, 
+                android.R.color.holo_orange_light, 
+                android.R.color.holo_red_light);
+
 		setupHandlers();
 		lookupOwnUserId();
-		loadOwnPosts();
+		loadOwnPosts(true);
 
 		return view;
 	}
 	
+	@Override 
+	public void onRefresh() {
+        new Handler().post(new Runnable() {
+            @Override public void run() {
+            	loadOwnPosts(false);
+            	slSwipeLayout.setRefreshing(false);
+            }
+        });
+    }
 	private void setupHandlers() {
 		lvPosts.setOnItemClickListener(new OnItemClickListener() {
 
@@ -84,13 +103,16 @@ public class ManagePostsFragment extends BaseFragment {
 	/**
 	 * load posts created by self
 	 */
-	private void loadOwnPosts() {
+	private void loadOwnPosts(boolean showProgressBar) {
 		SearchCriteria criteria = new SearchCriteria();
 		criteria.setUserId(userId);
 		
-        pbLoading.setVisibility(ProgressBar.VISIBLE);
+		if (showProgressBar)
+			pbLoading.setVisibility(ProgressBar.VISIBLE);
+		else
+			pbLoading.setVisibility(ProgressBar.INVISIBLE);
+		
         new SearchPostTask().execute(criteria); 
-        
 	}
 	
 	

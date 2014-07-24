@@ -3,36 +3,32 @@ package com.codepath.yardsale.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.codepath.yardsale.R;
-import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.adapter.PostArrayAdapter;
-import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.GeoLocation;
 import com.codepath.yardsale.model.Post;
-import com.codepath.yardsale.util.JsonUtil;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment{
 	
 	protected List<Post> posts;
 	protected ArrayAdapter<Post> aPosts;
 	protected ListView lvPosts;
 	protected ProgressBar pbLoading;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

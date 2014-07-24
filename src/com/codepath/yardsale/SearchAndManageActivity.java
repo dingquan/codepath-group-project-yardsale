@@ -33,7 +33,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 	FragmentPagerAdapter adapterViewPager;
 	SearchResultFragment searchResultFragment;
 	ManagePostsFragment managePostsFragment;
-	MenuItem miRefresh;
 	MenuItem miCreate;
 	MenuItem miSearch;
 	
@@ -64,9 +63,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 					if (miCreate != null){
 						miCreate.setVisible(false);
 					}
-					if (miRefresh != null){
-						miRefresh.setVisible(true);						
-					}
 					if (miSearch != null){
 						miSearch.setVisible(true);
 					}
@@ -77,9 +73,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 					}
 					if (miSearch != null){
 						miSearch.setVisible(false);
-					}
-					if (miRefresh != null){
-						miRefresh.setVisible(false);						
 					}
 					if (miSearch != null){
 						miSearch.setVisible(false);
@@ -111,7 +104,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_search, menu);
-		miRefresh = menu.findItem(R.id.action_refresh);
 		miCreate = menu.findItem(R.id.action_post);
 		miSearch = menu.findItem(R.id.action_search);
 		miCreate.setVisible(false);
@@ -148,11 +140,6 @@ public class SearchAndManageActivity extends FragmentActivity {
 		startActivityForResult(i, REQUEST_CODE_ADD_WISH);
 	}
 	
-	public void onRefresh(MenuItem mi){
-		searchResultFragment.refresh();
-	}
-
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_CODE_CREATE_POST) {
@@ -171,7 +158,7 @@ public class SearchAndManageActivity extends FragmentActivity {
 			String searchStr = data.getExtras().getString("search_criteria");
 			Log.d("DEBUG", searchStr);
 			SearchCriteria criteria = (SearchCriteria) JsonUtil.fromJson(searchStr, SearchCriteria.class);
-			searchResultFragment.searchPostsByCriteria(criteria);
+			searchResultFragment.searchPostsByCriteria(criteria, true);
 			vpPager.setCurrentItem(0);
 		}
 		else{

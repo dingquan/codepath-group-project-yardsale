@@ -2,14 +2,15 @@ package com.codepath.yardsale.fragment;
 
 import java.util.List;
 
-import android.R.color;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
 
+import com.codepath.yardsale.R;
 import com.codepath.yardsale.ViewPostActivity;
 import com.codepath.yardsale.dao.PostDao;
 import com.codepath.yardsale.model.GeoLocation;
@@ -31,7 +33,8 @@ import com.google.android.gms.location.LocationClient;
 
 public class SearchResultFragment extends BaseFragment implements
 		GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+		GooglePlayServicesClient.OnConnectionFailedListener, 
+		SwipeRefreshLayout.OnRefreshListener {
 	
 	private static SearchResultFragment searchResultFragment;
 	
@@ -41,6 +44,8 @@ public class SearchResultFragment extends BaseFragment implements
 	private LocationClient locationClient;
 	private Location lastKnownLocation;
 	private SearchCriteria savedCriteria;
+	private SwipeRefreshLayout slSwipeLayout;
+
 
 	// newInstance constructor for creating fragment with arguments
 	public static SearchResultFragment newInstance(int page, String title) {
@@ -58,7 +63,7 @@ public class SearchResultFragment extends BaseFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		locationClient = new LocationClient(getActivity(), this, this);
+		locationClient = new LocationClient(getActivity(), this, this);		
 	}
 	
 
@@ -66,6 +71,13 @@ public class SearchResultFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = super.onCreateView(inflater, container, savedInstanceState);
+		slSwipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_container);
+		slSwipeLayout.setOnRefreshListener(this);
+		slSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
+                android.R.color.holo_green_light, 
+                android.R.color.holo_orange_light, 
+                android.R.color.holo_red_light);
+
 		setupHandlers();
 		// Connect the client.
 		if (isGooglePlayServicesAvailable()) {
@@ -84,6 +96,16 @@ public class SearchResultFragment extends BaseFragment implements
 		super.onStop();
 	}
 
+	@Override 
+	public void onRefresh() {
+        new Handler().post(new Runnable() {
+            @Override public void run() {
+            	refresh();
+            	slSwipeLayout.setRefreshing(false);
+            }
+        });
+    }
+	
 	private void setupHandlers() {
 		lvPosts.setOnItemClickListener(new OnItemClickListener() {
 
@@ -120,7 +142,7 @@ public class SearchResultFragment extends BaseFragment implements
 	}
 
 
-	public void searchPostsByCriteria(SearchCriteria criteria){
+	public void searchPostsByCriteria(SearchCriteria criteria, boolean showProgressBar){
 		if (criteria == null)
 			return;
 		String nearCity = criteria.getNearCity();
@@ -130,7 +152,10 @@ public class SearchResultFragment extends BaseFragment implements
 		}
 		
 		Log.d("DEBUG", JsonUtil.toJson(criteria));
-		pbLoading.setVisibility(ProgressBar.VISIBLE);
+		if (showProgressBar)
+			pbLoading.setVisibility(ProgressBar.VISIBLE);
+		else
+			pbLoading.setVisibility(ProgressBar.INVISIBLE);
 
 		new SearchPostTask().execute(criteria);
 	}
@@ -269,7 +294,7 @@ public class SearchResultFragment extends BaseFragment implements
 	
 	public void refresh() {
 		if (savedCriteria != null){
-			searchPostsByCriteria(savedCriteria);
+			searchPostsByCriteria(savedCriteria, false);
 		}
 	}
 }
