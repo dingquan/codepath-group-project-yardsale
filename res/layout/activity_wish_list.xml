@@ -17,6 +17,7 @@
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/btnAdd"
         android:inputType="text"
+        android:hint="Make a wish.."
         android:textAppearance="?android:attr/textAppearanceSmall" >
 
     </EditText>
