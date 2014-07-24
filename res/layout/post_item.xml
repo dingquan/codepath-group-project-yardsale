@@ -43,7 +43,6 @@
             android:layout_below="@+id/tvTitle"
             android:layout_marginTop="5dp"
             android:text="@string/title_description"
-            android:textSize="10sp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             />
 
@@ -67,6 +66,7 @@
             android:layout_alignBottom="@+id/ivImage"
             android:layout_alignLeft="@+id/tvDescription"
             android:text="@string/title_location"
+            android:textColor="#909090"
             android:textAppearance="?android:attr/textAppearanceSmall"
             />
 
@@ -78,6 +78,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="14dp"
             android:text="@string/title_date"
+            android:textColor="#909090"
             android:textAppearance="?android:attr/textAppearanceSmall" />
        
     </RelativeLayout>

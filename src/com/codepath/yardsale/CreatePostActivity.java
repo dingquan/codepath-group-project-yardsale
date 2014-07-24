@@ -55,7 +55,9 @@ public class CreatePostActivity extends BaseActivity {
 	public final static String REQUEST_CODE_EDIT_ADS ="0";
 	public final String APP_TAG = "TradingPost";
 	public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-	public String photoFileName ;
+	
+	private String takenPhotoPath;
+	private String capturedPhotoPath;
 	private Spinner spinner;
 	private TextView title;
 	private TextView description;
@@ -261,24 +263,32 @@ public class CreatePostActivity extends BaseActivity {
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
 				result = (List<String>) data.getSerializableExtra("result");
-				
+
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
 			}
-		}else if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-		       if (resultCode == RESULT_OK) {
-			         Uri takenPhotoUri = getPhotoFileUri(photoFileName);
-			         result.add(takenPhotoUri.getPath());
-			         // by this point we have the camera photo on disk
-			         //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
-			         // Load the taken image into a preview
-			         //ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-			         //ivPreview.setImageBitmap(takenImage);   
-			       } else { // Result was a failure
-			    	   Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
-			       }
-			    }
+		} else if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				if (takenPhotoPath == null) {
+					takenPhotoPath = prefs.getString("takenPhotoPath", null);
+					if (takenPhotoPath == null) {
+						Log.e("ERROR", "Path to the photo taken is missing");
+					}
+				}
+				result.add(takenPhotoPath);
+				// by this point we have the camera photo on disk
+				// Bitmap takenImage =
+				// BitmapFactory.decodeFile(takenPhotoUri.getPath());
+				// Load the taken image into a preview
+				// ImageView ivPreview = (ImageView)
+				// findViewById(R.id.ivPreview);
+				// ivPreview.setImageBitmap(takenImage);
+			} else { // Result was a failure
+				Toast.makeText(this, "Picture wasn't taken!",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
 		pbLoading.setVisibility(ProgressBar.VISIBLE);
 		tvUploading.setVisibility(View.VISIBLE);
 		gallery.setVisibility(View.INVISIBLE);
@@ -332,9 +342,12 @@ public class CreatePostActivity extends BaseActivity {
 	
 	public void onLaunchCamera(MenuItem mi) {
 	    // create Intent to take a picture and return control to the calling application
-		photoFileName = UUID.randomUUID().toString()+".png";
+		String photoFileName = UUID.randomUUID().toString()+".png";
 	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
+	    Uri takenPhotoUri = getPhotoFileUri(photoFileName);
+	    takenPhotoPath = takenPhotoUri.getPath();
+	    prefs.edit().putString("takenPhotoPath", takenPhotoPath).commit();
+	    intent.putExtra(MediaStore.EXTRA_OUTPUT, takenPhotoUri); // set the image file name
 	    // Start the image capture intent to take photo
 	    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
@@ -392,11 +405,29 @@ public class CreatePostActivity extends BaseActivity {
 				Log.d("CreatePostActivity do in background","is empty");
 			}
 			for (int i = 0; i < result.size(); i++) {
+				if (result.get(i) == null)
+					continue;
 				Bitmap bitmap = BitmapFactory.decodeFile(result.get(i));
 				// Convert it to byte
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
 				if (bitmap.getWidth() > 1024){
-					bitmap = Bitmap.createScaledBitmap(bitmap, 1024, 768, false);
+					int origHeight = bitmap.getHeight();
+					int origWidth = bitmap.getWidth();
+					int newHeight;
+					int newWidth;
+					if (origWidth > origHeight){
+						newHeight = 768;
+						newWidth = 1024;
+						if (origWidth > 0)
+							newHeight = origHeight * newWidth / origWidth;
+					}
+					else{
+						newHeight = 1024;
+						newWidth = 768;
+						if (origWidth > 0)
+							newHeight = origHeight * newWidth / origWidth;
+					}
+					bitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
 				}
 				// Compress image to lower quality scale 1 - 100
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);

@@ -150,6 +150,7 @@ public class ManagePostsFragment extends BaseFragment implements SwipeRefreshLay
 
 		@Override
 		protected void onPostExecute(List<Post> posts) {
+			aPosts.clear();
 			aPosts.addAll(posts);
 	        pbLoading.setVisibility(ProgressBar.INVISIBLE);
 		}
