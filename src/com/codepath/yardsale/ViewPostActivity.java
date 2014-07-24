@@ -111,7 +111,7 @@ public class ViewPostActivity extends Activity {
 	public void onSMS(MenuItem mi)
 	{
 		String message = " Description: "+ post.getDescription()+" Price: $"+fprice + " Location: "+post.getContact().getAddress()+ " Phone:"+ post.getContact().getPhone();
-		String subject = "Check this Post: " +  post.getTitle();
+		String subject = "Trader Post: " +  post.getTitle();
 		Intent share = new Intent(Intent.ACTION_SEND);
 		share.setType("text/plain");
 		share.putExtra(Intent.EXTRA_SUBJECT, subject);
