@@ -26,4 +26,7 @@ Notes:
 
 Walkthrough of all user stories:
 
+The GIF walkthrough is outdated. Our app is on Google Play Store now, check it out!
+https://play.google.com/store/apps/details?id=com.codepath.yardsale
+
 ![Video Walkthrough](YardSale.gif)
