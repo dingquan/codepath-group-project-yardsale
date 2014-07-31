@@ -128,20 +128,20 @@ public class SearchAndManageActivity extends FragmentActivity {
 		// diag.show(fm, "fragment_search_criteria");
 		Intent i = new Intent(SearchAndManageActivity.this, SearchCriteriaActivity.class);
 		startActivityForResult(i, REQUEST_CODE_SEARCH_CRITERIA);
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 	}
 
 	public void onPost(MenuItem mi) {
 		Intent i = new Intent(SearchAndManageActivity.this, CreatePostActivity.class);
 		i.putExtra("location", searchResultFragment.getLastKnownLocation());
 		startActivityForResult(i, REQUEST_CODE_CREATE_POST);
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 	}
 
    public void onAddingWish(MenuItem mi) {
 		Intent i = new Intent(SearchAndManageActivity.this, WishListActivity.class);
 		startActivityForResult(i, REQUEST_CODE_ADD_WISH);
-		overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
+		overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
 	}
 	
 	@Override
